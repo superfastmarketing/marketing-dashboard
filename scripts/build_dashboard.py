@@ -224,8 +224,11 @@ def kpi(label, value, sub, source, color=''):
             f'<div class="kpi-value">{value}</div>'
             f'<div class="kpi-sub">{sub}</div></div>')
 
-def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12):
-    """Build the combined sub-source HTML table body."""
+def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, ytd_source_map=None):
+    """Build the combined sub-source HTML table body.
+    ytd_source_map: {sub_source_name_lower: source_group_name} built from YTD marketing report
+    so CC sub-sources not in this period's marketing still land in the right group.
+    """
     # Index CC sub-source data by normalized name
     cc = {r['name'].strip().lower(): r for r in ss_rows}
 
@@ -363,36 +366,67 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12):
                 f'<td>{dm_p}</td>{td(grp_sale)}<td>{cl_p}</td>'
                 f'{td(grp_drop)}<td>$0</td></tr>')
 
-    # CC sub-sources not matched to any marketing group
+    # CC sub-sources not matched to any marketing group in this period
     unplaced = [r for r in ss_rows if r['name'].strip().lower() not in placed]
     if unplaced:
-        lines.append(f'<tr class="div-row"><td colspan="{colspan}">OTHER</td></tr>')
+        # Use YTD source map to place them in the right group; fall back to OTHER
+        by_grp = defaultdict(list)
         for r in unplaced:
-            set_v=r['set']; gi=r['gross_issue']; ni=r.get('net_issue',gi)
-            demo=r['demo']; sale=r['sale']; drop=r['drop']
-            i_pct=pct(gi,set_v) if set_v else '—'
-            d_pct=pct(demo,ni) if ni else '—'
-            c_pct=pct(sale,demo) if demo else '—'
+            grp_name = (ytd_source_map or {}).get(r['name'].strip().lower(), 'Other')
+            by_grp[grp_name].append(r)
+
+        for grp_name, rows in sorted(by_grp.items()):
+            # If this group already appeared above (had marketing subs this period),
+            # add these CC-only rows under the same header; otherwise open a new one.
+            lines.append(f'<tr class="div-row"><td colspan="{colspan}">{grp_name.upper()} (no raw leads this period)</td></tr>')
+
+            grp_set = grp_cc_gi = grp_ni = grp_demo = grp_sale = grp_drop = 0
+            for r in rows:
+                set_v=r['set']; gi=r['gross_issue']; ni=r.get('net_issue',gi)
+                demo=r['demo']; sale=r['sale']; drop=r['drop']
+                grp_set+=set_v; grp_cc_gi+=gi; grp_ni+=ni
+                grp_demo+=demo; grp_sale+=sale; grp_drop+=drop
+                i_pct=pct(gi,set_v) if set_v else '—'
+                d_pct=pct(demo,ni) if ni else '—'
+                c_pct=pct(sale,demo) if demo else '—'
+                if colspan==12:
+                    lines.append(
+                        f'<tr><td>&nbsp;&nbsp;{r["name"]}</td>'
+                        f'<td class="mc">—</td>'
+                        f'{td(set_v)}{td(gi)}'
+                        f'<td{rate_class(i_pct)}>{i_pct}</td>'
+                        f'{td(ni)}{td(demo)}'
+                        f'<td{rate_class(d_pct)}>{d_pct}</td>'
+                        f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
+                        f'{td(drop)}<td>$0</td></tr>')
+                else:
+                    lines.append(
+                        f'<tr><td>&nbsp;&nbsp;{r["name"]}</td>'
+                        f'<td class="mc">—</td>'
+                        f'{td(set_v)}{td(gi)}'
+                        f'<td{rate_class(i_pct)}>{i_pct}</td>'
+                        f'{td(demo)}'
+                        f'<td{rate_class(d_pct)}>{d_pct}</td>'
+                        f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
+                        f'{td(drop)}<td>$0</td></tr>')
+            # Group subtotal
+            gi_p=pct(grp_cc_gi,grp_set) if grp_set else '—'
+            dm_p=pct(grp_demo,grp_ni) if grp_ni else '—'
+            cl_p=pct(grp_sale,grp_demo) if grp_demo else '—'
             if colspan==12:
                 lines.append(
-                    f'<tr><td>&nbsp;&nbsp;{r["name"]}</td>'
+                    f'<tr class="grp"><td>&nbsp;&nbsp;{grp_name} Total</td>'
                     f'<td class="mc">—</td>'
-                    f'{td(set_v)}{td(gi)}'
-                    f'<td{rate_class(i_pct)}>{i_pct}</td>'
-                    f'{td(ni)}{td(demo)}'
-                    f'<td{rate_class(d_pct)}>{d_pct}</td>'
-                    f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
-                    f'{td(drop)}<td>$0</td></tr>')
+                    f'{td(grp_set)}{td(grp_cc_gi)}<td>{gi_p}</td>'
+                    f'{td(grp_ni)}{td(grp_demo)}<td>{dm_p}</td>'
+                    f'{td(grp_sale)}<td>{cl_p}</td>{td(grp_drop)}<td>$0</td></tr>')
             else:
                 lines.append(
-                    f'<tr><td>&nbsp;&nbsp;{r["name"]}</td>'
+                    f'<tr class="grp"><td>&nbsp;&nbsp;{grp_name} Total</td>'
                     f'<td class="mc">—</td>'
-                    f'{td(set_v)}{td(gi)}'
-                    f'<td{rate_class(i_pct)}>{i_pct}</td>'
-                    f'{td(demo)}'
-                    f'<td{rate_class(d_pct)}>{d_pct}</td>'
-                    f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
-                    f'{td(drop)}<td>$0</td></tr>')
+                    f'{td(grp_set)}{td(grp_cc_gi)}<td>{gi_p}</td>'
+                    f'{td(grp_demo)}<td>{dm_p}</td>'
+                    f'{td(grp_sale)}<td>{cl_p}</td>{td(grp_drop)}<td>$0</td></tr>')
 
     # Grand total row
     if ss_total:
@@ -636,7 +670,7 @@ function bar(id,labels,datasets){var el=document.getElementById(id);if(!el)retur
 """
 
 
-def gen_period_section(pid, label, date_label, d, colspan):
+def gen_period_section(pid, label, date_label, d, colspan, ytd_source_map=None):
     """Generate one main period section (PW/PM/MTD/YTD)."""
     mkt_groups, mkt_grand = d['marketing']
     src_rows, src_total   = d['source']
@@ -676,7 +710,7 @@ def gen_period_section(pid, label, date_label, d, colspan):
     has_multi_src = len(src_labels) > 1
 
     # Sub-source table
-    table_body = build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan)
+    table_body = build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan, ytd_source_map)
 
     # Table header
     if colspan == 12:
@@ -921,6 +955,15 @@ def run():
     _dfmt = '%B %#d, %Y' if platform.system() == 'Windows' else '%B %-d, %Y'
     today_str = date.today().strftime(_dfmt)
 
+    # Build source-group lookup from YTD marketing report (full year = most complete).
+    # Used to correctly group CC sub-sources that have no raw leads in a given period.
+    ytd_mkt_groups, _ = data['ytd']['marketing']
+    ytd_source_map = {}
+    for grp_name, grp in ytd_mkt_groups.items():
+        for s in grp['subs']:
+            ytd_source_map[s['name'].strip().lower()] = grp_name
+    print(f"  YTD source map: {len(ytd_source_map)} sub-sources across {len(ytd_mkt_groups)} groups")
+
     # Main period sections
     PMAP = {'prior_week':('pw','Prior Week',12),
              'prior_month':('pm','Prior Month',12),
@@ -931,7 +974,7 @@ def run():
     chart_js = ''
     for period, (pid, label, colspan) in PMAP.items():
         _, _, date_lbl = dr[period]
-        sec, cjs = gen_period_section(pid, label, date_lbl, data[period], colspan)
+        sec, cjs = gen_period_section(pid, label, date_lbl, data[period], colspan, ytd_source_map)
         period_sections += sec
         chart_js += cjs
 
