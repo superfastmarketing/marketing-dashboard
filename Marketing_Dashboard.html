@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SuperFast Kitchen &amp; Bath — Marketing Dashboard</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+<script>window.ChartAnnotation=ChartAnnotation;</script>
 <style>
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -453,9 +455,15 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 
   <div class="period-section" id="rep-pw">
     <div class="period-label">Prior Week &nbsp;•&nbsp; Jun 8 – Jun 13, 2026</div>
-    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">12</div><div class="kpi-sub">2 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">7</div><div class="kpi-sub">0 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$0</div><div class="kpi-sub">Net: $0</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">—</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">1</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">1</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">1</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">12</div><div class="kpi-sub">2 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">7</div><div class="kpi-sub">0 sales</div></div><div class="kpi-card red"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">58.3%</div><div class="kpi-sub">Target: 70%</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$0</div><div class="kpi-sub">Net: $0</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">—</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">1</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">1</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">1</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
 
     <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % vs. 70% Target
+          <span class="chart-subtitle">Green = at or above target &nbsp;·&nbsp; Red = below target</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="setter-demo-pct-pw"></canvas></div>
+      </div>
       <div class="chart-card full">
         <div class="chart-title">Appointment Issue Breakdown per Setter
           <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
@@ -510,9 +518,15 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   </div>
   <div class="period-section" id="rep-pm">
     <div class="period-label">Prior Month &nbsp;•&nbsp; May 1 – 31, 2026</div>
-    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">48</div><div class="kpi-sub">7 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">35</div><div class="kpi-sub">6 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$247,805</div><div class="kpi-sub">Net: $245,755</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">99.2%</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">2</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">4</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">5</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">48</div><div class="kpi-sub">7 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">35</div><div class="kpi-sub">6 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">72.9%</div><div class="kpi-sub">Target: 70%</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$247,805</div><div class="kpi-sub">Net: $245,755</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">99.2%</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">2</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">4</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">5</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
 
     <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % vs. 70% Target
+          <span class="chart-subtitle">Green = at or above target &nbsp;·&nbsp; Red = below target</span>
+        </div>
+        <div class="chart-wrap" style="height:294px"><canvas id="setter-demo-pct-pm"></canvas></div>
+      </div>
       <div class="chart-card full">
         <div class="chart-title">Appointment Issue Breakdown per Setter
           <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
@@ -632,9 +646,15 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   </div>
   <div class="period-section" id="rep-mtd">
     <div class="period-label">Month to Date &nbsp;•&nbsp; June 1 – 15, 2026</div>
-    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">27</div><div class="kpi-sub">3 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">15</div><div class="kpi-sub">0 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$0</div><div class="kpi-sub">Net: $0</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">—</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">1</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">1</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">3</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">27</div><div class="kpi-sub">3 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">15</div><div class="kpi-sub">0 sales</div></div><div class="kpi-card red"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">55.6%</div><div class="kpi-sub">Target: 70%</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$0</div><div class="kpi-sub">Net: $0</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">—</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">1</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">1</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">3</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
 
     <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % vs. 70% Target
+          <span class="chart-subtitle">Green = at or above target &nbsp;·&nbsp; Red = below target</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="setter-demo-pct-mtd"></canvas></div>
+      </div>
       <div class="chart-card full">
         <div class="chart-title">Appointment Issue Breakdown per Setter
           <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
@@ -702,9 +722,15 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   </div>
   <div class="period-section active" id="rep-ytd">
     <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – June 15, 2026</div>
-    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">242</div><div class="kpi-sub">12 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">151</div><div class="kpi-sub">32 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$1,158,356</div><div class="kpi-sub">Net: $1,122,262</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">96.9%</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">15</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">7</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">18</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">242</div><div class="kpi-sub">12 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">151</div><div class="kpi-sub">32 sales</div></div><div class="kpi-card red"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">62.4%</div><div class="kpi-sub">Target: 70%</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$1,158,356</div><div class="kpi-sub">Net: $1,122,262</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">96.9%</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">15</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">7</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">18</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
 
     <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % vs. 70% Target
+          <span class="chart-subtitle">Green = at or above target &nbsp;·&nbsp; Red = below target</span>
+        </div>
+        <div class="chart-wrap" style="height:504px"><canvas id="setter-demo-pct-ytd"></canvas></div>
+      </div>
       <div class="chart-card full">
         <div class="chart-title">Appointment Issue Breakdown per Setter
           <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
@@ -1094,6 +1120,45 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
     }
   });
 })();
+(function(){
+  var el=document.getElementById('setter-demo-pct-pw');
+  if(!el)return;
+  var colors=['#dc3545','#dc3545'];
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Messano'],
+      datasets:[{
+        label:'Demo %',
+        data:[66.7,55.6],
+        backgroundColor:colors,
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        annotation:{
+          annotations:{
+            target:{
+              type:'line',drawTime:'afterDatasetsDraw',
+              scaleID:'x',value:70,
+              borderColor:'#1a2e4a',borderWidth:2,borderDash:[6,3],
+              label:{display:true,content:'Target 70%',position:'start',
+                     backgroundColor:'#1a2e4a',color:'white',
+                     font:{size:11,weight:'bold'},padding:4}
+            }
+          }
+        }
+      },
+      scales:{
+        x:{beginAtZero:true,max:100,ticks:{callback:function(v){return v+'%'}}},
+        y:{ticks:{font:{size:11}}}
+      }
+    }
+  });
+})();
 
 (function(){
   var el=document.getElementById('setter-issues-pm');
@@ -1113,6 +1178,45 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
       indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'top',labels:{font:{size:11},padding:12}}},
       scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('setter-demo-pct-pm');
+  if(!el)return;
+  var colors=['#28a745','#dc3545','#dc3545','#dc3545','#28a745','#28a745','#28a745'];
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Goscha','Huston','Knecht','Maughan','Messano','Robertson'],
+      datasets:[{
+        label:'Demo %',
+        data:[77.8,33.3,57.1,50.0,100.0,85.7,100.0],
+        backgroundColor:colors,
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        annotation:{
+          annotations:{
+            target:{
+              type:'line',drawTime:'afterDatasetsDraw',
+              scaleID:'x',value:70,
+              borderColor:'#1a2e4a',borderWidth:2,borderDash:[6,3],
+              label:{display:true,content:'Target 70%',position:'start',
+                     backgroundColor:'#1a2e4a',color:'white',
+                     font:{size:11,weight:'bold'},padding:4}
+            }
+          }
+        }
+      },
+      scales:{
+        x:{beginAtZero:true,max:100,ticks:{callback:function(v){return v+'%'}}},
+        y:{ticks:{font:{size:11}}}
+      }
     }
   });
 })();
@@ -1138,6 +1242,45 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
     }
   });
 })();
+(function(){
+  var el=document.getElementById('setter-demo-pct-mtd');
+  if(!el)return;
+  var colors=['#dc3545','#dc3545','#dc3545'];
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Messano','Trombley'],
+      datasets:[{
+        label:'Demo %',
+        data:[62.5,55.6,0.0],
+        backgroundColor:colors,
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        annotation:{
+          annotations:{
+            target:{
+              type:'line',drawTime:'afterDatasetsDraw',
+              scaleID:'x',value:70,
+              borderColor:'#1a2e4a',borderWidth:2,borderDash:[6,3],
+              label:{display:true,content:'Target 70%',position:'start',
+                     backgroundColor:'#1a2e4a',color:'white',
+                     font:{size:11,weight:'bold'},padding:4}
+            }
+          }
+        }
+      },
+      scales:{
+        x:{beginAtZero:true,max:100,ticks:{callback:function(v){return v+'%'}}},
+        y:{ticks:{font:{size:11}}}
+      }
+    }
+  });
+})();
 
 (function(){
   var el=document.getElementById('setter-issues-ytd');
@@ -1157,6 +1300,45 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
       indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'top',labels:{font:{size:11},padding:12}}},
       scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('setter-demo-pct-ytd');
+  if(!el)return;
+  var colors=['#28a745','#dc3545','#dc3545','#dc3545','#dc3545','#dc3545','#28a745','#28a745','#28a745','#dc3545','#dc3545','#dc3545'];
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Coleman','Goscha','Humphrey','Huston','Knecht','Koerner','Maughan','Messano','Robertson','Trombley','Unknown'],
+      datasets:[{
+        label:'Demo %',
+        data:[71.4,33.3,55.0,53.8,57.1,63.4,70.0,100.0,71.8,58.3,0.0,25.0],
+        backgroundColor:colors,
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        annotation:{
+          annotations:{
+            target:{
+              type:'line',drawTime:'afterDatasetsDraw',
+              scaleID:'x',value:70,
+              borderColor:'#1a2e4a',borderWidth:2,borderDash:[6,3],
+              label:{display:true,content:'Target 70%',position:'start',
+                     backgroundColor:'#1a2e4a',color:'white',
+                     font:{size:11,weight:'bold'},padding:4}
+            }
+          }
+        }
+      },
+      scales:{
+        x:{beginAtZero:true,max:100,ticks:{callback:function(v){return v+'%'}}},
+        y:{ticks:{font:{size:11}}}
+      }
     }
   });
 })();
