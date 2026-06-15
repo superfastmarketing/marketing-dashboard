@@ -1054,20 +1054,23 @@ def gen_salesreps_section(data_by_period, date_ranges_dict):
         dispo_html = ''
         if dispo_total and dispo_total.get('dispos'):
             dt = dispo_total['dispos']
-            # Sort by count descending, show all with > 0
+            grand_total = dispo_total['total'] or 1
+            # Sort by count descending
             sorted_dispos = sorted(dt.items(), key=lambda x: x[1], reverse=True)
-            dp_labels = js_str_arr([d[0] for d in sorted_dispos])
+            # Pie: labels include count + pct
+            def dpct(n): return round(n / grand_total * 100)
+            dp_labels = js_str_arr([f'{d[0]}: {d[1]} ({dpct(d[1])}%)' for d in sorted_dispos])
             dp_vals   = js_arr([d[1] for d in sorted_dispos])
-            # Palette — cycle through enough colors
             DPAL = ['#2d5a8e','#28a745','#fd7e14','#dc3545','#6f42c1','#17a2b8',
                     '#ffc107','#4da6ff','#20c997','#e83e8c','#adb5bd','#343a40',
-                    '#fd7e14','#6610f2','#795548','#00bcd4','#ff5722','#9c27b0','#607d8b']
+                    '#6610f2','#795548','#00bcd4','#ff5722','#9c27b0','#607d8b']
             dp_colors = js_str_arr([DPAL[i % len(DPAL)] for i in range(len(sorted_dispos))])
 
             chart_js += f"""
 (function(){{
   var el=document.getElementById('{dispo_pie_id}');
   if(!el)return;
+  var total={grand_total};
   new Chart(el,{{
     type:'doughnut',
     data:{{
@@ -1076,20 +1079,36 @@ def gen_salesreps_section(data_by_period, date_ranges_dict):
     }},
     options:{{
       responsive:true,maintainAspectRatio:false,
-      plugins:{{legend:{{position:'right',labels:{{font:{{size:11}},padding:10}}}}}}
+      plugins:{{
+        legend:{{position:'right',labels:{{font:{{size:11}},padding:10}}}},
+        tooltip:{{callbacks:{{label:function(ctx){{
+          var n=ctx.parsed;
+          var pct=Math.round(n/total*100);
+          return ' '+ctx.label.split(':')[0]+': '+n+' ('+pct+'%)';
+        }}}}}}
+      }}
     }}
   }});
 }})();
 """
-            # Dispo table — one row per setter
+            # Dispo table — each cell shows "N (pct%)", total row shows count + pct
             dispo_cols_sorted = [d[0] for d in sorted_dispos]
             th_dispos = ''.join(f'<th>{c}</th>' for c in dispo_cols_sorted)
             dispo_tbl_rows = ''
             for drow in dispo_rows:
-                tds = ''.join(f'<td>{drow["dispos"].get(c, 0) or "—"}</td>' for c in dispo_cols_sorted)
+                row_total = drow['total'] or 1
+                def cell(c, row_tot=row_total):
+                    n = drow['dispos'].get(c, 0)
+                    if not n: return '—'
+                    return f'{n} ({dpct(n)}%)'
+                tds = ''.join(f'<td>{cell(c)}</td>' for c in dispo_cols_sorted)
                 dispo_tbl_rows += f'<tr><td>{drow["name"]}</td><td>{drow["total"]}</td>{tds}</tr>'
             if dispo_total:
-                tot_tds = ''.join(f'<td><strong>{dispo_total["dispos"].get(c,0) or "—"}</strong></td>' for c in dispo_cols_sorted)
+                def tcell(c):
+                    n = dispo_total['dispos'].get(c, 0)
+                    if not n: return '—'
+                    return f'{n} ({dpct(n)}%)'
+                tot_tds = ''.join(f'<td><strong>{tcell(c)}</strong></td>' for c in dispo_cols_sorted)
                 dispo_tbl_rows += f'<tr class="gtot"><td>TOTAL</td><td>{dispo_total["total"]}</td>{tot_tds}</tr>'
 
             dispo_html = f'''
