@@ -1,0 +1,23 @@
+# Credentials — never commit these
+.env
+scripts/credentials.json
+scripts/token.json
+
+# Downloaded reports (regenerated daily, no need to track)
+reports/
+
+# Logs
+logs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Screenshot artifacts from automation
+login_error.png
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+desktop.ini

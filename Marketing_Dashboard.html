@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SuperFast Kitchen &amp; Bath — Marketing Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #222; }
+header { background: linear-gradient(135deg, #1a2e4a 0%, #2d5a8e 100%); color: white; padding: 20px 32px; display: flex; align-items: center; gap: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+header h1 { font-size: 1.5rem; font-weight: 700; }
+header p { font-size: 0.83rem; opacity: 0.75; margin-top: 2px; }
+.logo { font-size: 2rem; }
+.data-note { background: #e8f4fd; border-left: 4px solid #4da6ff; padding: 10px 32px; font-size: 0.79rem; color: #444; }
+.data-note strong { color: #1a2e4a; }
+.tabs { display: flex; background: #1a2e4a; padding: 0 32px; gap: 4px; flex-wrap: wrap; }
+.tab { padding: 11px 20px; cursor: pointer; color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 600; border-bottom: 3px solid transparent; transition: all 0.2s; }
+.tab:hover { color: white; }
+.tab.active { color: white; border-bottom-color: #4da6ff; }
+.section { display: none; padding: 24px 32px; }
+.section.active { display: block; }
+.period-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #4da6ff; margin-bottom: 16px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.kpi-card { background: white; border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-left: 4px solid #4da6ff; }
+.kpi-card.green { border-left-color: #28a745; } .kpi-card.orange { border-left-color: #fd7e14; } .kpi-card.purple { border-left-color: #6f42c1; } .kpi-card.red { border-left-color: #dc3545; } .kpi-card.teal { border-left-color: #17a2b8; }
+.kpi-source { font-size: 0.65rem; color: #bbb; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.kpi-label { font-size: 0.73rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #888; }
+.kpi-value { font-size: 1.9rem; font-weight: 800; margin: 4px 0 2px; color: #1a2e4a; line-height: 1; }
+.kpi-sub { font-size: 0.77rem; color: #999; }
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.chart-card { background: white; border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.chart-card.full { grid-column: 1 / -1; }
+.chart-title { font-size: 0.82rem; font-weight: 700; color: #444; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.chart-subtitle { display: block; font-size: 0.69rem; color: #999; font-weight: normal; text-transform: none; letter-spacing: 0; margin-top: 2px; }
+.chart-wrap { position: relative; height: 260px; } .chart-wrap.tall { height: 340px; }
+.table-card { background: white; border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 20px; overflow-x: auto; }
+.table-note { font-size: 0.72rem; color: #888; margin-bottom: 10px; font-style: italic; }
+table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+thead th { background: #1a2e4a; color: white; padding: 8px 9px; text-align: right; font-weight: 600; font-size: 0.7rem; white-space: nowrap; }
+thead th:first-child { text-align: left; }
+thead th.src-col { background: #4a2d7a; }
+tbody tr { border-bottom: 1px solid #f0f0f0; } tbody tr:hover { background: #f7f9fc; }
+tbody tr.grp { background: #eef3f9; font-weight: 700; }
+tbody tr.gtot { background: #1a2e4a; color: white; font-weight: 800; }
+tbody tr.div-row td { background: #f0f4fa; font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.8px; color: #666; font-weight: 700; padding: 5px 9px; }
+tbody tr.div-kitchens td { background: #fef9ec; color: #92400e; }
+tbody tr.div-bathrooms td { background: #eff6ff; color: #1e40af; }
+tbody tr.div-windows td { background: #ecfdf5; color: #065f46; }
+tbody tr.grp-kitchens { background: #fef3c7; font-weight: 700; }
+tbody tr.grp-bathrooms { background: #dbeafe; font-weight: 700; }
+tbody tr.grp-windows { background: #d1fae5; font-weight: 700; }
+tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:first-child { text-align: left; }
+.g { color: #28a745; font-weight: 600; } .w { color: #fd7e14; font-weight: 600; } .b { color: #dc3545; font-weight: 600; }
+.mc { color: #6f42c1; font-style: italic; }
+.period-toggle { display: flex; gap: 8px; margin-bottom: 20px; }
+.ptab { padding: 7px 18px; border-radius: 20px; cursor: pointer; font-size: 0.81rem; font-weight: 600; background: #e9ecef; color: #555; border: none; transition: all 0.2s; }
+.ptab.active { background: #1a2e4a; color: white; }
+.ptab:hover:not(.active) { background: #d1d5db; }
+.period-section { display: none; }
+.period-section.active { display: block; }
+.group-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+.group-card { background: white; border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.group-card.kitchens { border-top: 4px solid #fd7e14; }
+.group-card.bathrooms { border-top: 4px solid #4da6ff; }
+.group-card.windows { border-top: 4px solid #20c997; }
+.group-name { font-size: 0.84rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+.group-name.kitchens { color: #92400e; }
+.group-name.bathrooms { color: #1e40af; }
+.group-name.windows { color: #065f46; }
+.group-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.gstat-label { font-size: 0.66rem; color: #aaa; text-transform: uppercase; }
+.gstat-val { font-size: 1.15rem; font-weight: 800; color: #1a2e4a; }
+.rep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+.rep-card { background: white; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-left: 4px solid #4da6ff; }
+.rep-name { font-size: 0.88rem; font-weight: 700; color: #1a2e4a; margin-bottom: 8px; }
+.rep-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.rstat-label { font-size: 0.64rem; color: #aaa; text-transform: uppercase; }
+.rstat-val { font-size: 1rem; font-weight: 700; color: #1a2e4a; }
+.rep-gross { margin-top: 8px; font-size: 0.75rem; color: #555; }
+
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🏠</div>
+  <div>
+    <h1>SuperFast Kitchen &amp; Bath — Marketing Dashboard</h1>
+    <p>Generated June 14, 2026 &nbsp;|&nbsp; Raw Leads: Marketing Sub-Source Report &nbsp;|&nbsp; Campaign Metrics: Call Center Reports</p>
+  </div>
+</header>
+<div class="data-note">
+  <strong>Data Sources:</strong> &nbsp;
+  <span style="color:#6f42c1;font-weight:700">■ Raw Leads</span> = Marketing Sub-Source Report (lead entry date) &nbsp;&nbsp;
+  <span style="color:#2d5a8e;font-weight:700">■ Set/Demo/Sales</span> = Call Center: Appointment Statistics by Sub-Source &nbsp;&nbsp;
+  <span style="color:#28a745;font-weight:700">■ Products &amp; Setters</span> = Appt Statistics by Product / by Setter
+</div>
+<div class="tabs">
+  <div class="tab active" onclick="showTab('pw',this)">Prior Week</div>
+  <div class="tab" onclick="showTab('pm',this)">Prior Month</div>
+  <div class="tab" onclick="showTab('mtd',this)">Month to Date</div>
+  <div class="tab" onclick="showTab('ytd',this)">Year to Date</div>
+  <div class="tab" onclick="showTab('products',this)">Products</div>
+  <div class="tab" onclick="showTab('salesreps',this)">📞 Setters</div>
+  <div class="tab" onclick="showTab('callcenter',this)">Call Center</div>
+</div>
+
+
+<!-- ===== PRIOR WEEK ===== -->
+<div class="section active" id="pw">
+  <div class="period-label">Prior Week &nbsp;•&nbsp; Jun 1 – Jun 6, 2026</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-source">Marketing Report</div><div class="kpi-label">Total Raw Leads</div><div class="kpi-value">38</div><div class="kpi-sub">Leads received this period</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">13</div><div class="kpi-sub">Appt date Jun 1 – Jun 6, 2026</div></div>
+    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">8</div><div class="kpi-sub">100.0% of net issued</div></div>
+    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">0</div><div class="kpi-sub">$0 gross revenue</div></div>
+    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">69.2%</div><div class="kpi-sub">9 issued / 13 set</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">100.0%</div><div class="kpi-sub">8 demos / 8 net issued</div></div>
+    <div class="kpi-card red"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">0.0%</div><div class="kpi-sub">0 sales / 8 demos</div></div>
+    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">30.8%</div><div class="kpi-sub">4 dropped / 13 set</div></div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card"><div class="chart-title">Raw Leads by Source<span class="chart-subtitle">Marketing Sub-Source Report</span></div><div class="chart-wrap"><canvas id="pw-leads-pie"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">Appointments Set by Source<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="pw-set-pie"></canvas></div></div>
+    <div class="chart-card full"><div class="chart-title">Conversion Funnel<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="pw-funnel"></canvas></div></div>
+  </div>
+  <div class="table-card">
+    <div class="chart-title">Prior Week Results by Sub-Source</div>
+    <div class="table-note">Raw = Marketing Sub-Source Report. Set / Issue / Demo / Sales = Call Center Appointment Statistics (Jun 1 – Jun 6, 2026).</div>
+    <table><thead><tr><th>Sub-Source</th><th class="src-col">Raw*</th><th>Set</th><th>Gross Issue</th><th>Issue Rate</th><th>Net Issue</th><th>Demo</th><th>Demo Rate</th><th>Sales</th><th>Close %</th><th>Drop</th><th>Gross $</th></tr></thead>
+    <tbody>
+<tr class="div-row"><td colspan="12">INTERNET</td></tr>
+<tr><td>&nbsp;&nbsp;Contractor Appointments</td><td class="mc">4</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Google</td><td class="mc">1</td><td>3</td><td>2</td><td class="w">66.7%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;HomeBuddy</td><td class="mc">6</td><td>4</td><td>3</td><td class="w">75.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Networx</td><td class="mc">9</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stratum Digital</td><td class="mc">15</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">2</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Internet Total</td><td class="mc">37</td><td>10</td><td>7</td><td>70.0%</td><td>6</td><td>6</td><td>100.0%</td><td>0</td><td>0.0%</td><td>3</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">STORE BOOTH</td></tr>
+<tr><td>&nbsp;&nbsp;True Value 12th GJ</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Store Booth Total</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">OTHER</td></tr>
+<tr><td>&nbsp;&nbsp;Beacon Fest</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stampede Mesa Fairgrounds 5/26</td><td class="mc">—</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Bath and Kitchen $15k Giveaway</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td>38</td><td>13</td><td>9</td><td>69.2%</td><td>8</td><td>8</td><td>100.0%</td><td>0</td><td>0.0%</td><td>4</td><td>$0</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ===== PRIOR MONTH ===== -->
+<div class="section" id="pm">
+  <div class="period-label">Prior Month &nbsp;•&nbsp; May 1 – 31, 2026</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-source">Marketing Report</div><div class="kpi-label">Total Raw Leads</div><div class="kpi-value">324</div><div class="kpi-sub">Leads received this period</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">48</div><div class="kpi-sub">Appt date May 1 – 31, 2026</div></div>
+    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">35</div><div class="kpi-sub">94.6% of net issued</div></div>
+    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">6</div><div class="kpi-sub">$247,805 gross revenue</div></div>
+    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">77.1%</div><div class="kpi-sub">37 issued / 48 set</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">94.6%</div><div class="kpi-sub">35 demos / 37 net issued</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">17.1%</div><div class="kpi-sub">6 sales / 35 demos</div></div>
+    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">22.9%</div><div class="kpi-sub">11 dropped / 48 set</div></div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card"><div class="chart-title">Raw Leads by Source<span class="chart-subtitle">Marketing Sub-Source Report</span></div><div class="chart-wrap"><canvas id="pm-leads-pie"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">Appointments Set by Source<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="pm-set-pie"></canvas></div></div>
+    <div class="chart-card full"><div class="chart-title">Conversion Funnel<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="pm-funnel"></canvas></div></div>
+  </div>
+  <div class="table-card">
+    <div class="chart-title">Prior Month Results by Sub-Source</div>
+    <div class="table-note">Raw = Marketing Sub-Source Report. Set / Issue / Demo / Sales = Call Center Appointment Statistics (May 1 – 31, 2026).</div>
+    <table><thead><tr><th>Sub-Source</th><th class="src-col">Raw*</th><th>Set</th><th>Gross Issue</th><th>Issue Rate</th><th>Net Issue</th><th>Demo</th><th>Demo Rate</th><th>Sales</th><th>Close %</th><th>Drop</th><th>Gross $</th></tr></thead>
+    <tbody>
+<tr class="div-row"><td colspan="12">EMPREFERRAL</td></tr>
+<tr><td>&nbsp;&nbsp;Kelly</td><td class="mc">1</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;EmpReferral Total</td><td class="mc">1</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">EVENT</td></tr>
+<tr><td>&nbsp;&nbsp;Rides and Vibes GJ</td><td class="mc">1</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stampede Mesa Fairgrounds 5/26</td><td class="mc">12</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Event Total</td><td class="mc">13</td><td>3</td><td>2</td><td>66.7%</td><td>2</td><td>2</td><td>100.0%</td><td>0</td><td>0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">FACEBOOK</td></tr>
+<tr><td>&nbsp;&nbsp;Bath and Kitchen $15k Giveaway</td><td class="mc">56</td><td>4</td><td>3</td><td class="w">75.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Facebook Total</td><td class="mc">56</td><td>4</td><td>3</td><td>75.0%</td><td>3</td><td>3</td><td>100.0%</td><td>0</td><td>0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">INTERNET</td></tr>
+<tr><td>&nbsp;&nbsp;Google</td><td class="mc">17</td><td>11</td><td>8</td><td class="w">72.7%</td><td>8</td><td>8</td><td class="g">100.0%</td><td>1</td><td class="b">12.5%</td><td>3</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;HomeBuddy</td><td class="mc">26</td><td>3</td><td>2</td><td class="w">66.7%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>1</td><td class="b">50.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Networx</td><td class="mc">27</td><td>6</td><td>5</td><td class="g">83.3%</td><td>5</td><td>5</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stratum Digital</td><td class="mc">162</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">11</td><td>4</td><td>3</td><td class="w">75.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Internet Total</td><td class="mc">243</td><td>25</td><td>19</td><td>76.0%</td><td>19</td><td>19</td><td>100.0%</td><td>2</td><td>10.5%</td><td>6</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">SWEEPSTAKES</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">11</td><td>4</td><td>3</td><td class="w">75.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Sweepstakes Total</td><td class="mc">11</td><td>4</td><td>3</td><td>75.0%</td><td>3</td><td>3</td><td>100.0%</td><td>0</td><td>0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">OTHER</td></tr>
+<tr><td>&nbsp;&nbsp;Beacon Fest</td><td class="mc">—</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td>2</td><td class="w">66.7%</td><td>1</td><td class="b">50.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Bridal Show GJ</td><td class="mc">—</td><td>5</td><td>3</td><td class="w">60.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>1</td><td class="b">33.3%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;GJ Home Show</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td class="g">100.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Farmers Market</td><td class="mc">—</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Home Show</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;SW Arbor Fest GJ</td><td class="mc">—</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td>2</td><td class="w">66.7%</td><td>1</td><td class="b">50.0%</td><td>0</td><td>$0</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td>324</td><td>48</td><td>37</td><td>77.1%</td><td>37</td><td>35</td><td>94.6%</td><td>6</td><td>17.1%</td><td>11</td><td>$0</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ===== MONTH TO DATE ===== -->
+<div class="section" id="mtd">
+  <div class="period-label">Month to Date &nbsp;•&nbsp; June 1 – 14, 2026</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-source">Marketing Report</div><div class="kpi-label">Total Raw Leads</div><div class="kpi-value">83</div><div class="kpi-sub">Leads received this period</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">25</div><div class="kpi-sub">Appt date June 1 – 14, 2026</div></div>
+    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">15</div><div class="kpi-sub">83.3% of net issued</div></div>
+    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">0</div><div class="kpi-sub">$0 gross revenue</div></div>
+    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">76.0%</div><div class="kpi-sub">19 issued / 25 set</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">83.3%</div><div class="kpi-sub">15 demos / 18 net issued</div></div>
+    <div class="kpi-card red"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">0.0%</div><div class="kpi-sub">0 sales / 15 demos</div></div>
+    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">24.0%</div><div class="kpi-sub">6 dropped / 25 set</div></div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card"><div class="chart-title">Raw Leads by Source<span class="chart-subtitle">Marketing Sub-Source Report</span></div><div class="chart-wrap"><canvas id="mtd-leads-pie"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">Appointments Set by Source<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="mtd-set-pie"></canvas></div></div>
+    <div class="chart-card full"><div class="chart-title">Conversion Funnel<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="mtd-funnel"></canvas></div></div>
+  </div>
+  <div class="table-card">
+    <div class="chart-title">Month to Date Results by Sub-Source</div>
+    <div class="table-note">Raw = Marketing Sub-Source Report. Set / Issue / Demo / Sales = Call Center Appointment Statistics (June 1 – 14, 2026).</div>
+    <table><thead><tr><th>Sub-Source</th><th class="src-col">Raw*</th><th>Set</th><th>Gross Issue</th><th>Issue Rate</th><th>Net Issue</th><th>Demo</th><th>Demo Rate</th><th>Sales</th><th>Close %</th><th>Drop</th><th>Gross $</th></tr></thead>
+    <tbody>
+<tr class="div-row"><td colspan="12">EVENT</td></tr>
+<tr><td>&nbsp;&nbsp;Fruita Farmers Markets</td><td class="mc">4</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Rides and Vibes GJ</td><td class="mc">2</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Riverside Markets Eddy Park</td><td class="mc">7</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;SW Arbor Fest GJ</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Event Total</td><td class="mc">14</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">INTERNET</td></tr>
+<tr><td>&nbsp;&nbsp;Contractor Appointments</td><td class="mc">17</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Google</td><td class="mc">2</td><td>4</td><td>2</td><td class="b">50.0%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;HomeBuddy</td><td class="mc">11</td><td>5</td><td>4</td><td class="g">80.0%</td><td>4</td><td>4</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Networx</td><td class="mc">16</td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td>1</td><td class="b">50.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stratum Digital</td><td class="mc">17</td><td>3</td><td>2</td><td class="w">66.7%</td><td>2</td><td>1</td><td class="b">50.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">4</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Internet Total</td><td class="mc">67</td><td>16</td><td>12</td><td>75.0%</td><td>12</td><td>9</td><td>75.0%</td><td>0</td><td>0.0%</td><td>4</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">STORE BOOTH</td></tr>
+<tr><td>&nbsp;&nbsp;True Value 12th GJ</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Store Booth Total</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">SWEEPSTAKES</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">1</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Sweepstakes Total</td><td class="mc">1</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">OTHER</td></tr>
+<tr><td>&nbsp;&nbsp;Beacon Fest</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stampede Mesa Fairgrounds 5/26</td><td class="mc">—</td><td>4</td><td>2</td><td class="b">50.0%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Bath and Kitchen $15k Giveaway</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td>83</td><td>25</td><td>19</td><td>76.0%</td><td>18</td><td>15</td><td>83.3%</td><td>0</td><td>0.0%</td><td>6</td><td>$0</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ===== YEAR TO DATE ===== -->
+<div class="section" id="ytd">
+  <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – June 14, 2026</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-source">Marketing Report</div><div class="kpi-label">Total Raw Leads</div><div class="kpi-value">820</div><div class="kpi-sub">Leads received this period</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">240</div><div class="kpi-sub">Appt date January 1 – June 14, 2026</div></div>
+    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">151</div><div class="kpi-sub">87.3% of net issued</div></div>
+    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">32</div><div class="kpi-sub">$1,158,356 gross revenue</div></div>
+    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">79.2%</div><div class="kpi-sub">190 issued / 240 set</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">87.3%</div><div class="kpi-sub">151 demos / 173 net issued</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">21.2%</div><div class="kpi-sub">32 sales / 151 demos</div></div>
+    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">20.8%</div><div class="kpi-sub">50 dropped / 240 set</div></div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card"><div class="chart-title">Raw Leads by Source<span class="chart-subtitle">Marketing Sub-Source Report</span></div><div class="chart-wrap"><canvas id="ytd-leads-pie"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">Appointments Set by Source<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="ytd-set-pie"></canvas></div></div>
+    <div class="chart-card full"><div class="chart-title">Conversion Funnel<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="ytd-funnel"></canvas></div></div>
+  </div>
+  <div class="table-card">
+    <div class="chart-title">Year to Date Results by Sub-Source</div>
+    <div class="table-note">Raw = Marketing Sub-Source Report. Set / Issue / Demo / Sales = Call Center Appointment Statistics (January 1 – June 14, 2026).</div>
+    <table><thead><tr><th>Sub-Source</th><th class="src-col">Raw*</th><th>Set</th><th>Gross Issue</th><th>Issue Rate</th><th>Net Issue</th><th>Demo</th><th>Demo Rate</th><th>Sales</th><th>Close %</th><th>Drop</th><th>Gross $</th></tr></thead>
+    <tbody>
+<tr class="div-row"><td colspan="12">BCI</td></tr>
+<tr><td>&nbsp;&nbsp;BCI</td><td class="mc">10</td><td>11</td><td>9</td><td class="g">81.8%</td><td>7</td><td>4</td><td class="b">57.1%</td><td>1</td><td class="b">25.0%</td><td>2</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;BCI Total</td><td class="mc">10</td><td>11</td><td>9</td><td>81.8%</td><td>7</td><td>4</td><td>57.1%</td><td>1</td><td>25.0%</td><td>2</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">CUSTREF</td></tr>
+<tr><td>&nbsp;&nbsp;Customer Referral</td><td class="mc">2</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;CustRef Total</td><td class="mc">2</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">EMPREFERRAL</td></tr>
+<tr><td>&nbsp;&nbsp;Kelly</td><td class="mc">3</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>2</td><td class="w">66.7%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Lindsay</td><td class="mc">1</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;EmpReferral Total</td><td class="mc">4</td><td>4</td><td>4</td><td>100.0%</td><td>4</td><td>4</td><td>100.0%</td><td>2</td><td>50.0%</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">EVENT</td></tr>
+<tr><td>&nbsp;&nbsp;Beacon Fest</td><td class="mc">75</td><td>14</td><td>14</td><td class="g">100.0%</td><td>11</td><td>7</td><td class="w">63.6%</td><td>3</td><td class="b">42.9%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Bridal Show GJ</td><td class="mc">7</td><td>5</td><td>3</td><td class="w">60.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>1</td><td class="b">33.3%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Craft Fair GJ 4/11</td><td class="mc">2</td><td>3</td><td>2</td><td class="w">66.7%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Fruita Farmers Markets</td><td class="mc">4</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;GJ Home Show</td><td class="mc">53</td><td>36</td><td>29</td><td class="g">80.6%</td><td>29</td><td>26</td><td class="g">89.7%</td><td>6</td><td class="b">23.1%</td><td>7</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Cabin Fever Winter Markets</td><td class="mc">5</td><td>6</td><td>5</td><td class="g">83.3%</td><td>4</td><td>3</td><td class="w">75.0%</td><td>2</td><td class="w">66.7%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Craft Fair 10/25</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Farmers Market</td><td class="mc">6</td><td>8</td><td>3</td><td class="b">37.5%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>5</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Gun Show</td><td class="mc">2</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Home Show</td><td class="mc">23</td><td>21</td><td>14</td><td class="w">66.7%</td><td>12</td><td>11</td><td class="g">91.7%</td><td>5</td><td class="b">45.5%</td><td>7</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose Santas Workshop 12/5-6</td><td class="mc">1</td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>1</td><td class="b">50.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Rides and Vibes GJ</td><td class="mc">3</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Riverside Markets Eddy Park</td><td class="mc">7</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;RV Expo GJ</td><td class="mc">23</td><td>11</td><td>8</td><td class="w">72.7%</td><td>6</td><td>5</td><td class="g">83.3%</td><td>2</td><td class="b">40.0%</td><td>3</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stampede Mesa Fairgrounds 5/26</td><td class="mc">12</td><td>5</td><td>3</td><td class="w">60.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;SW Arbor Fest GJ</td><td class="mc">19</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td>2</td><td class="w">66.7%</td><td>1</td><td class="b">50.0%</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Event Total</td><td class="mc">243</td><td>117</td><td>88</td><td>75.2%</td><td>79</td><td>68</td><td>86.1%</td><td>21</td><td>30.9%</td><td>29</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">FACEBOOK</td></tr>
+<tr><td>&nbsp;&nbsp;Bath and Kitchen $15k Giveaway</td><td class="mc">111</td><td>5</td><td>4</td><td class="g">80.0%</td><td>4</td><td>4</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Facebook Total</td><td class="mc">111</td><td>5</td><td>4</td><td>80.0%</td><td>4</td><td>4</td><td>100.0%</td><td>0</td><td>0.0%</td><td>1</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">FLYER</td></tr>
+<tr><td>&nbsp;&nbsp;Door Hanger</td><td class="mc">1</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Flyer Total</td><td class="mc">1</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">INTERNET</td></tr>
+<tr><td>&nbsp;&nbsp;Bath Planet</td><td class="mc">2</td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Contractor Appointments</td><td class="mc">17</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Google</td><td class="mc">27</td><td>25</td><td>20</td><td class="g">80.0%</td><td>20</td><td>17</td><td class="g">85.0%</td><td>1</td><td class="b">5.9%</td><td>5</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;HomeBuddy</td><td class="mc">37</td><td>8</td><td>6</td><td class="w">75.0%</td><td>6</td><td>6</td><td class="g">100.0%</td><td>1</td><td class="b">16.7%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Houzz</td><td class="mc">3</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td>3</td><td class="g">100.0%</td><td>1</td><td class="b">33.3%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Networx</td><td class="mc">75</td><td>14</td><td>12</td><td class="g">85.7%</td><td>10</td><td>9</td><td class="g">90.0%</td><td>1</td><td class="b">11.1%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stratum Digital</td><td class="mc">179</td><td>4</td><td>3</td><td class="w">75.0%</td><td>3</td><td>2</td><td class="w">66.7%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">68</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Internet Total</td><td class="mc">408</td><td>58</td><td>48</td><td>82.8%</td><td>46</td><td>40</td><td>87.0%</td><td>4</td><td>10.0%</td><td>10</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">STORE BOOTH</td></tr>
+<tr><td>&nbsp;&nbsp;True Value 12th GJ</td><td class="mc">8</td><td>4</td><td>3</td><td class="w">75.0%</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td class="g">100.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;True Value Orchard Mesa</td><td class="mc">2</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Store Booth Total</td><td class="mc">10</td><td>4</td><td>3</td><td>75.0%</td><td>2</td><td>1</td><td>50.0%</td><td>1</td><td>100.0%</td><td>1</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">SWEEPSTAKES</td></tr>
+<tr><td>&nbsp;&nbsp;Event</td><td class="mc">2</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">28</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Sweepstakes Total</td><td class="mc">30</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">UNKNOWN</td></tr>
+<tr><td>&nbsp;&nbsp;Unknown</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Unknown Total</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">OTHER</td></tr>
+<tr><td>&nbsp;&nbsp;Moose Lodge Craft Fair</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td>820</td><td>240</td><td>190</td><td>79.2%</td><td>173</td><td>151</td><td>87.3%</td><td>32</td><td>21.2%</td><td>50</td><td>$0</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+
+<!-- ===== PRODUCTS ===== -->
+<div class="section" id="products">
+  <div class="period-label">Product Performance &nbsp;•&nbsp; Appointment Statistics by Product</div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('products','prod-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('products','prod-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('products','prod-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('products','prod-ytd',this)">Year to Date</button></div>
+
+  <div class="period-section" id="prod-pw">
+    <div class="period-label">Prior Week &nbsp;•&nbsp; Jun 1 – Jun 6, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Product Performance — Prior Week</div>
+      <div class="table-note">Appointment Statistics by Product. Appointment dates Jun 1 – Jun 6, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
+      <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
+<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
+<tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>4</td><td>3</td><td class="w">75.0%</td><td>3</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-bathrooms"><td>&nbsp;&nbsp;Bathrooms Total</td><td></td><td>7</td><td>6</td><td class="g">85.7%</td><td>6</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
+<tr><td colspan="10" style="text-align:center;color:#aaa;font-style:italic;padding:14px;">No appointments this period</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>9</td><td>8</td><td>88.9%</td><td>8</td><td>100.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="prod-pm">
+    <div class="period-label">Prior Month &nbsp;•&nbsp; May 1 – 31, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Product Performance — Prior Month</div>
+      <div class="table-note">Appointment Statistics by Product. Appointment dates May 1 – 31, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
+      <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
+<tr><td>&nbsp;&nbsp;CAB</td><td>Cabinets</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td class="g">100.0%</td><td>1</td><td class="b">33.3%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>9</td><td>9</td><td class="g">100.0%</td><td>7</td><td class="w">77.8%</td><td>2</td><td class="b">28.6%</td><td>—</td></tr>
+<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>12</td><td>12</td><td class="g">100.0%</td><td>10</td><td class="g">83.3%</td><td>3</td><td>30.0%</td><td>$0</td></tr>
+<tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
+<tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>13</td><td>13</td><td class="g">100.0%</td><td>13</td><td class="g">100.0%</td><td>2</td><td class="b">15.4%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>10</td><td>10</td><td class="g">100.0%</td><td>10</td><td class="g">100.0%</td><td>1</td><td class="b">10.0%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;WAIT</td><td>Walk-in Tub</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-bathrooms"><td>&nbsp;&nbsp;Bathrooms Total</td><td></td><td>24</td><td>24</td><td class="g">100.0%</td><td>24</td><td class="g">100.0%</td><td>3</td><td>12.5%</td><td>$0</td></tr>
+<tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
+<tr><td>&nbsp;&nbsp;WINDR</td><td>Windows & Doors</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-windows"><td>&nbsp;&nbsp;W&amp;D Total</td><td></td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>37</td><td>37</td><td>100.0%</td><td>35</td><td>94.6%</td><td>6</td><td>17.1%</td><td>$0</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="prod-mtd">
+    <div class="period-label">Month to Date &nbsp;•&nbsp; June 1 – 14, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Product Performance — Month to Date</div>
+      <div class="table-note">Appointment Statistics by Product. Appointment dates June 1 – 14, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
+      <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
+<tr><td>&nbsp;&nbsp;CAB</td><td>Cabinets</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>4</td><td>4</td><td class="g">100.0%</td><td>4</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>4</td><td>4</td><td class="g">100.0%</td><td>4</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
+<tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>11</td><td>10</td><td class="g">90.9%</td><td>7</td><td class="w">70.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>3</td><td>3</td><td class="g">100.0%</td><td>3</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;WAIT</td><td>Walk-in Tub</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-bathrooms"><td>&nbsp;&nbsp;Bathrooms Total</td><td></td><td>15</td><td>14</td><td class="g">93.3%</td><td>11</td><td class="w">78.6%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
+<tr><td colspan="10" style="text-align:center;color:#aaa;font-style:italic;padding:14px;">No appointments this period</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>19</td><td>18</td><td>94.7%</td><td>15</td><td>83.3%</td><td>0</td><td>0.0%</td><td>$0</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section active" id="prod-ytd">
+    <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – June 14, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Product Performance — Year to Date</div>
+      <div class="table-note">Appointment Statistics by Product. Appointment dates January 1 – June 14, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
+      <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
+<tr><td>&nbsp;&nbsp;CAB</td><td>Cabinets</td><td>19</td><td>18</td><td class="g">94.7%</td><td>16</td><td class="g">88.9%</td><td>4</td><td class="b">25.0%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>40</td><td>38</td><td class="g">95.0%</td><td>35</td><td class="g">92.1%</td><td>9</td><td class="b">25.7%</td><td>—</td></tr>
+<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>59</td><td>56</td><td class="g">94.9%</td><td>51</td><td class="g">91.1%</td><td>13</td><td>25.5%</td><td>$0</td></tr>
+<tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
+<tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>70</td><td>64</td><td class="g">91.4%</td><td>53</td><td class="g">82.8%</td><td>9</td><td class="b">17.0%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>56</td><td>48</td><td class="g">85.7%</td><td>43</td><td class="g">89.6%</td><td>10</td><td class="b">23.3%</td><td>—</td></tr>
+<tr><td>&nbsp;&nbsp;WAIT</td><td>Walk-in Tub</td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-bathrooms"><td>&nbsp;&nbsp;Bathrooms Total</td><td></td><td>128</td><td>114</td><td class="g">89.1%</td><td>98</td><td class="g">86.0%</td><td>19</td><td>19.4%</td><td>$0</td></tr>
+<tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
+<tr><td>&nbsp;&nbsp;WINDR</td><td>Windows & Doors</td><td>3</td><td>3</td><td class="g">100.0%</td><td>2</td><td class="w">66.7%</td><td>0</td><td>0.0%</td><td>—</td></tr>
+<tr class="grp-windows"><td>&nbsp;&nbsp;W&amp;D Total</td><td></td><td>3</td><td>3</td><td class="g">100.0%</td><td>2</td><td class="w">66.7%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>190</td><td>173</td><td>91.1%</td><td>151</td><td>87.3%</td><td>32</td><td>21.2%</td><td>$0</td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== SETTERS / CALL CENTER ===== -->
+<div class="section" id="salesreps">
+  <div class="period-label">Setter Performance &nbsp;•&nbsp; Appointment Statistics by Setter</div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('salesreps','rep-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('salesreps','rep-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('salesreps','rep-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('salesreps','rep-ytd',this)">Year to Date</button></div>
+
+  <div class="period-section" id="rep-pw">
+    <div class="period-label">Prior Week &nbsp;•&nbsp; Jun 1 – Jun 6, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Setter Performance — Prior Week</div>
+      <div class="table-note">Source: Appointment Statistics by Setter. Dates Jun 1 – Jun 6, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>4</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>9</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>13</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="rep-pm">
+    <div class="period-label">Prior Month &nbsp;•&nbsp; May 1 – 31, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Setter Performance — Prior Month</div>
+      <div class="table-note">Source: Appointment Statistics by Setter. Dates May 1 – 31, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>9</td><td>0</td><td>$28,850</td><td>$3,206</td></tr>
+<tr><td>Goscha, Ezra</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Huston, Riley</td><td>7</td><td>0</td><td>$128,555</td><td>$18,365</td></tr>
+<tr><td>Knecht, Lindsay</td><td>6</td><td>0</td><td>$13,010</td><td>$2,168</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>21</td><td>0</td><td>$77,390</td><td>$3,685</td></tr>
+<tr><td>Robertson, Kelly</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>48</td><td>6</td><td>$247,805</td><td>$5,163</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="rep-mtd">
+    <div class="period-label">Month to Date &nbsp;•&nbsp; June 1 – 14, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Setter Performance — Month to Date</div>
+      <div class="table-note">Source: Appointment Statistics by Setter. Dates June 1 – 14, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>7</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>18</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>25</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section active" id="rep-ytd">
+    <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – June 14, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Setter Performance — Year to Date</div>
+      <div class="table-note">Source: Appointment Statistics by Setter. Dates January 1 – June 14, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>27</td><td>0</td><td>$144,873</td><td>$5,366</td></tr>
+<tr><td>Coleman, Maggie</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Goscha, Ezra</td><td>20</td><td>0</td><td>$70,272</td><td>$3,514</td></tr>
+<tr><td>Humphrey, Dante</td><td>13</td><td>0</td><td>$36,916</td><td>$2,840</td></tr>
+<tr><td>Huston, Riley</td><td>28</td><td>0</td><td>$223,955</td><td>$7,998</td></tr>
+<tr><td>Knecht, Lindsay</td><td>71</td><td>0</td><td>$117,531</td><td>$1,655</td></tr>
+<tr><td>Koerner, Jesse</td><td>10</td><td>0</td><td>$73,731</td><td>$7,373</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>39</td><td>0</td><td>$77,390</td><td>$1,984</td></tr>
+<tr><td>Robertson, Kelly</td><td>24</td><td>0</td><td>$413,688</td><td>$17,237</td></tr>
+<tr><td>Unknown, Unknown</td><td>4</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>240</td><td>32</td><td>$1,158,356</td><td>$4,826</td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== CALL CENTER ===== -->
+<div class="section" id="callcenter">
+  <div class="period-label">Call Center Performance &nbsp;•&nbsp; Appointment Statistics Reports</div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('callcenter','cc-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('callcenter','cc-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('callcenter','cc-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('callcenter','cc-ytd',this)">Year to Date</button></div>
+
+  <div class="period-section" id="cc-pw">
+    <div class="period-label">Prior Week &nbsp;•&nbsp; Jun 1 – Jun 6, 2026</div>
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">13</div><div class="kpi-sub">2 active setters</div></div>
+      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">8</div><div class="kpi-sub">100.0% of net issued</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">0</div><div class="kpi-sub">$0 gross revenue</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">69.2%</div><div class="kpi-sub">9 issued / 13 set</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">100.0%</div><div class="kpi-sub">8 demos / 8 net issued</div></div>
+      <div class="kpi-card red"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">0.0%</div><div class="kpi-sub">0 sales / 8 demos</div></div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><div class="chart-title">Set by Setter<span class="chart-subtitle">Prior Week — 13 total</span></div><div class="chart-wrap"><canvas id="cc-pw-setter-pie"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Set by Product<span class="chart-subtitle">Prior Week — 13 total</span></div><div class="chart-wrap"><canvas id="cc-pw-product-pie"></canvas></div></div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Setter — Prior Week</div>
+      <div class="table-note">Appt dates Jun 1 – Jun 6, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>4</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>9</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>13</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Product — Prior Week</div>
+      <div class="table-note">Appt dates Jun 1 – Jun 6, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
+      <tbody><tr><td>Full Bathroom (FB)</td><td>7</td><td>0</td><td>—</td></tr>
+<tr><td>Full Kitchen (FK)</td><td>3</td><td>0</td><td>—</td></tr>
+<tr><td>Wet Area (WA)</td><td>3</td><td>0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>13</td><td>0</td><td>$0</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="cc-pm">
+    <div class="period-label">Prior Month &nbsp;•&nbsp; May 1 – 31, 2026</div>
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">48</div><div class="kpi-sub">7 active setters</div></div>
+      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">35</div><div class="kpi-sub">94.6% of net issued</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">6</div><div class="kpi-sub">$247,805 gross revenue</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">77.1%</div><div class="kpi-sub">37 issued / 48 set</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">94.6%</div><div class="kpi-sub">35 demos / 37 net issued</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">17.1%</div><div class="kpi-sub">6 sales / 35 demos</div></div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><div class="chart-title">Set by Setter<span class="chart-subtitle">Prior Month — 48 total</span></div><div class="chart-wrap"><canvas id="cc-pm-setter-pie"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Set by Product<span class="chart-subtitle">Prior Month — 48 total</span></div><div class="chart-wrap"><canvas id="cc-pm-product-pie"></canvas></div></div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Setter — Prior Month</div>
+      <div class="table-note">Appt dates May 1 – 31, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>9</td><td>0</td><td>$28,850</td><td>$3,206</td></tr>
+<tr><td>Goscha, Ezra</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Huston, Riley</td><td>7</td><td>0</td><td>$128,555</td><td>$18,365</td></tr>
+<tr><td>Knecht, Lindsay</td><td>6</td><td>0</td><td>$13,010</td><td>$2,168</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>21</td><td>0</td><td>$77,390</td><td>$3,685</td></tr>
+<tr><td>Robertson, Kelly</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>48</td><td>6</td><td>$247,805</td><td>$5,163</td></tr></tbody></table>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Product — Prior Month</div>
+      <div class="table-note">Appt dates May 1 – 31, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
+      <tbody><tr><td>Cabinets (CAB)</td><td>3</td><td>1</td><td>—</td></tr>
+<tr><td>Full Bathroom (FB)</td><td>19</td><td>2</td><td>—</td></tr>
+<tr><td>Full Kitchen (FK)</td><td>11</td><td>2</td><td>—</td></tr>
+<tr><td>Wet Area (WA)</td><td>12</td><td>1</td><td>—</td></tr>
+<tr><td>Walk-in Tub (WAIT)</td><td>1</td><td>0</td><td>—</td></tr>
+<tr><td>Windows & Doors (WINDR)</td><td>1</td><td>0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>48</td><td>6</td><td>$247,805</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="cc-mtd">
+    <div class="period-label">Month to Date &nbsp;•&nbsp; June 1 – 14, 2026</div>
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">25</div><div class="kpi-sub">2 active setters</div></div>
+      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">15</div><div class="kpi-sub">83.3% of net issued</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">0</div><div class="kpi-sub">$0 gross revenue</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">76.0%</div><div class="kpi-sub">19 issued / 25 set</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">83.3%</div><div class="kpi-sub">15 demos / 18 net issued</div></div>
+      <div class="kpi-card red"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">0.0%</div><div class="kpi-sub">0 sales / 15 demos</div></div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><div class="chart-title">Set by Setter<span class="chart-subtitle">Month to Date — 25 total</span></div><div class="chart-wrap"><canvas id="cc-mtd-setter-pie"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Set by Product<span class="chart-subtitle">Month to Date — 25 total</span></div><div class="chart-wrap"><canvas id="cc-mtd-product-pie"></canvas></div></div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Setter — Month to Date</div>
+      <div class="table-note">Appt dates June 1 – 14, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>7</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>18</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>25</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Product — Month to Date</div>
+      <div class="table-note">Appt dates June 1 – 14, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
+      <tbody><tr><td>Cabinets (CAB)</td><td>1</td><td>0</td><td>—</td></tr>
+<tr><td>Full Bathroom (FB)</td><td>14</td><td>0</td><td>—</td></tr>
+<tr><td>Full Kitchen (FK)</td><td>6</td><td>0</td><td>—</td></tr>
+<tr><td>Wet Area (WA)</td><td>3</td><td>0</td><td>—</td></tr>
+<tr><td>Walk-in Tub (WAIT)</td><td>1</td><td>0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>25</td><td>0</td><td>$0</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section active" id="cc-ytd">
+    <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – June 14, 2026</div>
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">240</div><div class="kpi-sub">11 active setters</div></div>
+      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">151</div><div class="kpi-sub">87.3% of net issued</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">32</div><div class="kpi-sub">$1,158,356 gross revenue</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">79.2%</div><div class="kpi-sub">190 issued / 240 set</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">87.3%</div><div class="kpi-sub">151 demos / 173 net issued</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">21.2%</div><div class="kpi-sub">32 sales / 151 demos</div></div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><div class="chart-title">Set by Setter<span class="chart-subtitle">Year to Date — 240 total</span></div><div class="chart-wrap"><canvas id="cc-ytd-setter-pie"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Set by Product<span class="chart-subtitle">Year to Date — 240 total</span></div><div class="chart-wrap"><canvas id="cc-ytd-product-pie"></canvas></div></div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Setter — Year to Date</div>
+      <div class="table-note">Appt dates January 1 – June 14, 2026.</div>
+      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>27</td><td>0</td><td>$144,873</td><td>$5,366</td></tr>
+<tr><td>Coleman, Maggie</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Goscha, Ezra</td><td>20</td><td>0</td><td>$70,272</td><td>$3,514</td></tr>
+<tr><td>Humphrey, Dante</td><td>13</td><td>0</td><td>$36,916</td><td>$2,840</td></tr>
+<tr><td>Huston, Riley</td><td>28</td><td>0</td><td>$223,955</td><td>$7,998</td></tr>
+<tr><td>Knecht, Lindsay</td><td>71</td><td>0</td><td>$117,531</td><td>$1,655</td></tr>
+<tr><td>Koerner, Jesse</td><td>10</td><td>0</td><td>$73,731</td><td>$7,373</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>39</td><td>0</td><td>$77,390</td><td>$1,984</td></tr>
+<tr><td>Robertson, Kelly</td><td>24</td><td>0</td><td>$413,688</td><td>$17,237</td></tr>
+<tr><td>Unknown, Unknown</td><td>4</td><td>0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>240</td><td>32</td><td>$1,158,356</td><td>$4,826</td></tr></tbody></table>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Product — Year to Date</div>
+      <div class="table-note">Appt dates January 1 – June 14, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
+      <tbody><tr><td>Cabinets (CAB)</td><td>26</td><td>4</td><td>—</td></tr>
+<tr><td>Full Bathroom (FB)</td><td>92</td><td>9</td><td>—</td></tr>
+<tr><td>Full Kitchen (FK)</td><td>51</td><td>9</td><td>—</td></tr>
+<tr><td>Wet Area (WA)</td><td>65</td><td>10</td><td>—</td></tr>
+<tr><td>Walk-in Tub (WAIT)</td><td>2</td><td>0</td><td>—</td></tr>
+<tr><td>Windows & Doors (WINDR)</td><td>3</td><td>0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>240</td><td>32</td><td>$1,158,356</td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+function showTab(id,el){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');el.classList.add('active');window.dispatchEvent(new Event('resize'));}
+function showPeriod(sectId,id,el){document.querySelectorAll('#'+sectId+' .period-section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('#'+sectId+' .ptab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');el.classList.add('active');window.dispatchEvent(new Event('resize'));}
+const C=['#2d5a8e','#4da6ff','#28a745','#fd7e14','#6f42c1','#dc3545','#17a2b8','#ffc107','#20c997','#e83e8c'];
+function pie(id,labels,data){var el=document.getElementById(id);if(!el)return;new Chart(el,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:C,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:10}}}}})}
+function hbar(id,labels,data,colors){var el=document.getElementById(id);if(!el)return;new Chart(el,{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}}}})}
+function bar(id,labels,datasets){var el=document.getElementById(id);if(!el)return;new Chart(el,{type:'bar',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{x:{ticks:{font:{size:10}}},y:{beginAtZero:true}}}})}
+
+pie('pw-leads-pie',['Internet','Store Booth'],[37,1]);
+pie('pw-set-pie',['Event','Facebook','Internet'],[2,1,10]);
+hbar('pw-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[38,13,9,8,8,0],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+pie('pm-leads-pie',['EmpReferral','Event','Facebook','Internet','Sweepstakes'],[1,13,56,243,11]);
+pie('pm-set-pie',['EmpReferral','Event','Facebook','Internet'],[1,18,4,25]);
+hbar('pm-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[324,48,37,37,35,6],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+pie('mtd-leads-pie',['Event','Internet','Store Booth','Sweepstakes'],[14,67,1,1]);
+pie('mtd-set-pie',['Event','Facebook','Internet','Sweepstakes'],[5,1,18,1]);
+hbar('mtd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[83,25,19,18,15,0],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+pie('ytd-leads-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Flyer','Internet','Store Booth','Sweepstakes','Unknown'],[10,2,4,243,111,1,408,10,30,1]);
+pie('ytd-set-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Flyer','Internet','Store Booth','Sweepstakes'],[11,1,4,118,5,1,95,4,1]);
+hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[820,240,190,173,151,32],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+pie('cc-pw-setter-pie',['Bates, Austin','Messano, Angela'],[4,9]);
+pie('cc-pw-product-pie',['FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)'],[7,3,3]);
+pie('cc-pm-setter-pie',['Bates, Austin','Goscha, Ezra','Huston, Riley','Knecht, Lindsay','Maughan, Samantha','Messano, Angela','Robertson, Kelly'],[9,3,7,6,1,21,1]);
+pie('cc-pm-product-pie',['CAB (Cabinets)','FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)','WAIT (Walk-in Tub)','WINDR (Windows & Doors)'],[3,19,11,12,1,1]);
+pie('cc-mtd-setter-pie',['Bates, Austin','Messano, Angela'],[7,18]);
+pie('cc-mtd-product-pie',['CAB (Cabinets)','FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)','WAIT (Walk-in Tub)'],[1,14,6,3,1]);
+pie('cc-ytd-setter-pie',['Bates, Austin','Coleman, Maggie','Goscha, Ezra','Humphrey, Dante','Huston, Riley','Knecht, Lindsay','Koerner, Jesse','Maughan, Samantha','Messano, Angela','Robertson, Kelly','Unknown, Unknown'],[27,3,20,13,28,71,10,1,39,24,4]);
+pie('cc-ytd-product-pie',['CAB (Cabinets)','FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)','WAIT (Walk-in Tub)','WINDR (Windows & Doors)'],[26,92,51,65,2,3]);
+
+</script>
+</body>
+</html>
