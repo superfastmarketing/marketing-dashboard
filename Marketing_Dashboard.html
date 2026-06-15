@@ -446,69 +446,445 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 </div>
 
 
-<!-- ===== SETTERS / CALL CENTER ===== -->
+<!-- ===== SETTERS ===== -->
 <div class="section" id="salesreps">
   <div class="period-label">Setter Performance &nbsp;•&nbsp; Appointment Statistics by Setter</div>
   <div class="period-toggle"><button class="ptab" onclick="showPeriod('salesreps','rep-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('salesreps','rep-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('salesreps','rep-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('salesreps','rep-ytd',this)">Year to Date</button></div>
 
   <div class="period-section" id="rep-pw">
     <div class="period-label">Prior Week &nbsp;•&nbsp; Jun 8 – Jun 13, 2026</div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">12</div><div class="kpi-sub">2 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">7</div><div class="kpi-sub">0 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$0</div><div class="kpi-sub">Net: $0</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">—</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">1</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">1</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">1</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Appointment Issue Breakdown per Setter
+          <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="setter-issues-pw"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Bates, Austin</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 1</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Messano, Angela</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">9</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">1</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 1</div>
+    </div></div>
+
     <div class="table-card">
-      <div class="chart-title">Setter Performance — Prior Week</div>
-      <div class="table-note">Source: Appointment Statistics by Setter. Dates Jun 8 – Jun 13, 2026.</div>
-      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>9</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>12</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+      <div class="chart-title">Appointment Statistics by Setter — Prior Week</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Setter. Appointment dates Jun 8 – Jun 13, 2026.<br>
+        NSLI = Net Sale to List Issue (Net Amt ÷ Gross Amt). CNS=Customer No-Show · 1Leg=One Leg Reset · CXL=Cancel prior to Issue · NG=No Good.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Setter</th><th>Set</th><th>Issued</th><th>Demo</th><th>Sale</th>
+          <th>CNS</th><th>1-Leg</th><th>CXL</th><th>NG</th><th>Drop</th>
+          <th>Gross $</th><th>Net $</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Bates, Austin</td><td>3</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>9</td><td>8</td><td>5</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>12</td><td>10</td><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>4</td><td>$0</td><td>$0</td><td>—</td></tr></tbody>
+      </table>
     </div>
   </div>
   <div class="period-section" id="rep-pm">
     <div class="period-label">Prior Month &nbsp;•&nbsp; May 1 – 31, 2026</div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">48</div><div class="kpi-sub">7 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">35</div><div class="kpi-sub">6 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$247,805</div><div class="kpi-sub">Net: $245,755</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">99.2%</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">2</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">4</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">5</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Appointment Issue Breakdown per Setter
+          <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
+        </div>
+        <div class="chart-wrap" style="height:294px"><canvas id="setter-issues-pm"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Bates, Austin</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">9</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $28,850 &nbsp;|&nbsp; NSLI: 100.0% &nbsp;|&nbsp; Drop: 0</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Goscha, Ezra</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">1</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 1</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Huston, Riley</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">1</div></div>
+      </div>
+      <div class="rep-gross">Net: $126,505 &nbsp;|&nbsp; NSLI: 98.4% &nbsp;|&nbsp; Drop: 2</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Knecht, Lindsay</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">6</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">2</div></div>
+      </div>
+      <div class="rep-gross">Net: $13,010 &nbsp;|&nbsp; NSLI: 100.0% &nbsp;|&nbsp; Drop: 3</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Maughan, Samantha</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 0</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Messano, Angela</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">21</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">18</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">1</div></div>
+      </div>
+      <div class="rep-gross">Net: $77,390 &nbsp;|&nbsp; NSLI: 100.0% &nbsp;|&nbsp; Drop: 4</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Robertson, Kelly</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 0</div>
+    </div></div>
+
     <div class="table-card">
-      <div class="chart-title">Setter Performance — Prior Month</div>
-      <div class="table-note">Source: Appointment Statistics by Setter. Dates May 1 – 31, 2026.</div>
-      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>9</td><td>0</td><td>$28,850</td><td>$3,206</td></tr>
-<tr><td>Goscha, Ezra</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Huston, Riley</td><td>7</td><td>0</td><td>$128,555</td><td>$18,365</td></tr>
-<tr><td>Knecht, Lindsay</td><td>6</td><td>0</td><td>$13,010</td><td>$2,168</td></tr>
-<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>21</td><td>0</td><td>$77,390</td><td>$3,685</td></tr>
-<tr><td>Robertson, Kelly</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>48</td><td>6</td><td>$247,805</td><td>$5,163</td></tr></tbody></table>
+      <div class="chart-title">Appointment Statistics by Setter — Prior Month</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Setter. Appointment dates May 1 – 31, 2026.<br>
+        NSLI = Net Sale to List Issue (Net Amt ÷ Gross Amt). CNS=Customer No-Show · 1Leg=One Leg Reset · CXL=Cancel prior to Issue · NG=No Good.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Setter</th><th>Set</th><th>Issued</th><th>Demo</th><th>Sale</th>
+          <th>CNS</th><th>1-Leg</th><th>CXL</th><th>NG</th><th>Drop</th>
+          <th>Gross $</th><th>Net $</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Bates, Austin</td><td>9</td><td>9</td><td>7</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$28,850</td><td>$28,850</td><td>100.0%</td></tr>
+<tr><td>Goscha, Ezra</td><td>3</td><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Huston, Riley</td><td>7</td><td>5</td><td>4</td><td>2</td><td>1</td><td>0</td><td>1</td><td>0</td><td>2</td><td>$128,555</td><td>$126,505</td><td>98.4%</td></tr>
+<tr><td>Knecht, Lindsay</td><td>6</td><td>3</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td><td>3</td><td>$13,010</td><td>$13,010</td><td>100.0%</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>21</td><td>17</td><td>18</td><td>2</td><td>0</td><td>3</td><td>1</td><td>0</td><td>4</td><td>$77,390</td><td>$77,390</td><td>100.0%</td></tr>
+<tr><td>Robertson, Kelly</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>48</td><td>38</td><td>35</td><td>6</td><td>2</td><td>4</td><td>5</td><td>0</td><td>47</td><td>$247,805</td><td>$245,755</td><td>99.2%</td></tr></tbody>
+      </table>
     </div>
   </div>
   <div class="period-section" id="rep-mtd">
     <div class="period-label">Month to Date &nbsp;•&nbsp; June 1 – 15, 2026</div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">27</div><div class="kpi-sub">3 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">15</div><div class="kpi-sub">0 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$0</div><div class="kpi-sub">Net: $0</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">—</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">1</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">1</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">3</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Appointment Issue Breakdown per Setter
+          <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="setter-issues-mtd"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Bates, Austin</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">8</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">1</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 2</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Messano, Angela</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">18</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">10</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">2</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 4</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Trombley, Andrew</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 0</div>
+    </div></div>
+
     <div class="table-card">
-      <div class="chart-title">Setter Performance — Month to Date</div>
-      <div class="table-note">Source: Appointment Statistics by Setter. Dates June 1 – 15, 2026.</div>
-      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>8</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>18</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Trombley, Andrew</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>27</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+      <div class="chart-title">Appointment Statistics by Setter — Month to Date</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Setter. Appointment dates June 1 – 15, 2026.<br>
+        NSLI = Net Sale to List Issue (Net Amt ÷ Gross Amt). CNS=Customer No-Show · 1Leg=One Leg Reset · CXL=Cancel prior to Issue · NG=No Good.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Setter</th><th>Set</th><th>Issued</th><th>Demo</th><th>Sale</th>
+          <th>CNS</th><th>1-Leg</th><th>CXL</th><th>NG</th><th>Drop</th>
+          <th>Gross $</th><th>Net $</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Bates, Austin</td><td>8</td><td>6</td><td>5</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>18</td><td>14</td><td>10</td><td>0</td><td>1</td><td>1</td><td>2</td><td>0</td><td>4</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Trombley, Andrew</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>27</td><td>21</td><td>15</td><td>0</td><td>1</td><td>1</td><td>3</td><td>0</td><td>26</td><td>$0</td><td>$0</td><td>—</td></tr></tbody>
+      </table>
     </div>
   </div>
   <div class="period-section active" id="rep-ytd">
     <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – June 15, 2026</div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">242</div><div class="kpi-sub">12 active setters</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">151</div><div class="kpi-sub">32 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$1,158,356</div><div class="kpi-sub">Net: $1,122,262</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">96.9%</div><div class="kpi-sub">Net Amt / Gross Amt</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">15</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">7</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">18</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Appointment Issue Breakdown per Setter
+          <span class="chart-subtitle">CNS = No-Show &nbsp;·&nbsp; 1-Leg = One Leg Reset &nbsp;·&nbsp; CXL = Cancel prior to Issue &nbsp;·&nbsp; NG = No Good</span>
+        </div>
+        <div class="chart-wrap" style="height:504px"><canvas id="setter-issues-ytd"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Bates, Austin</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">28</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">20</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">1</div></div>
+      </div>
+      <div class="rep-gross">Net: $126,723 &nbsp;|&nbsp; NSLI: 87.5% &nbsp;|&nbsp; Drop: 1</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Coleman, Maggie</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: -1</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Goscha, Ezra</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">20</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">11</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">4</div></div>
+      </div>
+      <div class="rep-gross">Net: $67,736 &nbsp;|&nbsp; NSLI: 96.4% &nbsp;|&nbsp; Drop: 7</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Humphrey, Dante</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">13</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">2</div></div>
+      </div>
+      <div class="rep-gross">Net: $52,631 &nbsp;|&nbsp; NSLI: 142.6% &nbsp;|&nbsp; Drop: 4</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Huston, Riley</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">28</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">16</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">2</div></div>
+      </div>
+      <div class="rep-gross">Net: $195,428 &nbsp;|&nbsp; NSLI: 87.3% &nbsp;|&nbsp; Drop: 8</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Knecht, Lindsay</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">71</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">45</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">4</div></div>
+      </div>
+      <div class="rep-gross">Net: $116,300 &nbsp;|&nbsp; NSLI: 99.0% &nbsp;|&nbsp; Drop: 11</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Koerner, Jesse</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">10</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $73,926 &nbsp;|&nbsp; NSLI: 100.3% &nbsp;|&nbsp; Drop: 3</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Maughan, Samantha</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 0</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Messano, Angela</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">39</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">28</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">3</div></div>
+      </div>
+      <div class="rep-gross">Net: $77,390 &nbsp;|&nbsp; NSLI: 100.0% &nbsp;|&nbsp; Drop: 8</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Robertson, Kelly</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">24</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">14</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">6</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">2</div></div>
+      </div>
+      <div class="rep-gross">Net: $412,129 &nbsp;|&nbsp; NSLI: 99.6% &nbsp;|&nbsp; Drop: 4</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Trombley, Andrew</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 0</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Unknown, Unknown</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CXL</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">Net: $0 &nbsp;|&nbsp; NSLI: — &nbsp;|&nbsp; Drop: 1</div>
+    </div></div>
+
     <div class="table-card">
-      <div class="chart-title">Setter Performance — Year to Date</div>
-      <div class="table-note">Source: Appointment Statistics by Setter. Dates January 1 – June 15, 2026.</div>
-      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>28</td><td>0</td><td>$144,873</td><td>$5,174</td></tr>
-<tr><td>Coleman, Maggie</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Goscha, Ezra</td><td>20</td><td>0</td><td>$70,272</td><td>$3,514</td></tr>
-<tr><td>Humphrey, Dante</td><td>13</td><td>0</td><td>$36,916</td><td>$2,840</td></tr>
-<tr><td>Huston, Riley</td><td>28</td><td>0</td><td>$223,955</td><td>$7,998</td></tr>
-<tr><td>Knecht, Lindsay</td><td>71</td><td>0</td><td>$117,531</td><td>$1,655</td></tr>
-<tr><td>Koerner, Jesse</td><td>10</td><td>0</td><td>$73,731</td><td>$7,373</td></tr>
-<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>39</td><td>0</td><td>$77,390</td><td>$1,984</td></tr>
-<tr><td>Robertson, Kelly</td><td>24</td><td>0</td><td>$413,688</td><td>$17,237</td></tr>
-<tr><td>Trombley, Andrew</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Unknown, Unknown</td><td>4</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>242</td><td>32</td><td>$1,158,356</td><td>$4,787</td></tr></tbody></table>
+      <div class="chart-title">Appointment Statistics by Setter — Year to Date</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Setter. Appointment dates January 1 – June 15, 2026.<br>
+        NSLI = Net Sale to List Issue (Net Amt ÷ Gross Amt). CNS=Customer No-Show · 1Leg=One Leg Reset · CXL=Cancel prior to Issue · NG=No Good.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Setter</th><th>Set</th><th>Issued</th><th>Demo</th><th>Sale</th>
+          <th>CNS</th><th>1-Leg</th><th>CXL</th><th>NG</th><th>Drop</th>
+          <th>Gross $</th><th>Net $</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Bates, Austin</td><td>28</td><td>27</td><td>20</td><td>5</td><td>3</td><td>0</td><td>1</td><td>0</td><td>1</td><td>$144,873</td><td>$126,723</td><td>87.5%</td></tr>
+<tr><td>Coleman, Maggie</td><td>3</td><td>4</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Goscha, Ezra</td><td>20</td><td>13</td><td>11</td><td>3</td><td>0</td><td>0</td><td>4</td><td>0</td><td>7</td><td>$70,272</td><td>$67,736</td><td>96.4%</td></tr>
+<tr><td>Humphrey, Dante</td><td>13</td><td>9</td><td>7</td><td>2</td><td>1</td><td>0</td><td>2</td><td>0</td><td>4</td><td>$36,916</td><td>$52,631</td><td>142.6%</td></tr>
+<tr><td>Huston, Riley</td><td>28</td><td>20</td><td>16</td><td>5</td><td>4</td><td>0</td><td>2</td><td>0</td><td>8</td><td>$223,955</td><td>$195,428</td><td>87.3%</td></tr>
+<tr><td>Knecht, Lindsay</td><td>71</td><td>60</td><td>45</td><td>7</td><td>2</td><td>3</td><td>4</td><td>0</td><td>11</td><td>$117,531</td><td>$116,300</td><td>99.0%</td></tr>
+<tr><td>Koerner, Jesse</td><td>10</td><td>7</td><td>7</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>$73,731</td><td>$73,926</td><td>100.3%</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>39</td><td>31</td><td>28</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0</td><td>8</td><td>$77,390</td><td>$77,390</td><td>100.0%</td></tr>
+<tr><td>Robertson, Kelly</td><td>24</td><td>20</td><td>14</td><td>6</td><td>3</td><td>0</td><td>2</td><td>0</td><td>4</td><td>$413,688</td><td>$412,129</td><td>99.6%</td></tr>
+<tr><td>Trombley, Andrew</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Unknown, Unknown</td><td>4</td><td>3</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>242</td><td>196</td><td>151</td><td>32</td><td>15</td><td>7</td><td>18</td><td>0</td><td>239</td><td>$1,158,356</td><td>$1,122,262</td><td>96.9%</td></tr></tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -537,9 +913,9 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="chart-title">Appointment Statistics by Setter — Prior Week</div>
       <div class="table-note">Appt dates Jun 8 – Jun 13, 2026.</div>
       <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>9</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>12</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+      <tbody><tr><td>Bates, Austin</td><td>3</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>9</td><td>8</td><td>5</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>12</td><td>10</td><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>4</td><td>$0</td><td>$0</td><td>—</td></tr></tbody></table>
     </div>
     <div class="table-card">
       <div class="chart-title">Appointment Statistics by Product — Prior Week</div>
@@ -570,14 +946,14 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="chart-title">Appointment Statistics by Setter — Prior Month</div>
       <div class="table-note">Appt dates May 1 – 31, 2026.</div>
       <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>9</td><td>0</td><td>$28,850</td><td>$3,206</td></tr>
-<tr><td>Goscha, Ezra</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Huston, Riley</td><td>7</td><td>0</td><td>$128,555</td><td>$18,365</td></tr>
-<tr><td>Knecht, Lindsay</td><td>6</td><td>0</td><td>$13,010</td><td>$2,168</td></tr>
-<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>21</td><td>0</td><td>$77,390</td><td>$3,685</td></tr>
-<tr><td>Robertson, Kelly</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>48</td><td>6</td><td>$247,805</td><td>$5,163</td></tr></tbody></table>
+      <tbody><tr><td>Bates, Austin</td><td>9</td><td>9</td><td>7</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$28,850</td><td>$28,850</td><td>100.0%</td></tr>
+<tr><td>Goscha, Ezra</td><td>3</td><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Huston, Riley</td><td>7</td><td>5</td><td>4</td><td>2</td><td>1</td><td>0</td><td>1</td><td>0</td><td>2</td><td>$128,555</td><td>$126,505</td><td>98.4%</td></tr>
+<tr><td>Knecht, Lindsay</td><td>6</td><td>3</td><td>3</td><td>1</td><td>0</td><td>1</td><td>2</td><td>0</td><td>3</td><td>$13,010</td><td>$13,010</td><td>100.0%</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>21</td><td>17</td><td>18</td><td>2</td><td>0</td><td>3</td><td>1</td><td>0</td><td>4</td><td>$77,390</td><td>$77,390</td><td>100.0%</td></tr>
+<tr><td>Robertson, Kelly</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>48</td><td>38</td><td>35</td><td>6</td><td>2</td><td>4</td><td>5</td><td>0</td><td>47</td><td>$247,805</td><td>$245,755</td><td>99.2%</td></tr></tbody></table>
     </div>
     <div class="table-card">
       <div class="chart-title">Appointment Statistics by Product — Prior Month</div>
@@ -610,10 +986,10 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="chart-title">Appointment Statistics by Setter — Month to Date</div>
       <div class="table-note">Appt dates June 1 – 15, 2026.</div>
       <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>8</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>18</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Trombley, Andrew</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>27</td><td>0</td><td>$0</td><td>—</td></tr></tbody></table>
+      <tbody><tr><td>Bates, Austin</td><td>8</td><td>6</td><td>5</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>18</td><td>14</td><td>10</td><td>0</td><td>1</td><td>1</td><td>2</td><td>0</td><td>4</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Trombley, Andrew</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>27</td><td>21</td><td>15</td><td>0</td><td>1</td><td>1</td><td>3</td><td>0</td><td>26</td><td>$0</td><td>$0</td><td>—</td></tr></tbody></table>
     </div>
     <div class="table-card">
       <div class="chart-title">Appointment Statistics by Product — Month to Date</div>
@@ -645,19 +1021,19 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="chart-title">Appointment Statistics by Setter — Year to Date</div>
       <div class="table-note">Appt dates January 1 – June 15, 2026.</div>
       <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody><tr><td>Bates, Austin</td><td>28</td><td>0</td><td>$144,873</td><td>$5,174</td></tr>
-<tr><td>Coleman, Maggie</td><td>3</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Goscha, Ezra</td><td>20</td><td>0</td><td>$70,272</td><td>$3,514</td></tr>
-<tr><td>Humphrey, Dante</td><td>13</td><td>0</td><td>$36,916</td><td>$2,840</td></tr>
-<tr><td>Huston, Riley</td><td>28</td><td>0</td><td>$223,955</td><td>$7,998</td></tr>
-<tr><td>Knecht, Lindsay</td><td>71</td><td>0</td><td>$117,531</td><td>$1,655</td></tr>
-<tr><td>Koerner, Jesse</td><td>10</td><td>0</td><td>$73,731</td><td>$7,373</td></tr>
-<tr><td>Maughan, Samantha</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Messano, Angela</td><td>39</td><td>0</td><td>$77,390</td><td>$1,984</td></tr>
-<tr><td>Robertson, Kelly</td><td>24</td><td>0</td><td>$413,688</td><td>$17,237</td></tr>
-<tr><td>Trombley, Andrew</td><td>1</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr><td>Unknown, Unknown</td><td>4</td><td>0</td><td>$0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>242</td><td>32</td><td>$1,158,356</td><td>$4,787</td></tr></tbody></table>
+      <tbody><tr><td>Bates, Austin</td><td>28</td><td>27</td><td>20</td><td>5</td><td>3</td><td>0</td><td>1</td><td>0</td><td>1</td><td>$144,873</td><td>$126,723</td><td>87.5%</td></tr>
+<tr><td>Coleman, Maggie</td><td>3</td><td>4</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Goscha, Ezra</td><td>20</td><td>13</td><td>11</td><td>3</td><td>0</td><td>0</td><td>4</td><td>0</td><td>7</td><td>$70,272</td><td>$67,736</td><td>96.4%</td></tr>
+<tr><td>Humphrey, Dante</td><td>13</td><td>9</td><td>7</td><td>2</td><td>1</td><td>0</td><td>2</td><td>0</td><td>4</td><td>$36,916</td><td>$52,631</td><td>142.6%</td></tr>
+<tr><td>Huston, Riley</td><td>28</td><td>20</td><td>16</td><td>5</td><td>4</td><td>0</td><td>2</td><td>0</td><td>8</td><td>$223,955</td><td>$195,428</td><td>87.3%</td></tr>
+<tr><td>Knecht, Lindsay</td><td>71</td><td>60</td><td>45</td><td>7</td><td>2</td><td>3</td><td>4</td><td>0</td><td>11</td><td>$117,531</td><td>$116,300</td><td>99.0%</td></tr>
+<tr><td>Koerner, Jesse</td><td>10</td><td>7</td><td>7</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>$73,731</td><td>$73,926</td><td>100.3%</td></tr>
+<tr><td>Maughan, Samantha</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Messano, Angela</td><td>39</td><td>31</td><td>28</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0</td><td>8</td><td>$77,390</td><td>$77,390</td><td>100.0%</td></tr>
+<tr><td>Robertson, Kelly</td><td>24</td><td>20</td><td>14</td><td>6</td><td>3</td><td>0</td><td>2</td><td>0</td><td>4</td><td>$413,688</td><td>$412,129</td><td>99.6%</td></tr>
+<tr><td>Trombley, Andrew</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr><td>Unknown, Unknown</td><td>4</td><td>3</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>242</td><td>196</td><td>151</td><td>32</td><td>15</td><td>7</td><td>18</td><td>0</td><td>239</td><td>$1,158,356</td><td>$1,122,262</td><td>96.9%</td></tr></tbody></table>
     </div>
     <div class="table-card">
       <div class="chart-title">Appointment Statistics by Product — Year to Date</div>
@@ -696,6 +1072,94 @@ hbar('mtd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
 pie('ytd-leads-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Flyer','Internet','Store Booth','Sweepstakes','Unknown'],[10,2,4,243,111,1,410,10,30,1]);
 pie('ytd-set-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Flyer','Internet','Store Booth','Sweepstakes'],[11,1,4,119,5,1,96,4,1]);
 hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[822,242,190,173,151,32],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+
+(function(){
+  var el=document.getElementById('setter-issues-pw');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Messano'],
+      datasets:[
+        {label:'CNS (No-Show)',data:[0,1],backgroundColor:'#fd7e14',borderRadius:2},
+        {label:'1-Leg Reset',data:[0,1],backgroundColor:'#4da6ff',borderRadius:2},
+        {label:'CXL (Cancel)',data:[0,1],backgroundColor:'#dc3545',borderRadius:2},
+        {label:'NG (No Good)',data:[0,0],backgroundColor:'#adb5bd',borderRadius:2}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11},padding:12}}},
+      scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('setter-issues-pm');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Goscha','Huston','Knecht','Maughan','Messano','Robertson'],
+      datasets:[
+        {label:'CNS (No-Show)',data:[1,0,1,0,0,0,0],backgroundColor:'#fd7e14',borderRadius:2},
+        {label:'1-Leg Reset',data:[0,0,0,1,0,3,0],backgroundColor:'#4da6ff',borderRadius:2},
+        {label:'CXL (Cancel)',data:[0,1,1,2,0,1,0],backgroundColor:'#dc3545',borderRadius:2},
+        {label:'NG (No Good)',data:[0,0,0,0,0,0,0],backgroundColor:'#adb5bd',borderRadius:2}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11},padding:12}}},
+      scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('setter-issues-mtd');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Messano','Trombley'],
+      datasets:[
+        {label:'CNS (No-Show)',data:[0,1,0],backgroundColor:'#fd7e14',borderRadius:2},
+        {label:'1-Leg Reset',data:[0,1,0],backgroundColor:'#4da6ff',borderRadius:2},
+        {label:'CXL (Cancel)',data:[1,2,0],backgroundColor:'#dc3545',borderRadius:2},
+        {label:'NG (No Good)',data:[0,0,0],backgroundColor:'#adb5bd',borderRadius:2}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11},padding:12}}},
+      scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('setter-issues-ytd');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Coleman','Goscha','Humphrey','Huston','Knecht','Koerner','Maughan','Messano','Robertson','Trombley','Unknown'],
+      datasets:[
+        {label:'CNS (No-Show)',data:[3,0,0,1,4,2,0,0,1,3,0,1],backgroundColor:'#fd7e14',borderRadius:2},
+        {label:'1-Leg Reset',data:[0,0,0,0,0,3,0,0,4,0,0,0],backgroundColor:'#4da6ff',borderRadius:2},
+        {label:'CXL (Cancel)',data:[1,0,4,2,2,4,0,0,3,2,0,0],backgroundColor:'#dc3545',borderRadius:2},
+        {label:'NG (No Good)',data:[0,0,0,0,0,0,0,0,0,0,0,0],backgroundColor:'#adb5bd',borderRadius:2}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11},padding:12}}},
+      scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
 pie('cc-pw-setter-pie',['Bates, Austin','Messano, Angela'],[3,9]);
 pie('cc-pw-product-pie',['CAB (Cabinets)','FB (Full Bathroom)','FK (Full Kitchen)','WAIT (Walk-in Tub)'],[1,7,3,1]);
 pie('cc-pm-setter-pie',['Bates, Austin','Goscha, Ezra','Huston, Riley','Knecht, Lindsay','Maughan, Samantha','Messano, Angela','Robertson, Kelly'],[9,3,7,6,1,21,1]);
