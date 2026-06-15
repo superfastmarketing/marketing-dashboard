@@ -94,7 +94,27 @@ def main():
 
         run_step("Upload to Google Drive", drive)  # non-fatal if Drive fails
 
-        # Step 4 — Send email
+        # Step 4 — Publish to GitHub Pages
+        def github_pages():
+            import subprocess
+            repo_root = Path(__file__).parent.parent
+            today = date.today().isoformat()
+            subprocess.run(["git", "add", "Marketing_Dashboard.html"], cwd=repo_root, check=True)
+            result = subprocess.run(
+                ["git", "diff", "--cached", "--quiet"],
+                cwd=repo_root
+            )
+            if result.returncode != 0:  # there are staged changes
+                subprocess.run(
+                    ["git", "commit", "-m", f"Dashboard update {today}"],
+                    cwd=repo_root, check=True
+                )
+            subprocess.run(["git", "push", "origin", "main"], cwd=repo_root, check=True)
+            print("  Published to GitHub Pages: https://superfastmarketing.github.io/marketing-dashboard/Marketing_Dashboard.html")
+
+        run_step("Publish to GitHub Pages", github_pages)  # non-fatal
+
+        # Step 5 — Send email
         def email():
             import send_email
             send_email.send()

@@ -27,13 +27,10 @@ SMTP_PORT     = 587
 SMTP_FROM     = os.getenv("SMTP_FROM", "")
 SMTP_PASS     = os.getenv("SMTP_APP_PASSWORD", "")
 SMTP_TO       = [a.strip() for a in os.getenv("SMTP_TO", "").split(",") if a.strip()]
-GDRIVE_FILE_ID = os.getenv("GDRIVE_FILE_ID", "")
-
-
-def _drive_link():
-    if GDRIVE_FILE_ID:
-        return f"https://drive.google.com/file/d/{GDRIVE_FILE_ID}/view"
-    return None
+DASHBOARD_URL = os.getenv(
+    "DASHBOARD_URL",
+    f"https://drive.google.com/file/d/{os.getenv('GDRIVE_FILE_ID','')}/view"
+)
 
 
 def _build_body(link):
@@ -91,9 +88,9 @@ def send():
         print("  SMTP_TO not set in .env — skipping email.")
         return
 
-    link = _drive_link()
+    link = DASHBOARD_URL
     if not link:
-        print("  GDRIVE_FILE_ID not set in .env — skipping email.")
+        print("  DASHBOARD_URL not set in .env — skipping email.")
         return
 
     today = date.today().strftime("%B %d, %Y")
