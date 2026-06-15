@@ -86,6 +86,13 @@ REPORTS = [
         "report": "Appointment Statistics by Source",
         "source": "--All Sources--",
     },
+    {
+        "name":   "dispo_distribution",
+        "group":  "Call Center",
+        "report": "Dispo Distribution",
+        "source": "--All Sources--",
+        "market": "--ALL--",
+    },
 ]
 
 

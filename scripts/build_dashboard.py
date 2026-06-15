@@ -104,7 +104,14 @@ def parse_cc(path):
     return rows, total
 
 def parse_setter(path):
-    """Parse appt_by_setter."""
+    """Parse appt_by_setter.
+    Column map (data row / Total row):
+      Set=3/3, GrossIssue=5/5, Demo=9/8, Sale=10/11,
+      CNS=13/14, SRS=17/18, 1Leg=19/20, CXL=22/23,
+      Porched=24/25, NG=27/28, Other=29/30,
+      GrossAmt=33/32, SaleCXL=34/34, NetAmt(NSLI)=36/36, Drop=39/39
+    Note: Sale col shifts by 1 between data rows and Total row (merged cell artifact).
+    """
     ws = load_sheet(path)
     rows, total = [], None
     for r in range(ws.nrows):
@@ -115,18 +122,72 @@ def parse_setter(path):
 
         if name == 'Total:':
             total = {
-                'set': iv(gv(rv,3)), 'gross_issue': iv(gv(rv,5)),
-                'demo': iv(gv(rv,8)), 'sale': iv(gv(rv,11)),
-                'gross_amt': fv(gv(rv,32)), 'drop': iv(gv(rv,39)),
+                'set':        iv(gv(rv,3)),
+                'gross_issue':iv(gv(rv,5)),
+                'demo':       iv(gv(rv,8)),
+                'sale':       iv(gv(rv,11)),
+                'cns':        iv(gv(rv,14)),
+                'one_leg':    iv(gv(rv,20)),
+                'cxl':        iv(gv(rv,23)),
+                'ng':         iv(gv(rv,28)),
+                'gross_amt':  fv(gv(rv,32)),
+                'net_amt':    fv(gv(rv,36)),
+                'drop':       iv(gv(rv,39)),
             }
         elif iv(gv(rv,3)) > 0 or name:
             rows.append({
-                'name': name,
-                'set': iv(gv(rv,3)), 'gross_issue': iv(gv(rv,5)),
-                'demo': iv(gv(rv,9)), 'sale': iv(gv(rv,11)),
-                'gross_amt': fv(gv(rv,33)), 'drop': iv(gv(rv,39)),
+                'name':       name,
+                'set':        iv(gv(rv,3)),
+                'gross_issue':iv(gv(rv,5)),
+                'demo':       iv(gv(rv,9)),
+                'sale':       iv(gv(rv,10)),   # col10 in data rows (col11 in Total)
+                'cns':        iv(gv(rv,13)),
+                'one_leg':    iv(gv(rv,19)),
+                'cxl':        iv(gv(rv,22)),
+                'ng':         iv(gv(rv,27)),
+                'gross_amt':  fv(gv(rv,33)),
+                'net_amt':    fv(gv(rv,36)),   # NSLI = Net Amt
+                'drop':       iv(gv(rv,39)),
             })
     return rows, total
+
+def parse_dispo(path):
+    """Parse Dispo Distribution report (by setter).
+    Row structure: header rows, then pairs of (count row, pct row) per setter, then Totals.
+    Col map: name=0, total=2(data)/1(totals), then dispo cols read dynamically from row 6.
+    Returns (rows, total, dispo_cols) where dispo_cols = {col_idx: label}.
+    """
+    ws = load_sheet(path)
+    # Read dispo column headers from row 6
+    dispo_cols = {}
+    if ws.nrows > 6:
+        for ci, v in enumerate(ws.row_values(6)):
+            s = str(v).strip()
+            if s and ci > 1:
+                dispo_cols[ci] = s
+
+    rows, total = [], None
+    r = 0
+    while r < ws.nrows:
+        rv = ws.row_values(r)
+        name = str(rv[0]).strip() if rv[0] != '' else ''
+        # Skip header/footer rows
+        if not name or name in ('Setter',) or is_footer(name):
+            r += 1
+            continue
+        if name.lower().startswith('total'):
+            total_count = iv(gv(rv, 1))
+            dispos = {dispo_cols[ci]: iv(rv[ci]) for ci in dispo_cols if ci < len(rv) and iv(rv[ci]) > 0}
+            total = {'name': 'TOTAL', 'total': total_count, 'dispos': dispos}
+            r += 2  # skip pct row
+            continue
+        # Data row: count row followed by pct row
+        count = iv(gv(rv, 2))
+        dispos = {dispo_cols[ci]: iv(rv[ci]) for ci in dispo_cols if ci < len(rv) and iv(rv[ci]) > 0}
+        if count > 0 or dispos:
+            rows.append({'name': name, 'total': count, 'dispos': dispos})
+        r += 2  # skip the pct row that follows
+    return rows, total, dispo_cols
 
 def parse_marketing(path):
     """Parse marketing_sub_source. Returns (groups, grand_total).
@@ -180,12 +241,17 @@ def load_all():
     data = {}
     for period in PERIODS:
         d = REPORTS_DIR / period
+        # dispo_distribution is .xls (downloaded directly); others are .xlsx
+        dispo_path = d / 'dispo_distribution.xls'
+        if not dispo_path.exists():
+            dispo_path = d / 'dispo_distribution.xlsx'
         data[period] = {
             'source':    parse_cc(d / 'appt_by_source.xlsx'),
             'subsource': parse_cc(d / 'appt_by_subsource.xlsx'),
             'product':   parse_cc(d / 'appt_by_product.xlsx'),
             'setter':    parse_setter(d / 'appt_by_setter.xlsx'),
             'marketing': parse_marketing(d / 'marketing_sub_source.xlsx'),
+            'dispo':     parse_dispo(dispo_path) if dispo_path.exists() else ([], None, {}),
         }
     return data
 
@@ -261,7 +327,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
             sale  = cc_row['sale']
             drop  = cc_row['drop']
             i_pct = pct(gi, set_v)
-            d_pct = pct(demo, ni) if ni else '—'
+            d_pct = pct(demo, gi) if gi else '—'
             c_pct = pct(sale, demo) if demo else '—'
         else:
             set_v = gi = ni = demo = sale = drop = 0
@@ -319,7 +385,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
             grp_demo += demo; grp_sale += sale; grp_drop += drop
 
             i_pct = pct(gi, set_v) if set_v else '—'
-            d_pct = pct(demo, ni) if ni else '—'
+            d_pct = pct(demo, gi) if gi else '—'
             c_pct = pct(sale, demo) if demo else '—'
             raw_d = str(raw_v) if raw_v else '—'
 
@@ -387,7 +453,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                 grp_set+=set_v; grp_cc_gi+=gi; grp_ni+=ni
                 grp_demo+=demo; grp_sale+=sale; grp_drop+=drop
                 i_pct=pct(gi,set_v) if set_v else '—'
-                d_pct=pct(demo,ni) if ni else '—'
+                d_pct=pct(demo,gi) if gi else '—'
                 c_pct=pct(sale,demo) if demo else '—'
                 if colspan==12:
                     lines.append(
@@ -433,7 +499,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
         t=ss_total
         total_raw = mkt_grand['raw'] if mkt_grand else '—'
         gi_p = pct(t['gross_issue'], t['set']) if t['set'] else '—'
-        dm_p = pct(t['demo'], t['net_issue']) if t['net_issue'] else '—'
+        dm_p = pct(t['demo'], t['gross_issue']) if t['gross_issue'] else '—'
         cl_p = pct(t['sale'], t['demo']) if t['demo'] else '—'
         if colspan==12:
             lines.append(
@@ -478,7 +544,7 @@ def build_product_table(prod_rows, prod_total, period_label):
         gi   = r['gross_issue']; ni = r['net_issue']
         demo = r['demo']; sale = r['sale']
         ni_p = pct(ni, gi) if gi else '—'
-        dm_p = pct(demo, ni) if ni else '—'
+        dm_p = pct(demo, gi) if gi else '—'
         cl_p = pct(sale, demo) if demo else '—'
         return (f'<tr><td>&nbsp;&nbsp;{code}</td><td>{lbl}</td>'
                 f'<td>{gi}</td><td>{ni}</td>'
@@ -494,7 +560,7 @@ def build_product_table(prod_rows, prod_total, period_label):
         gi=s['gross_issue']; ni=s['net_issue']
         demo=s['demo']; sale=s['sale']
         ni_p=pct(ni,gi) if gi else '—'
-        dm_p=pct(demo,ni) if ni else '—'
+        dm_p=pct(demo,gi) if gi else '—'
         cl_p=pct(sale,demo) if demo else '—'
         return (f'<tr class="grp-{css}"><td>&nbsp;&nbsp;{name}</td><td></td>'
                 f'<td>{gi}</td><td>{ni}</td>'
@@ -530,7 +596,7 @@ def build_product_table(prod_rows, prod_total, period_label):
         t=prod_total
         gi=t['gross_issue']; ni=t['net_issue']; demo=t['demo']; sale=t['sale']
         ni_p=pct(ni,gi) if gi else '—'
-        dm_p=pct(demo,ni) if ni else '—'
+        dm_p=pct(demo,gi) if gi else '—'
         cl_p=pct(sale,demo) if demo else '—'
         lines.append(
             f'<tr class="gtot"><td>GRAND TOTAL</td><td></td>'
@@ -542,22 +608,46 @@ def build_product_table(prod_rows, prod_total, period_label):
 
 
 def build_setter_table(setter_rows, setter_total):
-    """Build setter performance table for Call Center tab."""
+    """Full Appointment Statistics by Setter table."""
+    def nsli(gross_amt, gi):
+        return dollar(gross_amt / gi) if gi else '—'
+
     lines = []
     for r in setter_rows:
-        sale=r['sale']; gross=r['gross_amt']; set_v=r['set']
-        rev_per_set = f'${gross/set_v:,.0f}' if set_v and gross else '—'
         lines.append(
-            f'<tr><td>{r["name"]}</td><td>{set_v}</td>'
-            f'<td>{sale}</td><td>{dollar(gross)}</td>'
-            f'<td>{rev_per_set}</td></tr>')
+            f'<tr>'
+            f'<td>{r["name"]}</td>'
+            f'<td>{r["set"]}</td>'
+            f'<td>{r["gross_issue"]}</td>'
+            f'<td>{r["demo"]}</td>'
+            f'<td>{r["sale"]}</td>'
+            f'<td>{r["cns"]}</td>'
+            f'<td>{r["one_leg"]}</td>'
+            f'<td>{r["cxl"]}</td>'
+            f'<td>{r["ng"]}</td>'
+            f'<td>{r["drop"]}</td>'
+            f'<td>{dollar(r["gross_amt"])}</td>'
+            f'<td>{dollar(r["net_amt"])}</td>'
+            f'<td>{nsli(r["gross_amt"], r["gross_issue"])}</td>'
+            f'</tr>')
     if setter_total:
-        t=setter_total; gross=t['gross_amt']
-        rev=f'${gross/t["set"]:,.0f}' if t['set'] and gross else '—'
+        t = setter_total
         lines.append(
-            f'<tr class="gtot"><td>TOTAL</td><td>{t["set"]}</td>'
-            f'<td>{t["sale"]}</td><td>{dollar(gross)}</td>'
-            f'<td>{rev}</td></tr>')
+            f'<tr class="gtot">'
+            f'<td>TOTAL</td>'
+            f'<td>{t["set"]}</td>'
+            f'<td>{t["gross_issue"]}</td>'
+            f'<td>{t["demo"]}</td>'
+            f'<td>{t["sale"]}</td>'
+            f'<td>{t["cns"]}</td>'
+            f'<td>{t["one_leg"]}</td>'
+            f'<td>{t["cxl"]}</td>'
+            f'<td>{t["ng"]}</td>'
+            f'<td>{t["drop"]}</td>'
+            f'<td>{dollar(t["gross_amt"])}</td>'
+            f'<td>{dollar(t["net_amt"])}</td>'
+            f'<td>{nsli(t["gross_amt"], t["gross_issue"])}</td>'
+            f'</tr>')
     return '\n'.join(lines)
 
 
@@ -688,7 +778,7 @@ def gen_period_section(pid, label, date_label, d, colspan, ytd_source_map=None):
     drop    = t.get('drop', 0)
 
     gi_rate  = pct(gi, set_v) if set_v else '—'
-    dm_rate  = pct(demo, ni) if ni else '—'
+    dm_rate  = pct(demo, gi) if gi else '—'
     cl_rate  = pct(sale, demo) if demo else '—'
     dr_rate  = pct(drop, set_v) if set_v else '—'
 
@@ -756,10 +846,10 @@ def gen_period_section(pid, label, date_label, d, colspan, ytd_source_map=None):
   <div class="kpi-grid">
     {kpi('Total Raw Leads', raw, f'Leads received this period', 'Marketing Report')}
     {kpi('Appointments Set', set_v, f'Appt date {date_label}', 'Call Center Report', 'green')}
-    {kpi('Demos Run', demo, f'{dm_rate} of net issued', 'Call Center Report', 'orange')}
+    {kpi('Demos Run', demo, f'{dm_rate} of gross issued', 'Call Center Report', 'orange')}
     {kpi('Sales', sale, f'{dollar(gross)} gross revenue', 'Call Center Report', 'purple')}
     {kpi('Gross Issue Rate', gi_rate, f'{gi} issued / {set_v} set', 'Call Center Report', 'teal')}
-    {kpi('Demo Rate', dm_rate, f'{demo} demos / {ni} net issued', 'Call Center Report', 'green')}
+    {kpi('Demo Rate', dm_rate, f'{demo} demos / {gi} gross issued', 'Call Center Report', 'green')}
     {kpi('Gross Close %', cl_rate, f'{sale} sales / {demo} demos', 'Call Center Report', 'red' if sale==0 else 'green')}
     {kpi('Drop Rate', dr_rate, f'{drop} dropped / {set_v} set', 'Call Center Report')}
   </div>
@@ -815,40 +905,264 @@ def gen_products_section(data_by_period, date_ranges_dict):
 
 
 def gen_salesreps_section(data_by_period, date_ranges_dict):
-    """Generate the Sales Reps tab from appt_by_setter."""
-    PMAP = {'prior_week':'pw','prior_month':'pm','mtd':'mtd','ytd':'ytd'}
-    PLABELS = {'prior_week':'Prior Week','prior_month':'Prior Month','mtd':'Month to Date','ytd':'Year to Date'}
+    """Generate the Setters tab with infographic, NSLI, and full report table."""
+    PMAP   = {'prior_week':'pw','prior_month':'pm','mtd':'mtd','ytd':'ytd'}
+    PLABELS= {'prior_week':'Prior Week','prior_month':'Prior Month','mtd':'Month to Date','ytd':'Year to Date'}
     sections = []
+    chart_js = ''
     default = 'ytd'
+
     for period in PERIODS:
-        pid = PMAP[period]
+        pid   = PMAP[period]
         label = PLABELS[period]
         _, _, date_lbl = date_ranges_dict[period]
         setter_rows, setter_total = data_by_period[period]['setter']
+        active_rows = [r for r in setter_rows if r['set'] > 0]
+        dispo_rows, dispo_total, dispo_cols = data_by_period[period].get('dispo', ([], None, {}))
+
+        # ── KPI summary ──────────────────────────────────────────────────────
+        t = setter_total or {}
+        gross = t.get('gross_amt', 0)
+        net   = t.get('net_amt', 0)
+        total_set   = t.get('set', 0)
+        total_demo  = t.get('demo', 0)
+        total_sale  = t.get('sale', 0)
+        total_gi    = t.get('gross_issue', 0)
+        # NSLI = Gross Revenue / Gross Issued Leads ($ per issued lead)
+        nsli_val    = dollar(gross / total_gi) if total_gi else '—'
+        nsli_color  = 'teal'
+        # Demo % = Sit (Demo) / Gross Issue — matches LP report calculation
+        overall_demo_pct = f'{total_demo/total_gi*100:.1f}%' if total_gi else '—'
+        overall_demo_meets_target = total_gi > 0 and total_demo / total_gi >= 0.70
+
+        kpis = (
+            kpi('Appointments Set', total_set, f'{len(active_rows)} active setters', 'Appt Stats by Setter', 'green') +
+            kpi('Demos Run', total_demo, f'{total_sale} sales', 'Appt Stats by Setter', 'orange') +
+            kpi('Demo %', overall_demo_pct, 'Target: 70%', 'Appt Stats by Setter', 'green' if overall_demo_meets_target else 'red') +
+            kpi('NSLI', nsli_val, 'Gross $ ÷ Issued Leads', 'Appt Stats by Setter', nsli_color) +
+            kpi('Gross Revenue', dollar(gross), f'Net: {dollar(net)}', 'Appt Stats by Setter', 'purple') +
+            kpi('CNS', t.get('cns',0), 'Customer No-Show', 'Appt Stats by Setter') +
+            kpi('1-Leg Resets', t.get('one_leg',0), 'One leg reset', 'Appt Stats by Setter') +
+            kpi('CXL', t.get('cxl',0), 'Cancel prior to issue', 'Appt Stats by Setter') +
+            kpi('No Good (NG)', t.get('ng',0), 'No good appointments', 'Appt Stats by Setter')
+        )
+
+        # ── Chart IDs ────────────────────────────────────────────────────────
+        pie_id        = f'setter-results-pie-{pid}'
+        demo_chart_id = f'setter-demo-pct-{pid}'
+        s_labels      = js_str_arr([r['name'].split(',')[0] for r in active_rows])
+        chart_height  = max(220, len(active_rows) * 42)
+
+        # Pie chart — overall appointment result breakdown from total row
+        t_sale    = t.get('sale', 0)
+        t_demo    = t.get('demo', 0)
+        t_cns     = t.get('cns', 0)
+        t_one_leg = t.get('one_leg', 0)
+        t_cxl     = t.get('cxl', 0)
+        t_ng      = t.get('ng', 0)
+        t_drop    = t.get('drop', 0)
+        t_demo_ns = max(0, t_demo - t_sale)   # demos run that didn't close
+        pie_labels = js_str_arr(['Sale','Demo (No Sale)','CNS','1-Leg Reset','CXL','NG','Drop'])
+        pie_vals   = js_arr([t_sale, t_demo_ns, t_cns, t_one_leg, t_cxl, t_ng, t_drop])
+        pie_colors = js_str_arr(['#28a745','#4da6ff','#fd7e14','#6f42c1','#dc3545','#adb5bd','#17a2b8'])
+
+        # Demo % = Sit (Demo) / Gross Issue — matches LP report
+        demo_pcts   = [round(r['demo']/r['gross_issue']*100, 1) if r.get('gross_issue') else 0 for r in active_rows]
+        demo_colors = js_str_arr(['#28a745' if p >= 70 else '#dc3545' for p in demo_pcts])
+        demo_vals   = js_arr(demo_pcts)
+
+        chart_js += f"""
+(function(){{
+  var el=document.getElementById('{pie_id}');
+  if(!el)return;
+  new Chart(el,{{
+    type:'doughnut',
+    data:{{
+      labels:{pie_labels},
+      datasets:[{{data:{pie_vals},backgroundColor:{pie_colors},borderWidth:2,borderColor:'#fff'}}]
+    }},
+    options:{{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{{legend:{{position:'right',labels:{{font:{{size:11}},padding:12}}}}}}
+    }}
+  }});
+}})();
+(function(){{
+  var el=document.getElementById('{demo_chart_id}');
+  if(!el)return;
+  new Chart(el,{{
+    type:'bar',
+    data:{{
+      labels:{s_labels},
+      datasets:[{{
+        label:'Demo %',
+        data:{demo_vals},
+        backgroundColor:{demo_colors},
+        borderRadius:4
+      }}]
+    }},
+    options:{{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{{
+        legend:{{display:false}},
+        annotation:{{
+          annotations:{{
+            target:{{
+              type:'line',drawTime:'afterDatasetsDraw',
+              scaleID:'x',value:70,
+              borderColor:'#1a2e4a',borderWidth:2,borderDash:[6,3],
+              label:{{display:true,content:'Target 70%',position:'start',
+                     backgroundColor:'#1a2e4a',color:'white',
+                     font:{{size:11,weight:'bold'}},padding:4}}
+            }}
+          }}
+        }}
+      }},
+      scales:{{
+        x:{{beginAtZero:true,max:100,ticks:{{callback:function(v){{return v+'%'}}}}}},
+        y:{{ticks:{{font:{{size:11}}}}}}
+      }}
+    }}
+  }});
+}})();
+"""
+
+        # ── Per-setter summary cards ─────────────────────────────────────────
+        rep_cards = ''
+        for r in active_rows:
+            nsli_r     = dollar(r['gross_amt'] / r['gross_issue']) if r.get('gross_issue') else '—'
+            demo_pct_r = f'{r["demo"]/r["gross_issue"]*100:.1f}%' if r.get('gross_issue') else '—'
+            rep_cards += f'''
+    <div class="rep-card">
+      <div class="rep-name">{r["name"]}</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">{r["set"]}</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">{r["demo"]}</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">{demo_pct_r}</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">{r["sale"]}</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">{r["cns"]}</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">{r["one_leg"]}</div></div>
+      </div>
+      <div class="rep-gross">NSLI: {nsli_r} &nbsp;|&nbsp; CXL: {r["cxl"]} &nbsp;|&nbsp; Drop: {r["drop"]}</div>
+    </div>'''
+
+        # ── Full report table ────────────────────────────────────────────────
         table_body = build_setter_table(setter_rows, setter_total)
+
+        # ── Dispo Distribution pie chart + table ─────────────────────────────
+        dispo_pie_id = f'dispo-pie-{pid}'
+        dispo_html = ''
+        if dispo_total and dispo_total.get('dispos'):
+            dt = dispo_total['dispos']
+            # Sort by count descending, show all with > 0
+            sorted_dispos = sorted(dt.items(), key=lambda x: x[1], reverse=True)
+            dp_labels = js_str_arr([d[0] for d in sorted_dispos])
+            dp_vals   = js_arr([d[1] for d in sorted_dispos])
+            # Palette — cycle through enough colors
+            DPAL = ['#2d5a8e','#28a745','#fd7e14','#dc3545','#6f42c1','#17a2b8',
+                    '#ffc107','#4da6ff','#20c997','#e83e8c','#adb5bd','#343a40',
+                    '#fd7e14','#6610f2','#795548','#00bcd4','#ff5722','#9c27b0','#607d8b']
+            dp_colors = js_str_arr([DPAL[i % len(DPAL)] for i in range(len(sorted_dispos))])
+
+            chart_js += f"""
+(function(){{
+  var el=document.getElementById('{dispo_pie_id}');
+  if(!el)return;
+  new Chart(el,{{
+    type:'doughnut',
+    data:{{
+      labels:{dp_labels},
+      datasets:[{{data:{dp_vals},backgroundColor:{dp_colors},borderWidth:2,borderColor:'#fff'}}]
+    }},
+    options:{{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{{legend:{{position:'right',labels:{{font:{{size:11}},padding:10}}}}}}
+    }}
+  }});
+}})();
+"""
+            # Dispo table — one row per setter
+            dispo_cols_sorted = [d[0] for d in sorted_dispos]
+            th_dispos = ''.join(f'<th>{c}</th>' for c in dispo_cols_sorted)
+            dispo_tbl_rows = ''
+            for drow in dispo_rows:
+                tds = ''.join(f'<td>{drow["dispos"].get(c, 0) or "—"}</td>' for c in dispo_cols_sorted)
+                dispo_tbl_rows += f'<tr><td>{drow["name"]}</td><td>{drow["total"]}</td>{tds}</tr>'
+            if dispo_total:
+                tot_tds = ''.join(f'<td><strong>{dispo_total["dispos"].get(c,0) or "—"}</strong></td>' for c in dispo_cols_sorted)
+                dispo_tbl_rows += f'<tr class="gtot"><td>TOTAL</td><td>{dispo_total["total"]}</td>{tot_tds}</tr>'
+
+            dispo_html = f'''
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Dispo Distribution — {label}
+          <span class="chart-subtitle">Source: Call Center Dispo Distribution report. All appointments including issued and not issued.</span>
+        </div>
+        <div class="chart-wrap" style="height:300px"><canvas id="{dispo_pie_id}"></canvas></div>
+      </div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Dispo Distribution by Setter — {label}</div>
+      <div class="table-note">Source: Call Center Dispo Distribution. Appointment dates {date_lbl}. Columns ordered most to least frequent (YTD).</div>
+      <table>
+        <thead><tr><th>Setter</th><th>Total</th>{th_dispos}</tr></thead>
+        <tbody>{dispo_tbl_rows}</tbody>
+      </table>
+    </div>'''
+
         active = ' active' if period == default else ''
         sections.append(f'''
   <div class="period-section{active}" id="rep-{pid}">
     <div class="period-label">{label} &nbsp;•&nbsp; {date_lbl}</div>
-    <div class="table-card">
-      <div class="chart-title">Setter Performance — {label}</div>
-      <div class="table-note">Source: Appointment Statistics by Setter. Dates {date_lbl}.</div>
-      <table><thead><tr><th>Setter</th><th>Set</th><th>Sales</th><th>Gross $</th><th>Rev / Set</th></tr></thead>
-      <tbody>{table_body}</tbody></table>
+    <div class="kpi-grid">{kpis}</div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">Appointment Results Breakdown
+          <span class="chart-subtitle">All setters combined — {label}</span>
+        </div>
+        <div class="chart-wrap"><canvas id="{pie_id}"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Demo % vs. 70% Target — by Setter
+          <span class="chart-subtitle">Green = at or above target &nbsp;·&nbsp; Red = below target</span>
+        </div>
+        <div class="chart-wrap" style="height:{chart_height}px"><canvas id="{demo_chart_id}"></canvas></div>
+      </div>
     </div>
+
+    <div class="rep-grid">{rep_cards}</div>
+
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Setter — {label}</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Setter. Appointment dates {date_lbl}.<br>
+        NSLI = Gross Revenue ÷ Gross Issued Leads ($ per issued lead). CNS=Customer No-Show · 1Leg=One Leg Reset · CXL=Cancel prior to Issue · NG=No Good.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Setter</th><th>Set</th><th>Issued</th><th>Demo</th><th>Sale</th>
+          <th>CNS</th><th>1-Leg</th><th>CXL</th><th>NG</th><th>Drop</th>
+          <th>Gross $</th><th>Net $</th><th>NSLI</th>
+        </tr></thead>
+        <tbody>{table_body}</tbody>
+      </table>
+    </div>
+    {dispo_html}
   </div>''')
 
     btns = ' '.join(
         f'<button class="ptab{"" if p!="ytd" else " active"}" onclick="showPeriod(\'salesreps\',\'rep-{PMAP[p]}\',this)">{PLABELS[p]}</button>'
         for p in PERIODS)
+
     return f'''
-<!-- ===== SETTERS / CALL CENTER ===== -->
+<!-- ===== SETTERS ===== -->
 <div class="section" id="salesreps">
   <div class="period-label">Setter Performance &nbsp;•&nbsp; Appointment Statistics by Setter</div>
   <div class="period-toggle">{btns}</div>
-{''.join(sections)}
+{"".join(sections)}
 </div>
-'''
+''', chart_js
 
 
 def gen_callcenter_section(data_by_period, date_ranges_dict):
@@ -872,7 +1186,7 @@ def gen_callcenter_section(data_by_period, date_ranges_dict):
         gross = setter_total['gross_amt'] if setter_total else 0
 
         gi_rate = pct(gi, set_v) if set_v else '—'
-        dm_rate = pct(demo, ni) if ni else '—'
+        dm_rate = pct(demo, gi) if gi else '—'
         cl_rate = pct(sale, demo) if demo else '—'
 
         active_setters = len([r for r in setter_rows if r['set'] > 0])
@@ -907,10 +1221,10 @@ def gen_callcenter_section(data_by_period, date_ranges_dict):
     <div class="period-label">{label} &nbsp;•&nbsp; {date_lbl}</div>
     <div class="kpi-grid">
       {kpi('Appointments Set', set_v, f'{active_setters} active setters', 'Appt Stats by Setter', 'green')}
-      {kpi('Demos Run', demo, f'{dm_rate} of net issued', 'Appt Stats by Sub-Source', 'orange')}
+      {kpi('Demos Run', demo, f'{dm_rate} of gross issued', 'Appt Stats by Sub-Source', 'orange')}
       {kpi('Sales', sale, f'{dollar(gross)} gross revenue', 'Appt Stats by Sub-Source', 'purple')}
       {kpi('Gross Issue Rate', gi_rate, f'{gi} issued / {set_v} set', 'Appt Stats by Sub-Source', 'teal')}
-      {kpi('Demo Rate', dm_rate, f'{demo} demos / {ni} net issued', 'Appt Stats by Sub-Source', 'green')}
+      {kpi('Demo Rate', dm_rate, f'{demo} demos / {gi} gross issued', 'Appt Stats by Sub-Source', 'green')}
       {kpi('Close Rate', cl_rate, f'{sale} sales / {demo} demos', 'Appt Stats by Sub-Source', 'red' if sale==0 else 'green')}
     </div>
     <div class="charts-grid">
@@ -979,7 +1293,8 @@ def run():
         chart_js += cjs
 
     products_sec  = gen_products_section(data, dr)
-    reps_sec      = gen_salesreps_section(data, dr)
+    reps_sec, reps_js = gen_salesreps_section(data, dr)
+    chart_js += reps_js
     cc_sec, cc_js = gen_callcenter_section(data, dr)
     chart_js += cc_js
 
@@ -990,6 +1305,8 @@ def run():
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SuperFast Kitchen &amp; Bath — Marketing Dashboard</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+<script>window.ChartAnnotation=ChartAnnotation;</script>
 <style>
 {CSS}
 </style>
