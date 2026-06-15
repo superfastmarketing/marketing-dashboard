@@ -15,6 +15,7 @@ Log output is written to logs/pipeline_YYYY-MM-DD.log in the project root.
 """
 
 import sys
+import argparse
 import traceback
 from datetime import date
 from pathlib import Path
@@ -60,11 +61,15 @@ def run_step(name, fn):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--no-email', action='store_true', help='Skip the email step')
+    args = parser.parse_args()
+
     tee = Tee(LOG_FILE)
     sys.stdout = tee
 
     try:
-        print(f"Pipeline started: {date.today().isoformat()}")
+        print(f"Pipeline started: {date.today().isoformat()} (email={'no' if args.no_email else 'yes'})")
 
         # Step 1 — Download reports from LeadPerfection
         def download():
@@ -114,12 +119,15 @@ def main():
 
         run_step("Publish to GitHub Pages", github_pages)  # non-fatal
 
-        # Step 5 — Send email
-        def email():
-            import send_email
-            send_email.send()
+        # Step 5 — Send email (skipped on hourly runs)
+        if not args.no_email:
+            def email():
+                import send_email
+                send_email.send()
 
-        run_step("Send email", email)  # non-fatal if email fails
+            run_step("Send email", email)  # non-fatal if email fails
+        else:
+            print("\n[SKIP] Send email (--no-email flag set)")
 
         print(f"\n{'='*60}")
         print(f"Pipeline complete: {date.today().isoformat()}")
