@@ -46,6 +46,7 @@ thead th.src-col { background: #4a2d7a; }
 tbody tr { border-bottom: 1px solid #f0f0f0; } tbody tr:hover { background: #f7f9fc; }
 tbody tr.grp { background: #eef3f9; font-weight: 700; }
 tbody tr.gtot { background: #1a2e4a; color: white; font-weight: 800; }
+.ni-cell { background: #e8f4fd; color: #1a3a5c; }
 tbody tr.div-row td { background: #f0f4fa; font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.8px; color: #666; font-weight: 700; padding: 5px 9px; }
 tbody tr.div-kitchens td { background: #fef9ec; color: #92400e; }
 tbody tr.div-bathrooms td { background: #eff6ff; color: #1e40af; }
@@ -106,6 +107,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   <div class="tab" onclick="showTab('products',this)">Products</div>
   <div class="tab" onclick="showTab('salesreps',this)">📞 Setters</div>
   <div class="tab" onclick="showTab('callcenter',this)">Call Center</div>
+  <div class="tab" onclick="showTab('promoter',this)">🏆 Promoter Bonus</div>
 </div>
 
 
@@ -1158,6 +1160,30 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr><td>Windows & Doors (WINDR)</td><td>3</td><td>0</td><td>—</td></tr>
 <tr class="gtot"><td>TOTAL</td><td>246</td><td>33</td><td>$1,193,326</td></tr></tbody></table>
     </div>
+  </div>
+</div>
+
+
+<!-- ===== PROMOTER BONUS TRACKING ===== -->
+<div class="section" id="promoter">
+  <div class="period-label">Promoter Bonus Tracking &nbsp;•&nbsp; Net Issued Leads</div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('promoter','promo-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('promoter','promo-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('promoter','promo-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('promoter','promo-ytd',this)">Year to Date</button></div>
+
+  <div class="period-section" id="promo-pw">
+    <div class="period-label">Prior Week &nbsp;•&nbsp; Jun 8 – Jun 13, 2026</div>
+    <p style="padding:24px;color:#aaa;font-style:italic;">No promoter data found for this period — download the Appointment Statistics by Promoter report to populate this tab.</p>
+  </div>
+  <div class="period-section" id="promo-pm">
+    <div class="period-label">Prior Month &nbsp;•&nbsp; May 1 – 31, 2026</div>
+    <p style="padding:24px;color:#aaa;font-style:italic;">No promoter data found for this period — download the Appointment Statistics by Promoter report to populate this tab.</p>
+  </div>
+  <div class="period-section" id="promo-mtd">
+    <div class="period-label">Month to Date &nbsp;•&nbsp; June 1 – 17, 2026</div>
+    <p style="padding:24px;color:#aaa;font-style:italic;">No promoter data found for this period — download the Appointment Statistics by Promoter report to populate this tab.</p>
+  </div>
+  <div class="period-section active" id="promo-ytd">
+    <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – June 17, 2026</div>
+    <p style="padding:24px;color:#aaa;font-style:italic;">No promoter data found for this period — download the Appointment Statistics by Promoter report to populate this tab.</p>
   </div>
 </div>
 

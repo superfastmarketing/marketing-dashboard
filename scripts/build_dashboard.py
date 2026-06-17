@@ -76,31 +76,44 @@ def is_footer(name):
         'For Appoint', 'Set Appoint', 'Market:', 'Source:', 'User:'))
 
 def parse_cc(path):
-    """Parse appt_by_source / appt_by_subsource / appt_by_product."""
+    """Parse appt_by_source / appt_by_subsource / appt_by_product.
+    Each named row is followed by an unnamed pct/dollar sub-row.
+    Gross $ (Close $) lives in that sub-row: col 25 for data rows, col 24 for Total.
+    """
     ws = load_sheet(path)
+    all_rows = [ws.row_values(r) for r in range(ws.nrows)]
     rows, total = [], None
-    for r in range(ws.nrows):
-        rv = ws.row_values(r)
+    r = 0
+    while r < len(all_rows):
+        rv = all_rows[r]
         name = str(rv[0]).strip() if rv[0] != '' else ''
-        if not name or is_footer(name): continue
-        if name in ('Product', 'Source', 'Sub-Source', 'Setter'): continue
+        if not name or is_footer(name):
+            r += 1; continue
+        if name in ('Product', 'Source', 'Sub-Source', 'Setter'):
+            r += 1; continue
+
+        # Peek at next row for the gross $ (dollar sub-row has no name in col 0)
+        nxt = all_rows[r + 1] if r + 1 < len(all_rows) else []
 
         if name == 'Total:':
             total = {
                 'set': iv(gv(rv,2)), 'sale': iv(gv(rv,4)),
                 'demo': iv(gv(rv,30)), 'net_issue': iv(gv(rv,32)),
                 'gross_issue': iv(gv(rv,34)), 'drop': iv(gv(rv,36)),
+                'gross_amt': fv(gv(nxt, 24)),   # Close $ on Total sub-row is at col 24
             }
+            r += 2  # skip the sub-row we just consumed
         else:
             set_v = iv(gv(rv,2))
-            # include row if it has a numeric set value OR if it has any numeric data
             if set_v > 0 or any(isinstance(rv[c], float) for c in [4,31,33,35,37] if c < len(rv)):
                 rows.append({
                     'name': name,
                     'set': set_v, 'sale': iv(gv(rv,4)),
                     'demo': iv(gv(rv,31)), 'net_issue': iv(gv(rv,33)),
                     'gross_issue': iv(gv(rv,35)), 'drop': iv(gv(rv,37)),
+                    'gross_amt': fv(gv(nxt, 25)),  # Close $ on data sub-row is at col 25
                 })
+            r += 2  # skip the sub-row
     return rows, total
 
 def parse_setter(path):
@@ -150,6 +163,49 @@ def parse_setter(path):
                 'drop':       iv(gv(rv,39)),
             })
     return rows, total
+
+TRACKED_PROMOTERS = {'teresa', 'andrew', 'morgan', 'jazmin'}
+
+def parse_promoter(path):
+    """Parse appt_by_promoter — same format as appt_by_setter.
+    Returns (rows, total) where rows include net_issue = gross_issue - drop.
+    """
+    if not path.exists():
+        return [], None
+    ws = load_sheet(path)
+    rows, total = [], None
+    for r in range(ws.nrows):
+        rv = ws.row_values(r)
+        name = str(rv[0]).strip() if rv[0] != '' else ''
+        if not name or is_footer(name): continue
+        if name in ('Setter', 'Promoter'): continue
+        if name == 'Total:':
+            gi   = iv(gv(rv,5))
+            drop = iv(gv(rv,39))
+            total = {
+                'set':         iv(gv(rv,3)),
+                'gross_issue': gi,
+                'net_issue':   gi - drop,
+                'demo':        iv(gv(rv,8)),
+                'sale':        iv(gv(rv,11)),
+                'gross_amt':   fv(gv(rv,32)),
+                'drop':        drop,
+            }
+        elif iv(gv(rv,3)) > 0 or name:
+            gi   = iv(gv(rv,5))
+            drop = iv(gv(rv,39))
+            rows.append({
+                'name':        name,
+                'set':         iv(gv(rv,3)),
+                'gross_issue': gi,
+                'net_issue':   gi - drop,
+                'demo':        iv(gv(rv,9)),
+                'sale':        iv(gv(rv,10)),
+                'gross_amt':   fv(gv(rv,33)),
+                'drop':        drop,
+            })
+    return rows, total
+
 
 def parse_dispo(path):
     """Parse Dispo Distribution report (by setter).
@@ -252,6 +308,7 @@ def load_all():
             'setter':    parse_setter(d / 'appt_by_setter.xlsx'),
             'marketing': parse_marketing(d / 'marketing_sub_source.xlsx'),
             'dispo':     parse_dispo(dispo_path) if dispo_path.exists() else ([], None, {}),
+            'promoter':  parse_promoter(d / 'appt_by_promoter.xlsx'),
         }
     return data
 
@@ -326,11 +383,12 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
             demo  = cc_row['demo']
             sale  = cc_row['sale']
             drop  = cc_row['drop']
+            gross = cc_row.get('gross_amt', 0)
             i_pct = pct(gi, set_v)
             d_pct = pct(demo, gi) if gi else '—'
             c_pct = pct(sale, demo) if demo else '—'
         else:
-            set_v = gi = ni = demo = sale = drop = 0
+            set_v = gi = ni = demo = sale = drop = gross = 0
             i_pct = d_pct = c_pct = '—'
 
         raw_disp = str(raw_val) if raw_val else '—'
@@ -344,7 +402,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                     f'<td{rate_class(d_pct)}>{d_pct}</td>'
                     f'{td(sale)}'
                     f'<td{rate_class(c_pct)}>{c_pct}</td>'
-                    f'{td(drop)}<td>$0</td>')
+                    f'{td(drop)}<td>{dollar(gross)}</td>')
         else:
             # shorter colspan=11 (prior week)
             return (f'<td>&nbsp;&nbsp;{cc_row["name"] if cc_row else "—"}</td>'
@@ -355,7 +413,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                     f'<td{rate_class(d_pct)}>{d_pct}</td>'
                     f'{td(sale)}'
                     f'<td{rate_class(c_pct)}>{c_pct}</td>'
-                    f'{td(drop)}<td>$0</td>')
+                    f'{td(drop)}<td>{dollar(gross)}</td>')
 
     # Identify marketing source groups and their sub-sources
     for grp_name, grp in mkt_groups.items():
@@ -365,7 +423,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
 
         lines.append(f'<tr class="div-row"><td colspan="{colspan}">{grp_name.upper()}</td></tr>')
 
-        grp_set = grp_cc_gi = grp_ni = grp_demo = grp_sale = grp_drop = grp_raw = 0
+        grp_set = grp_cc_gi = grp_ni = grp_demo = grp_sale = grp_drop = grp_raw = grp_gross = 0
 
         for s in grp_subs:
             key = s['name'].strip().lower()
@@ -377,12 +435,13 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
 
             # Build display name for first column
             disp_name = s['name'].strip()
-            r_cc = cc_row or {'set':0,'gross_issue':0,'net_issue':0,'demo':0,'sale':0,'drop':0}
+            r_cc = cc_row or {'set':0,'gross_issue':0,'net_issue':0,'demo':0,'sale':0,'drop':0,'gross_amt':0}
             set_v  = r_cc['set'];  gi = r_cc['gross_issue']
             ni     = r_cc.get('net_issue', gi); demo = r_cc['demo']
             sale   = r_cc['sale']; drop = r_cc['drop']
+            gross  = r_cc.get('gross_amt', 0)
             grp_set += set_v; grp_cc_gi += gi; grp_ni += ni
-            grp_demo += demo; grp_sale += sale; grp_drop += drop
+            grp_demo += demo; grp_sale += sale; grp_drop += drop; grp_gross += gross
 
             i_pct = pct(gi, set_v) if set_v else '—'
             d_pct = pct(demo, gi) if gi else '—'
@@ -398,7 +457,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                     f'{td(ni)}{td(demo)}'
                     f'<td{rate_class(d_pct)}>{d_pct}</td>'
                     f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
-                    f'{td(drop)}<td>$0</td></tr>')
+                    f'{td(drop)}<td>{dollar(gross)}</td></tr>')
             else:
                 lines.append(
                     f'<tr><td>&nbsp;&nbsp;{disp_name}</td>'
@@ -408,7 +467,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                     f'{td(demo)}'
                     f'<td{rate_class(d_pct)}>{d_pct}</td>'
                     f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
-                    f'{td(drop)}<td>$0</td></tr>')
+                    f'{td(drop)}<td>{dollar(gross)}</td></tr>')
 
         # Group total
         gi_p = pct(grp_cc_gi, grp_set) if grp_set else '—'
@@ -422,7 +481,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                 f'{td(grp_set)}{td(grp_cc_gi)}'
                 f'<td>{gi_p}</td>{td(grp_ni)}{td(grp_demo)}'
                 f'<td>{dm_p}</td>{td(grp_sale)}<td>{cl_p}</td>'
-                f'{td(grp_drop)}<td>$0</td></tr>')
+                f'{td(grp_drop)}<td>{dollar(grp_gross)}</td></tr>')
         else:
             lines.append(
                 f'<tr class="grp"><td>&nbsp;&nbsp;{grp_name} Total</td>'
@@ -430,7 +489,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                 f'{td(grp_set)}{td(grp_cc_gi)}'
                 f'<td>{gi_p}</td>{td(grp_demo)}'
                 f'<td>{dm_p}</td>{td(grp_sale)}<td>{cl_p}</td>'
-                f'{td(grp_drop)}<td>$0</td></tr>')
+                f'{td(grp_drop)}<td>{dollar(grp_gross)}</td></tr>')
 
     # CC sub-sources not matched to any marketing group in this period
     unplaced = [r for r in ss_rows if r['name'].strip().lower() not in placed]
@@ -446,12 +505,12 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
             # add these CC-only rows under the same header; otherwise open a new one.
             lines.append(f'<tr class="div-row"><td colspan="{colspan}">{grp_name.upper()} (no raw leads this period)</td></tr>')
 
-            grp_set = grp_cc_gi = grp_ni = grp_demo = grp_sale = grp_drop = 0
+            grp_set = grp_cc_gi = grp_ni = grp_demo = grp_sale = grp_drop = grp_gross = 0
             for r in rows:
                 set_v=r['set']; gi=r['gross_issue']; ni=r.get('net_issue',gi)
-                demo=r['demo']; sale=r['sale']; drop=r['drop']
+                demo=r['demo']; sale=r['sale']; drop=r['drop']; gross=r.get('gross_amt',0)
                 grp_set+=set_v; grp_cc_gi+=gi; grp_ni+=ni
-                grp_demo+=demo; grp_sale+=sale; grp_drop+=drop
+                grp_demo+=demo; grp_sale+=sale; grp_drop+=drop; grp_gross+=gross
                 i_pct=pct(gi,set_v) if set_v else '—'
                 d_pct=pct(demo,gi) if gi else '—'
                 c_pct=pct(sale,demo) if demo else '—'
@@ -464,7 +523,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                         f'{td(ni)}{td(demo)}'
                         f'<td{rate_class(d_pct)}>{d_pct}</td>'
                         f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
-                        f'{td(drop)}<td>$0</td></tr>')
+                        f'{td(drop)}<td>{dollar(gross)}</td></tr>')
                 else:
                     lines.append(
                         f'<tr><td>&nbsp;&nbsp;{r["name"]}</td>'
@@ -474,7 +533,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                         f'{td(demo)}'
                         f'<td{rate_class(d_pct)}>{d_pct}</td>'
                         f'{td(sale)}<td{rate_class(c_pct)}>{c_pct}</td>'
-                        f'{td(drop)}<td>$0</td></tr>')
+                        f'{td(drop)}<td>{dollar(gross)}</td></tr>')
             # Group subtotal
             gi_p=pct(grp_cc_gi,grp_set) if grp_set else '—'
             dm_p=pct(grp_demo,grp_ni) if grp_ni else '—'
@@ -485,14 +544,14 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                     f'<td class="mc">—</td>'
                     f'{td(grp_set)}{td(grp_cc_gi)}<td>{gi_p}</td>'
                     f'{td(grp_ni)}{td(grp_demo)}<td>{dm_p}</td>'
-                    f'{td(grp_sale)}<td>{cl_p}</td>{td(grp_drop)}<td>$0</td></tr>')
+                    f'{td(grp_sale)}<td>{cl_p}</td>{td(grp_drop)}<td>{dollar(grp_gross)}</td></tr>')
             else:
                 lines.append(
                     f'<tr class="grp"><td>&nbsp;&nbsp;{grp_name} Total</td>'
                     f'<td class="mc">—</td>'
                     f'{td(grp_set)}{td(grp_cc_gi)}<td>{gi_p}</td>'
                     f'{td(grp_demo)}<td>{dm_p}</td>'
-                    f'{td(grp_sale)}<td>{cl_p}</td>{td(grp_drop)}<td>$0</td></tr>')
+                    f'{td(grp_sale)}<td>{cl_p}</td>{td(grp_drop)}<td>{dollar(grp_gross)}</td></tr>')
 
     # Grand total row
     if ss_total:
@@ -508,7 +567,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                 f'{td(t["set"])}{td(t["gross_issue"])}'
                 f'<td>{gi_p}</td>{td(t["net_issue"])}{td(t["demo"])}'
                 f'<td>{dm_p}</td>{td(t["sale"])}<td>{cl_p}</td>'
-                f'{td(t["drop"])}<td>$0</td></tr>')
+                f'{td(t["drop"])}<td>{dollar(t.get("gross_amt",0))}</td></tr>')
         else:
             lines.append(
                 f'<tr class="gtot"><td>GRAND TOTAL</td>'
@@ -516,7 +575,7 @@ def build_subsource_table(mkt_groups, mkt_grand, ss_rows, ss_total, colspan=12, 
                 f'{td(t["set"])}{td(t["gross_issue"])}'
                 f'<td>{gi_p}</td>{td(t["demo"])}'
                 f'<td>{dm_p}</td>{td(t["sale"])}<td>{cl_p}</td>'
-                f'{td(t["drop"])}<td>$0</td></tr>')
+                f'{td(t["drop"])}<td>{dollar(t.get("gross_amt",0))}</td></tr>')
 
     return '\n'.join(lines)
 
@@ -536,13 +595,14 @@ def build_product_table(prod_rows, prod_total, period_label):
         else: grp['other'].append(r)
 
     def sum_grp(rows):
-        return {k: sum(r.get(k,0) for r in rows) for k in ('set','sale','demo','net_issue','gross_issue','drop')}
+        return {k: sum(r.get(k,0) for r in rows) for k in ('set','sale','demo','net_issue','gross_issue','drop','gross_amt')}
 
     def prod_row(r):
         code = r['name'].upper()
         lbl  = PRODUCT_LABELS.get(code, code)
         gi   = r['gross_issue']; ni = r['net_issue']
         demo = r['demo']; sale = r['sale']
+        gross = r.get('gross_amt', 0)
         ni_p = pct(ni, gi) if gi else '—'
         dm_p = pct(demo, gi) if gi else '—'
         cl_p = pct(sale, demo) if demo else '—'
@@ -553,12 +613,13 @@ def build_product_table(prod_rows, prod_total, period_label):
                 f'<td{rate_class(dm_p)}>{dm_p}</td>'
                 f'<td>{sale}</td>'
                 f'<td{rate_class(cl_p) if sale>0 else ""}>{cl_p}</td>'
-                f'<td>—</td></tr>')
+                f'<td>{dollar(gross)}</td></tr>')
 
     def grp_total_row(name, rows, css):
         s = sum_grp(rows)
         gi=s['gross_issue']; ni=s['net_issue']
         demo=s['demo']; sale=s['sale']
+        gross=s.get('gross_amt',0)
         ni_p=pct(ni,gi) if gi else '—'
         dm_p=pct(demo,gi) if gi else '—'
         cl_p=pct(sale,demo) if demo else '—'
@@ -567,7 +628,7 @@ def build_product_table(prod_rows, prod_total, period_label):
                 f'<td{rate_class(ni_p)}>{ni_p}</td>'
                 f'<td>{demo}</td>'
                 f'<td{rate_class(dm_p)}>{dm_p}</td>'
-                f'<td>{sale}</td><td>{cl_p}</td><td>$0</td></tr>')
+                f'<td>{sale}</td><td>{cl_p}</td><td>{dollar(gross)}</td></tr>')
 
     lines = [
         '<tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>',
@@ -595,6 +656,7 @@ def build_product_table(prod_rows, prod_total, period_label):
     if prod_total:
         t=prod_total
         gi=t['gross_issue']; ni=t['net_issue']; demo=t['demo']; sale=t['sale']
+        gross=t.get('gross_amt',0)
         ni_p=pct(ni,gi) if gi else '—'
         dm_p=pct(demo,gi) if gi else '—'
         cl_p=pct(sale,demo) if demo else '—'
@@ -602,7 +664,7 @@ def build_product_table(prod_rows, prod_total, period_label):
             f'<tr class="gtot"><td>GRAND TOTAL</td><td></td>'
             f'<td>{gi}</td><td>{ni}</td><td>{ni_p}</td>'
             f'<td>{demo}</td><td>{dm_p}</td>'
-            f'<td>{sale}</td><td>{cl_p}</td><td>$0</td></tr>')
+            f'<td>{sale}</td><td>{cl_p}</td><td>{dollar(gross)}</td></tr>')
 
     return '\n'.join(lines)
 
@@ -713,6 +775,7 @@ thead th.src-col { background: #4a2d7a; }
 tbody tr { border-bottom: 1px solid #f0f0f0; } tbody tr:hover { background: #f7f9fc; }
 tbody tr.grp { background: #eef3f9; font-weight: 700; }
 tbody tr.gtot { background: #1a2e4a; color: white; font-weight: 800; }
+.ni-cell { background: #e8f4fd; color: #1a3a5c; }
 tbody tr.div-row td { background: #f0f4fa; font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.8px; color: #666; font-weight: 700; padding: 5px 9px; }
 tbody tr.div-kitchens td { background: #fef9ec; color: #92400e; }
 tbody tr.div-bathrooms td { background: #eff6ff; color: #1e40af; }
@@ -1277,6 +1340,126 @@ def gen_callcenter_section(data_by_period, date_ranges_dict):
 ''', chart_js
 
 
+def gen_promoter_section(data_by_period, date_ranges_dict):
+    """Generate the Promoter Bonus Tracking tab."""
+    PMAP   = {'prior_week':'pw','prior_month':'pm','mtd':'mtd','ytd':'ytd'}
+    PLABELS= {'prior_week':'Prior Week','prior_month':'Prior Month','mtd':'Month to Date','ytd':'Year to Date'}
+    COLORS = ['#2d5a8e','#28a745','#e67e22','#6f42c1']
+    sections = []
+    chart_js = ''
+    default = 'ytd'
+
+    # Collect all promoter names seen across all periods (preserve order, tracked first)
+    all_names_seen = []
+    for period in PERIODS:
+        rows, _ = data_by_period[period]['promoter']
+        for r in rows:
+            first = r['name'].split(',')[0].strip() if ',' in r['name'] else r['name'].split()[0].strip()
+            if first not in all_names_seen:
+                all_names_seen.append(first)
+
+    # YTD running totals for the summary banner
+    ytd_rows, ytd_total = data_by_period['ytd']['promoter']
+
+    for period in PERIODS:
+        pid   = PMAP[period]
+        label = PLABELS[period]
+        _, _, date_lbl = date_ranges_dict[period]
+        rows, total = data_by_period[period]['promoter']
+
+        if not rows:
+            sections.append(f'''
+  <div class="period-section{"" if period != default else " active"}" id="promo-{pid}">
+    <div class="period-label">{label} &nbsp;•&nbsp; {date_lbl}</div>
+    <p style="padding:24px;color:#aaa;font-style:italic;">No promoter data found for this period — download the Appointment Statistics by Promoter report to populate this tab.</p>
+  </div>''')
+            continue
+
+        # Build bar chart data — net issued leads per promoter
+        bar_labels = [r['name'].split(',')[0].strip() if ',' in r['name'] else r['name'].split()[0].strip() for r in rows]
+        bar_ni     = [r['net_issue'] for r in rows]
+        bar_gi     = [r['gross_issue'] for r in rows]
+
+        chart_js += (
+            f"bar('promo-{pid}-bar',{js_str_arr(bar_labels)},"
+            f"[{{label:'Net Issued',data:{js_arr(bar_ni)},backgroundColor:'#2d5a8e',borderRadius:4}},"
+            f"{{label:'Gross Issued',data:{js_arr(bar_gi)},backgroundColor:'#aac4e0',borderRadius:4}}]);\n"
+        )
+
+        # KPI totals
+        total_ni = total['net_issue'] if total else sum(r['net_issue'] for r in rows)
+        total_gi = total['gross_issue'] if total else sum(r['gross_issue'] for r in rows)
+        total_set = total['set'] if total else sum(r['set'] for r in rows)
+
+        # Table rows
+        tbl_rows = []
+        for r in rows:
+            first = r['name'].split(',')[0].strip() if ',' in r['name'] else r['name'].split()[0].strip()
+            drop_pct = pct(r['drop'], r['gross_issue']) if r['gross_issue'] else '—'
+            tbl_rows.append(
+                f'<tr><td>{r["name"]}</td>'
+                f'<td>{r["set"]}</td>'
+                f'<td>{r["gross_issue"]}</td>'
+                f'<td>{r["drop"]}</td>'
+                f'<td class="ni-cell"><strong>{r["net_issue"]}</strong></td>'
+                f'<td>{drop_pct}</td></tr>'
+            )
+        if total:
+            tot_drop_pct = pct(total['drop'], total['gross_issue']) if total['gross_issue'] else '—'
+            tbl_rows.append(
+                f'<tr class="gtot"><td>TOTAL</td>'
+                f'<td>{total_set}</td>'
+                f'<td>{total_gi}</td>'
+                f'<td>{total["drop"]}</td>'
+                f'<td><strong>{total_ni}</strong></td>'
+                f'<td>{tot_drop_pct}</td></tr>'
+            )
+
+        active = ' active' if period == default else ''
+        sections.append(f'''
+  <div class="period-section{active}" id="promo-{pid}">
+    <div class="period-label">{label} &nbsp;•&nbsp; {date_lbl}</div>
+    <div class="kpi-grid">
+      {kpi('Total Appointments Set', total_set, f'{len(rows)} active promoters', 'Appt Stats by Promoter', 'green')}
+      {kpi('Gross Issued Leads', total_gi, 'Leads passed to sales', 'Appt Stats by Promoter', 'teal')}
+      {kpi('Net Issued Leads', total_ni, f'After {total["drop"] if total else 0} drops removed', 'Appt Stats by Promoter', 'purple')}
+    </div>
+    <div class="charts-grid" style="grid-template-columns:1fr;">
+      <div class="chart-card">
+        <div class="chart-title">Net Issued Leads by Promoter
+          <span class="chart-subtitle">{label} — {total_ni} total net issued</span>
+        </div>
+        <div class="chart-wrap" style="height:280px;">
+          <canvas id="promo-{pid}-bar"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Promoter Net Issued Lead Tally — {label}</div>
+      <div class="table-note">Source: Appointment Statistics by Promoter. Net Issued = Gross Issued − Drops.</div>
+      <table>
+        <thead><tr>
+          <th>Promoter</th><th>Appts Set</th><th>Gross Issued</th>
+          <th>Drops</th><th>Net Issued ★</th><th>Drop %</th>
+        </tr></thead>
+        <tbody>{"".join(tbl_rows)}</tbody>
+      </table>
+    </div>
+  </div>''')
+
+    btns = ' '.join(
+        f'<button class="ptab{"" if p!="ytd" else " active"}" onclick="showPeriod(\'promoter\',\'promo-{PMAP[p]}\',this)">{PLABELS[p]}</button>'
+        for p in PERIODS)
+    return f'''
+<!-- ===== PROMOTER BONUS TRACKING ===== -->
+<div class="section" id="promoter">
+  <div class="period-label">Promoter Bonus Tracking &nbsp;•&nbsp; Net Issued Leads</div>
+  <div class="period-toggle">{btns}</div>
+{''.join(sections)}
+</div>
+''', chart_js
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def run():
@@ -1316,6 +1499,8 @@ def run():
     chart_js += reps_js
     cc_sec, cc_js = gen_callcenter_section(data, dr)
     chart_js += cc_js
+    promo_sec, promo_js = gen_promoter_section(data, dr)
+    chart_js += promo_js
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1352,12 +1537,14 @@ def run():
   <div class="tab" onclick="showTab('products',this)">Products</div>
   <div class="tab" onclick="showTab('salesreps',this)">📞 Setters</div>
   <div class="tab" onclick="showTab('callcenter',this)">Call Center</div>
+  <div class="tab" onclick="showTab('promoter',this)">🏆 Promoter Bonus</div>
 </div>
 
 {period_sections}
 {products_sec}
 {reps_sec}
 {cc_sec}
+{promo_sec}
 
 <script>
 {JS_HELPERS}

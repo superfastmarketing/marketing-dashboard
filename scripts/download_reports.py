@@ -93,6 +93,13 @@ REPORTS = [
         "source": "--All Sources--",
         "market": "--ALL--",
     },
+    {
+        "name":   "appt_by_promoter",
+        "group":  "Call Center",
+        "report": "Appointment Statistics by Promoter",
+        "source": "--All Sources--",
+        "market": "--ALL--",
+    },
 ]
 
 
