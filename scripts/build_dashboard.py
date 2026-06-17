@@ -776,6 +776,24 @@ tbody tr { border-bottom: 1px solid #f0f0f0; } tbody tr:hover { background: #f7f
 tbody tr.grp { background: #eef3f9; font-weight: 700; }
 tbody tr.gtot { background: #1a2e4a; color: white; font-weight: 800; }
 .ni-cell { background: #e8f4fd; color: #1a3a5c; }
+/* Promoter bonus cards */
+.promo-bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.promo-bonus-card { background: white; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.09); border-left: 4px solid #2d5a8e; }
+.promo-bonus-name { font-size: 1rem; font-weight: 700; color: #1a2e4a; margin-bottom: 4px; }
+.promo-bonus-count { font-size: 2rem; font-weight: 800; color: #2d5a8e; line-height: 1.1; }
+.promo-bonus-count span { font-size: 0.75rem; font-weight: 500; color: #888; }
+.promo-bonus-trophies { font-size: 1.4rem; margin: 8px 0 2px; min-height: 28px; }
+.promo-bonus-label { font-size: 0.75rem; color: #555; font-weight: 600; margin-bottom: 10px; }
+.promo-progress-wrap { background: #e9ecef; border-radius: 99px; height: 10px; overflow: hidden; margin-bottom: 4px; }
+.promo-progress-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #2d5a8e, #4a90d9); transition: width 0.4s ease; }
+.promo-progress-label { font-size: 0.71rem; color: #888; }
+/* Weekly bonus highlight */
+.promo-weekly-bonus { display: inline-block; background: #fff3cd; color: #856404; border: 1px solid #f0a500; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 700; margin: 6px 0 4px; }
+.promo-weekly-alert { background: #fff8e1; border: 1px solid #f0a500; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; font-size: 0.88rem; color: #6d4c00; }
+.promo-weekly-none { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; font-size: 0.85rem; color: #888; }
+tbody tr.promo-weekly-row td { background: #fffbeb; }
+tbody tr.promo-weekly-row td:first-child { color: #6d4c00; font-weight: 700; }
+.promo-week-badge { display: inline-block; background: #f0a500; color: white; border-radius: 4px; padding: 1px 7px; font-size: 0.7rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
 tbody tr.div-row td { background: #f0f4fa; font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.8px; color: #666; font-weight: 700; padding: 5px 9px; }
 tbody tr.div-kitchens td { background: #fef9ec; color: #92400e; }
 tbody tr.div-bathrooms td { background: #eff6ff; color: #1e40af; }
@@ -1340,32 +1358,60 @@ def gen_callcenter_section(data_by_period, date_ranges_dict):
 ''', chart_js
 
 
+def _promoter_first_name(full_name):
+    """Return first name from 'Last, First' or 'First Last' format."""
+    if ',' in full_name:
+        parts = full_name.split(',', 1)
+        return parts[1].strip().split()[0] if parts[1].strip() else parts[0].strip()
+    return full_name.strip().split()[0]
+
+
+def _bonus_milestone_card(name, ni, is_weekly_period):
+    """Render a per-promoter bonus progress card.
+
+    - Every 10 net issued leads = paycheck bonus milestone.
+    - 5+ in a single week (Sun-Sat) = weekly bonus.
+    """
+    bonuses_earned = ni // 10
+    progress       = ni % 10          # leads toward the next milestone
+    pct_fill       = progress * 10    # percentage for CSS progress bar
+
+    trophies = '🏆' * bonuses_earned if bonuses_earned else '<span style="color:#aaa;font-size:12px">none yet</span>'
+    next_needed = 10 - progress
+
+    weekly_badge = ''
+    weekly_row_style = ''
+    if is_weekly_period and ni >= 5:
+        weekly_badge = '<div class="promo-weekly-bonus">⭐ Weekly Bonus Earned!</div>'
+        weekly_row_style = 'border: 2px solid #f0a500;'
+
+    return f'''<div class="promo-bonus-card" style="{weekly_row_style}">
+  <div class="promo-bonus-name">{name}</div>
+  <div class="promo-bonus-count">{ni} <span>net issued</span></div>
+  {weekly_badge}
+  <div class="promo-bonus-trophies">{trophies}</div>
+  <div class="promo-bonus-label">{bonuses_earned} paycheck bonus{"es" if bonuses_earned != 1 else ""} earned</div>
+  <div class="promo-progress-wrap">
+    <div class="promo-progress-bar" style="width:{pct_fill}%"></div>
+  </div>
+  <div class="promo-progress-label">{progress}/10 &nbsp;—&nbsp; {next_needed} more to next bonus</div>
+</div>'''
+
+
 def gen_promoter_section(data_by_period, date_ranges_dict):
     """Generate the Promoter Bonus Tracking tab."""
     PMAP   = {'prior_week':'pw','prior_month':'pm','mtd':'mtd','ytd':'ytd'}
     PLABELS= {'prior_week':'Prior Week','prior_month':'Prior Month','mtd':'Month to Date','ytd':'Year to Date'}
-    COLORS = ['#2d5a8e','#28a745','#e67e22','#6f42c1']
     sections = []
     chart_js = ''
     default = 'ytd'
-
-    # Collect all promoter names seen across all periods (preserve order, tracked first)
-    all_names_seen = []
-    for period in PERIODS:
-        rows, _ = data_by_period[period]['promoter']
-        for r in rows:
-            first = r['name'].split(',')[0].strip() if ',' in r['name'] else r['name'].split()[0].strip()
-            if first not in all_names_seen:
-                all_names_seen.append(first)
-
-    # YTD running totals for the summary banner
-    ytd_rows, ytd_total = data_by_period['ytd']['promoter']
 
     for period in PERIODS:
         pid   = PMAP[period]
         label = PLABELS[period]
         _, _, date_lbl = date_ranges_dict[period]
         rows, total = data_by_period[period]['promoter']
+        is_weekly = (period == 'prior_week')
 
         if not rows:
             sections.append(f'''
@@ -1375,8 +1421,8 @@ def gen_promoter_section(data_by_period, date_ranges_dict):
   </div>''')
             continue
 
-        # Build bar chart data — net issued leads per promoter
-        bar_labels = [r['name'].split(',')[0].strip() if ',' in r['name'] else r['name'].split()[0].strip() for r in rows]
+        # Bar chart: Net Issued vs Gross Issued per promoter
+        bar_labels = [_promoter_first_name(r['name']) for r in rows]
         bar_ni     = [r['net_issue'] for r in rows]
         bar_gi     = [r['gross_issue'] for r in rows]
 
@@ -1387,17 +1433,37 @@ def gen_promoter_section(data_by_period, date_ranges_dict):
         )
 
         # KPI totals
-        total_ni = total['net_issue'] if total else sum(r['net_issue'] for r in rows)
-        total_gi = total['gross_issue'] if total else sum(r['gross_issue'] for r in rows)
-        total_set = total['set'] if total else sum(r['set'] for r in rows)
+        total_ni  = total['net_issue']  if total else sum(r['net_issue']  for r in rows)
+        total_gi  = total['gross_issue'] if total else sum(r['gross_issue'] for r in rows)
+        total_set = total['set']         if total else sum(r['set']         for r in rows)
+        total_drop = total['drop']       if total else sum(r['drop']        for r in rows)
 
-        # Table rows
+        # Bonus milestone cards (one per promoter)
+        milestone_cards = ''.join(
+            _bonus_milestone_card(_promoter_first_name(r['name']), r['net_issue'], is_weekly)
+            for r in rows
+        )
+
+        # Weekly bonus note
+        weekly_note = ''
+        if is_weekly:
+            weekly_earners = [_promoter_first_name(r['name']) for r in rows if r['net_issue'] >= 5]
+            if weekly_earners:
+                names_str = ', '.join(weekly_earners)
+                weekly_note = f'<div class="promo-weekly-alert">⭐ Weekly bonus threshold (5+ net issued) reached by: <strong>{names_str}</strong></div>'
+            else:
+                weekly_note = '<div class="promo-weekly-none">No promoters reached the 5 net issued weekly bonus threshold this week.</div>'
+
+        # Table rows — highlight weekly bonus earners
         tbl_rows = []
         for r in rows:
-            first = r['name'].split(',')[0].strip() if ',' in r['name'] else r['name'].split()[0].strip()
+            fname = _promoter_first_name(r['name'])
             drop_pct = pct(r['drop'], r['gross_issue']) if r['gross_issue'] else '—'
+            weekly_hit = is_weekly and r['net_issue'] >= 5
+            row_cls = ' class="promo-weekly-row"' if weekly_hit else ''
+            badge   = ' <span class="promo-week-badge">⭐ Weekly Bonus</span>' if weekly_hit else ''
             tbl_rows.append(
-                f'<tr><td>{r["name"]}</td>'
+                f'<tr{row_cls}><td>{r["name"]}{badge}</td>'
                 f'<td>{r["set"]}</td>'
                 f'<td>{r["gross_issue"]}</td>'
                 f'<td>{r["drop"]}</td>'
@@ -1405,13 +1471,11 @@ def gen_promoter_section(data_by_period, date_ranges_dict):
                 f'<td>{drop_pct}</td></tr>'
             )
         if total:
-            tot_drop_pct = pct(total['drop'], total['gross_issue']) if total['gross_issue'] else '—'
+            tot_drop_pct = pct(total_drop, total_gi) if total_gi else '—'
             tbl_rows.append(
                 f'<tr class="gtot"><td>TOTAL</td>'
-                f'<td>{total_set}</td>'
-                f'<td>{total_gi}</td>'
-                f'<td>{total["drop"]}</td>'
-                f'<td><strong>{total_ni}</strong></td>'
+                f'<td>{total_set}</td><td>{total_gi}</td>'
+                f'<td>{total_drop}</td><td><strong>{total_ni}</strong></td>'
                 f'<td>{tot_drop_pct}</td></tr>'
             )
 
@@ -1419,11 +1483,13 @@ def gen_promoter_section(data_by_period, date_ranges_dict):
         sections.append(f'''
   <div class="period-section{active}" id="promo-{pid}">
     <div class="period-label">{label} &nbsp;•&nbsp; {date_lbl}</div>
+    {weekly_note}
     <div class="kpi-grid">
       {kpi('Total Appointments Set', total_set, f'{len(rows)} active promoters', 'Appt Stats by Promoter', 'green')}
       {kpi('Gross Issued Leads', total_gi, 'Leads passed to sales', 'Appt Stats by Promoter', 'teal')}
-      {kpi('Net Issued Leads', total_ni, f'After {total["drop"] if total else 0} drops removed', 'Appt Stats by Promoter', 'purple')}
+      {kpi('Net Issued Leads', total_ni, f'After {total_drop} drops removed', 'Appt Stats by Promoter', 'purple')}
     </div>
+    <div class="promo-bonus-grid">{milestone_cards}</div>
     <div class="charts-grid" style="grid-template-columns:1fr;">
       <div class="chart-card">
         <div class="chart-title">Net Issued Leads by Promoter
@@ -1436,7 +1502,7 @@ def gen_promoter_section(data_by_period, date_ranges_dict):
     </div>
     <div class="table-card">
       <div class="chart-title">Promoter Net Issued Lead Tally — {label}</div>
-      <div class="table-note">Source: Appointment Statistics by Promoter. Net Issued = Gross Issued − Drops.</div>
+      <div class="table-note">Net Issued = Gross Issued − Drops. &nbsp;Every 10 net issued = paycheck bonus. &nbsp;{"5+ net issued in a week (Sun–Sat) = weekly bonus. " if is_weekly else ""}Source: Appt Stats by Promoter.</div>
       <table>
         <thead><tr>
           <th>Promoter</th><th>Appts Set</th><th>Gross Issued</th>

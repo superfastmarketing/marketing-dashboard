@@ -47,6 +47,24 @@ tbody tr { border-bottom: 1px solid #f0f0f0; } tbody tr:hover { background: #f7f
 tbody tr.grp { background: #eef3f9; font-weight: 700; }
 tbody tr.gtot { background: #1a2e4a; color: white; font-weight: 800; }
 .ni-cell { background: #e8f4fd; color: #1a3a5c; }
+/* Promoter bonus cards */
+.promo-bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.promo-bonus-card { background: white; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.09); border-left: 4px solid #2d5a8e; }
+.promo-bonus-name { font-size: 1rem; font-weight: 700; color: #1a2e4a; margin-bottom: 4px; }
+.promo-bonus-count { font-size: 2rem; font-weight: 800; color: #2d5a8e; line-height: 1.1; }
+.promo-bonus-count span { font-size: 0.75rem; font-weight: 500; color: #888; }
+.promo-bonus-trophies { font-size: 1.4rem; margin: 8px 0 2px; min-height: 28px; }
+.promo-bonus-label { font-size: 0.75rem; color: #555; font-weight: 600; margin-bottom: 10px; }
+.promo-progress-wrap { background: #e9ecef; border-radius: 99px; height: 10px; overflow: hidden; margin-bottom: 4px; }
+.promo-progress-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #2d5a8e, #4a90d9); transition: width 0.4s ease; }
+.promo-progress-label { font-size: 0.71rem; color: #888; }
+/* Weekly bonus highlight */
+.promo-weekly-bonus { display: inline-block; background: #fff3cd; color: #856404; border: 1px solid #f0a500; border-radius: 6px; padding: 3px 9px; font-size: 0.75rem; font-weight: 700; margin: 6px 0 4px; }
+.promo-weekly-alert { background: #fff8e1; border: 1px solid #f0a500; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; font-size: 0.88rem; color: #6d4c00; }
+.promo-weekly-none { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; font-size: 0.85rem; color: #888; }
+tbody tr.promo-weekly-row td { background: #fffbeb; }
+tbody tr.promo-weekly-row td:first-child { color: #6d4c00; font-weight: 700; }
+.promo-week-badge { display: inline-block; background: #f0a500; color: white; border-radius: 4px; padding: 1px 7px; font-size: 0.7rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
 tbody tr.div-row td { background: #f0f4fa; font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.8px; color: #666; font-weight: 700; padding: 5px 9px; }
 tbody tr.div-kitchens td { background: #fef9ec; color: #92400e; }
 tbody tr.div-bathrooms td { background: #eff6ff; color: #1e40af; }
