@@ -27,11 +27,10 @@ REPORTS_DIR.mkdir(exist_ok=True)
 def date_ranges():
     today = date.today()
 
-    # Prior week = Mon–Sat of the previous week
-    # (script runs Tuesday morning, so prior week ended last Saturday)
-    days_since_monday = today.weekday()  # Mon=0 … Sun=6
-    last_sat  = today - timedelta(days=days_since_monday + 2)
-    last_mon  = last_sat - timedelta(days=5)
+    # Prior week = Sun–Sat of the previous week
+    days_since_sunday = (today.weekday() + 1) % 7  # Sun=0 … Sat=6
+    last_sat  = today - timedelta(days=days_since_sunday + 1)
+    last_sun  = last_sat - timedelta(days=6)
 
     # Prior month
     first_of_month = today.replace(day=1)
@@ -39,7 +38,7 @@ def date_ranges():
     pm_start = pm_end.replace(day=1)
 
     return {
-        "prior_week":  (last_mon,             last_sat),
+        "prior_week":  (last_sun,             last_sat),
         "prior_month": (pm_start,             pm_end),
         "mtd":         (today.replace(day=1), today),
         "ytd":         (today.replace(month=1, day=1), today),

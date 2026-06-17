@@ -164,46 +164,55 @@ def parse_setter(path):
             })
     return rows, total
 
-TRACKED_PROMOTERS = {'teresa', 'andrew', 'morgan', 'jazmin'}
-
 def parse_promoter(path):
-    """Parse appt_by_promoter — same format as appt_by_setter.
-    Returns (rows, total) where rows include net_issue = gross_issue - drop.
+    """Parse appt_by_promoter.
+    Verified column map (0-indexed):
+      Header row (row 5): Set=2, Sale=4, Demo=30, NetIssue=33, GrossIssue=36
+      Data rows          : Set=2, Sale=4, Demo=31, NetIssue=34, GrossIssue=37
+      Total row          : Set=2, Sale=4, Demo=30, NetIssue=33, GrossIssue=36
+      Sub-row (pct/dollar): Close$=24 for both data and Total
+    Each named row is followed by an unnamed pct/dollar sub-row (r += 2).
     """
     if not path.exists():
         return [], None
     ws = load_sheet(path)
+    all_rows = [ws.row_values(r) for r in range(ws.nrows)]
     rows, total = [], None
-    for r in range(ws.nrows):
-        rv = ws.row_values(r)
+    r = 0
+    while r < len(all_rows):
+        rv = all_rows[r]
         name = str(rv[0]).strip() if rv[0] != '' else ''
-        if not name or is_footer(name): continue
-        if name in ('Setter', 'Promoter'): continue
+        if not name or is_footer(name) or name in ('Promoter', 'Setter'):
+            r += 1; continue
+        nxt = all_rows[r + 1] if r + 1 < len(all_rows) else []
         if name == 'Total:':
-            gi   = iv(gv(rv,5))
-            drop = iv(gv(rv,39))
+            gi  = iv(gv(rv, 36))
+            ni  = iv(gv(rv, 33))
             total = {
-                'set':         iv(gv(rv,3)),
+                'set':         iv(gv(rv, 2)),
+                'sale':        iv(gv(rv, 4)),
+                'demo':        iv(gv(rv, 30)),
+                'net_issue':   ni,
                 'gross_issue': gi,
-                'net_issue':   gi - drop,
-                'demo':        iv(gv(rv,8)),
-                'sale':        iv(gv(rv,11)),
-                'gross_amt':   fv(gv(rv,32)),
-                'drop':        drop,
+                'drop':        gi - ni,
+                'gross_amt':   fv(gv(nxt, 24)),
             }
-        elif iv(gv(rv,3)) > 0 or name:
-            gi   = iv(gv(rv,5))
-            drop = iv(gv(rv,39))
+            r += 2; continue
+        set_v = iv(gv(rv, 2))
+        if set_v > 0:
+            gi  = iv(gv(rv, 37))
+            ni  = iv(gv(rv, 34))
             rows.append({
                 'name':        name,
-                'set':         iv(gv(rv,3)),
+                'set':         set_v,
+                'sale':        iv(gv(rv, 4)),
+                'demo':        iv(gv(rv, 31)),
+                'net_issue':   ni,
                 'gross_issue': gi,
-                'net_issue':   gi - drop,
-                'demo':        iv(gv(rv,9)),
-                'sale':        iv(gv(rv,10)),
-                'gross_amt':   fv(gv(rv,33)),
-                'drop':        drop,
+                'drop':        gi - ni,
+                'gross_amt':   fv(gv(nxt, 24)),
             })
+        r += 2
     return rows, total
 
 
@@ -316,9 +325,9 @@ def load_all():
 
 def date_ranges():
     today = date.today()
-    days_since_monday = today.weekday()
-    last_sat  = today - timedelta(days=days_since_monday + 2)
-    last_mon  = last_sat - timedelta(days=5)
+    days_since_sunday = (today.weekday() + 1) % 7  # Sun=0 … Sat=6
+    last_sat  = today - timedelta(days=days_since_sunday + 1)
+    last_sun  = last_sat - timedelta(days=6)
     first_of_month = today.replace(day=1)
     pm_end   = first_of_month - timedelta(days=1)
     pm_start = pm_end.replace(day=1)
@@ -328,8 +337,8 @@ def date_ranges():
         f = fmt_str.replace('%-d', '%#d') if platform.system() == 'Windows' else fmt_str
         return d.strftime(f)
     return {
-        'prior_week':  (last_mon, last_sat,
-                        f'{d_str(last_mon, "%b %-d")} – {d_str(last_sat, "%b %-d")}, {last_sat.year}'),
+        'prior_week':  (last_sun, last_sat,
+                        f'{d_str(last_sun, "%b %-d")} – {d_str(last_sat, "%b %-d")}, {last_sat.year}'),
         'prior_month': (pm_start, pm_end,
                         f'{d_str(pm_start, "%B %-d")} – {d_str(pm_end, "%-d")}, {pm_end.year}'),
         'mtd':         (today.replace(day=1), today,
