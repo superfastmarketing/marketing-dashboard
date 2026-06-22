@@ -126,6 +126,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   <div class="tab" onclick="showTab('salesreps',this)">📞 Setters</div>
   <div class="tab" onclick="showTab('callcenter',this)">Call Center</div>
   <div class="tab" onclick="showTab('promoter',this)">🏆 Promoter Bonus</div>
+  <div class="tab" onclick="showTab('mktcosts',this)">💰 Marketing Costs</div>
 </div>
 
 
@@ -1641,6 +1642,14 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       </table>
     </div>
   </div>
+</div>
+
+
+<!-- ===== MARKETING COSTS ===== -->
+<div class="section" id="mktcosts">
+  <div class="period-label">Marketing Costs &nbsp;•&nbsp; Spend, Marketing %, Cost Per Lead &amp; Cost Per Demo</div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('mktcosts','costs-pm',this)">Prior Month</button> <button class="ptab active" onclick="showPeriod('mktcosts','costs-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('mktcosts','costs-ytd',this)">Year to Date</button></div>
+<div class="period-section" id="costs-pm"><div class="period-label">Prior Month</div><p style="padding:24px;color:#aaa;font-style:italic;">No marketing cost data available. Create a Google Sheet titled <strong>Marketing Cost for Dashboard</strong> with columns: Source, Cost Per Lead, Total Monthly Budget. Then run the pipeline once interactively to authorize Google Sheets access.</p></div><div class="period-section active" id="costs-mtd"><div class="period-label">Month to Date</div><p style="padding:24px;color:#aaa;font-style:italic;">No marketing cost data available. Create a Google Sheet titled <strong>Marketing Cost for Dashboard</strong> with columns: Source, Cost Per Lead, Total Monthly Budget. Then run the pipeline once interactively to authorize Google Sheets access.</p></div><div class="period-section" id="costs-ytd"><div class="period-label">Year to Date</div><p style="padding:24px;color:#aaa;font-style:italic;">No marketing cost data available. Create a Google Sheet titled <strong>Marketing Cost for Dashboard</strong> with columns: Source, Cost Per Lead, Total Monthly Budget. Then run the pipeline once interactively to authorize Google Sheets access.</p></div>
 </div>
 
 
