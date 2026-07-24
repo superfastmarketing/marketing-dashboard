@@ -478,15 +478,12 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="table-note">Appointment Statistics by Product. Appointment dates Jul 12 – Jul 18, 2026.</div>
       <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
       <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
-<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>3</td><td>3</td><td class="g">100.0%</td><td>2</td><td class="w">66.7%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
-<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>3</td><td>3</td><td class="g">100.0%</td><td>2</td><td class="w">66.7%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr><td colspan="10" style="text-align:center;color:#aaa;font-style:italic;padding:14px;">No appointments this period</td></tr>
 <tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
-<tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>6</td><td>4</td><td class="w">66.7%</td><td>2</td><td class="b">33.3%</td><td>1</td><td class="b">50.0%</td><td>$23,850</td></tr>
-<tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>4</td><td>4</td><td class="g">100.0%</td><td>3</td><td class="w">75.0%</td><td>1</td><td class="b">33.3%</td><td>$17,278</td></tr>
-<tr class="grp-bathrooms"><td>&nbsp;&nbsp;Bathrooms Total</td><td></td><td>10</td><td>8</td><td class="g">80.0%</td><td>5</td><td class="b">50.0%</td><td>2</td><td>40.0%</td><td>$41,127</td></tr>
+<tr><td colspan="10" style="text-align:center;color:#aaa;font-style:italic;padding:14px;">No appointments this period</td></tr>
 <tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
 <tr><td colspan="10" style="text-align:center;color:#aaa;font-style:italic;padding:14px;">No appointments this period</td></tr>
-<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>14</td><td>12</td><td>85.7%</td><td>8</td><td>57.1%</td><td>2</td><td>25.0%</td><td>$41,127</td></tr></tbody></table>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>—</td><td>$0</td></tr></tbody></table>
     </div>
   </div>
   <div class="period-section" id="prod-pm">
@@ -1200,10 +1197,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="chart-title">Appointment Statistics by Product — Prior Week</div>
       <div class="table-note">Appt dates Jul 12 – Jul 18, 2026.</div>
       <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
-      <tbody><tr><td>Full Bathroom (FB)</td><td>6</td><td>1</td><td>—</td></tr>
-<tr><td>Full Kitchen (FK)</td><td>5</td><td>0</td><td>—</td></tr>
-<tr><td>Wet Area (WA)</td><td>5</td><td>1</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>17</td><td>2</td><td>$0</td></tr></tbody></table>
+      <tbody><tr class="gtot"><td>TOTAL</td><td>0</td><td>0</td><td>$0</td></tr></tbody></table>
     </div>
   </div>
   <div class="period-section" id="cc-pm">
@@ -2183,7 +2177,7 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
   });
 })();
 pie('cc-pw-setter-pie',['Messano, Angela','Mestas, Jazmin','Robertson, Kelly','Robinson, Teresa'],[14,1,1,1]);
-pie('cc-pw-product-pie',['FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)'],[6,5,5]);
+pie('cc-pw-product-pie',[],[]);
 pie('cc-pm-setter-pie',['Bates, Austin','Messano, Angela','Mestas, Jazmin','Robertson, Kelly','Robinson, Teresa','Trombley, Andrew'],[13,33,1,2,2,5]);
 pie('cc-pm-product-pie',['CAB (Cabinets)','FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)','WAIT (Walk-in Tub)','WINDR (Windows & Doors)'],[1,31,12,6,5,2]);
 pie('cc-mtd-setter-pie',['Bates, Austin','Koerner, Jesse','Messano, Angela','Mestas, Jazmin','Robertson, Kelly','Robinson, Teresa'],[1,1,42,2,2,4]);
