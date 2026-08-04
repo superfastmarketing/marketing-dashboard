@@ -339,8 +339,6 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   </div>
 
   <div class="charts-grid">
-    <div class="chart-card"><div class="chart-title">Raw Leads by Source<span class="chart-subtitle">Marketing Sub-Source Report</span></div><div class="chart-wrap"><canvas id="ytd-leads-pie"></canvas></div></div>
-    <div class="chart-card"><div class="chart-title">Appointments Set by Source<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="ytd-set-pie"></canvas></div></div>
     <div class="chart-card full"><div class="chart-title">Conversion Funnel<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="ytd-funnel"></canvas></div></div>
   </div>
 
@@ -1814,8 +1812,6 @@ hbar('pm-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (C
 pie('mtd-leads-pie',['Event','Home Depot','Internet','Stratum Digital','Website'],[1,2,15,4,3],['#28a745','#e83e8c','#2d5a8e','#ff6b35','#17a2b8']);
 pie('mtd-set-pie',['Event','Home Depot','Internet','Website'],[1,2,1,1],['#28a745','#e83e8c','#2d5a8e','#17a2b8']);
 hbar('mtd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[25,5,4,2,1,0],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
-pie('ytd-leads-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Home Depot','Internet','ReLove','Store Booth','Stratum Digital','Sweepstakes','Unknown','Website'],[10,3,9,285,111,24,607,3,10,28,31,2,38],['#20c997','#6f42c1','#dc3545','#28a745','#4da6ff','#e83e8c','#2d5a8e','#ff6b35','#ffc107','#7b2d8b','#fd7e14','#adb5bd','#17a2b8']);
-pie('ytd-set-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Home Depot','Internet','ReLove','Store Booth','Stratum Digital','Sweepstakes','Website'],[11,2,7,142,5,13,145,3,4,4,1,12],['#20c997','#6f42c1','#dc3545','#28a745','#4da6ff','#e83e8c','#2d5a8e','#ff6b35','#ffc107','#7b2d8b','#fd7e14','#17a2b8']);
 hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[1161,349,300,243,210,44],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
 
 (function(){
