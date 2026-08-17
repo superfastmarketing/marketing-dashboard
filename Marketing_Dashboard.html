@@ -121,8 +121,10 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   <div class="tab active" onclick="showTab('pw',this)">Prior Week</div>
   <div class="tab" onclick="showTab('pm',this)">Prior Month</div>
   <div class="tab" onclick="showTab('mtd',this)">Month to Date</div>
+  <div class="tab" onclick="showTab('l30',this)">Last 30 Days</div>
   <div class="tab" onclick="showTab('ytd',this)">Year to Date</div>
   <div class="tab" onclick="showTab('products',this)">Products</div>
+  <div class="tab" onclick="showTab('sales',this)">💵 Sales</div>
   <div class="tab" onclick="showTab('salesreps',this)">📞 Setters</div>
   <div class="tab" onclick="showTab('callcenter',this)">Call Center</div>
   <div class="tab" onclick="showTab('promoter',this)">🏆 Promoter Bonus</div>
@@ -279,12 +281,12 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   <div class="kpi-grid">
     <div class="kpi-card"><div class="kpi-source">Marketing Report</div><div class="kpi-label">Total Raw Leads</div><div class="kpi-value">126</div><div class="kpi-sub">Leads received this period</div></div>
     <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">46</div><div class="kpi-sub">Appt date August 1 – 17, 2026</div></div>
-    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">19</div><div class="kpi-sub">76.0% of net issued</div></div>
-    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">$94,455</div><div class="kpi-sub">5 sales &nbsp;·&nbsp; $18,891 avg sale</div></div>
-    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">82.6%</div><div class="kpi-sub">38 issued / 46 set</div></div>
-    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">76.0%</div><div class="kpi-sub">19 demos / 25 net issued</div></div>
-    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">26.3%</div><div class="kpi-sub">5 sales / 19 demos</div></div>
-    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">17.4%</div><div class="kpi-sub">8 dropped / 46 set</div></div>
+    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">20</div><div class="kpi-sub">76.9% of net issued</div></div>
+    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">$94,955</div><div class="kpi-sub">6 sales &nbsp;·&nbsp; $15,826 avg sale</div></div>
+    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">84.8%</div><div class="kpi-sub">39 issued / 46 set</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">76.9%</div><div class="kpi-sub">20 demos / 26 net issued</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">30.0%</div><div class="kpi-sub">6 sales / 20 demos</div></div>
+    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">15.2%</div><div class="kpi-sub">7 dropped / 46 set</div></div>
   </div>
 
   <div class="charts-grid">
@@ -327,9 +329,9 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr><td>&nbsp;&nbsp;Referral Program</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
 <tr class="grp"><td>&nbsp;&nbsp;Stratum Digital Total</td><td class="mc">22</td><td>3</td><td>3</td><td>100.0%</td><td>3</td><td>2</td><td>66.7%</td><td>1</td><td>50.0%</td><td>0</td><td>$500</td></tr>
 <tr class="div-row"><td colspan="12">WEBSITE</td></tr>
-<tr><td>&nbsp;&nbsp;Google Search</td><td class="mc">2</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Google Search</td><td class="mc">2</td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>1</td><td class="b">50.0%</td><td>0</td><td>$500</td></tr>
 <tr><td>&nbsp;&nbsp;Vision Board</td><td class="mc">7</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
-<tr class="grp"><td>&nbsp;&nbsp;Website Total</td><td class="mc">9</td><td>3</td><td>1</td><td>33.3%</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0.0%</td><td>2</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Website Total</td><td class="mc">9</td><td>3</td><td>2</td><td>66.7%</td><td>2</td><td>2</td><td>100.0%</td><td>1</td><td>50.0%</td><td>1</td><td>$500</td></tr>
 <tr class="div-row"><td colspan="12">EMPREFERRAL (no raw leads this period)</td></tr>
 <tr><td>&nbsp;&nbsp;Teresa</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
 <tr class="grp"><td>&nbsp;&nbsp;EmpReferral Total</td><td class="mc">—</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0.0%</td><td>0</td><td>$0</td></tr>
@@ -340,7 +342,84 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr class="div-row"><td colspan="12">STRATUM DIGITAL (no raw leads this period)</td></tr>
 <tr><td>&nbsp;&nbsp;Google LSA</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
 <tr class="grp"><td>&nbsp;&nbsp;Stratum Digital Total</td><td class="mc">—</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
-<tr class="gtot"><td>GRAND TOTAL</td><td>126</td><td>46</td><td>38</td><td>82.6%</td><td>25</td><td>19</td><td>76.0%</td><td>5</td><td>26.3%</td><td>8</td><td>$94,455</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td>126</td><td>46</td><td>39</td><td>84.8%</td><td>26</td><td>20</td><td>76.9%</td><td>6</td><td>30.0%</td><td>7</td><td>$94,955</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ===== LAST 30 DAYS ===== -->
+<div class="section" id="l30">
+  <div class="period-label">Last 30 Days &nbsp;•&nbsp; Jul 19 – Aug 17, 2026</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-source">Marketing Report</div><div class="kpi-label">Total Raw Leads</div><div class="kpi-value">227</div><div class="kpi-sub">Leads received this period</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">78</div><div class="kpi-sub">Appt date Jul 19 – Aug 17, 2026</div></div>
+    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">36</div><div class="kpi-sub">78.3% of net issued</div></div>
+    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">$138,438</div><div class="kpi-sub">10 sales &nbsp;·&nbsp; $13,844 avg sale</div></div>
+    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">83.3%</div><div class="kpi-sub">65 issued / 78 set</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">78.3%</div><div class="kpi-sub">36 demos / 46 net issued</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">27.8%</div><div class="kpi-sub">10 sales / 36 demos</div></div>
+    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">16.7%</div><div class="kpi-sub">13 dropped / 78 set</div></div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card"><div class="chart-title">Raw Leads by Source<span class="chart-subtitle">Marketing Sub-Source Report</span></div><div class="chart-wrap"><canvas id="l30-leads-pie"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">Appointments Set by Source<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="l30-set-pie"></canvas></div></div>
+    <div class="chart-card full"><div class="chart-title">Conversion Funnel<span class="chart-subtitle">Call Center Report</span></div><div class="chart-wrap"><canvas id="l30-funnel"></canvas></div></div>
+  </div>
+
+  <div class="table-card">
+    <div class="chart-title">Last 30 Days Results by Sub-Source</div>
+    <div class="table-note">Raw = Marketing Sub-Source Report. Set / Issue / Demo / Sales = Call Center Appointment Statistics (Jul 19 – Aug 17, 2026). Demo Rate = Demos ÷ Net Issue.</div>
+    <table><thead><tr><th>Sub-Source</th><th class="src-col">Raw*</th><th>Set</th><th>Gross Issue</th><th>Issue Rate</th><th>Net Issue</th><th>Demo</th><th>Demo Rate</th><th>Sales</th><th>Close %</th><th>Drop</th><th>Gross $</th></tr></thead>
+    <tbody>
+<tr class="div-row"><td colspan="12">EMPREFERRAL</td></tr>
+<tr><td>&nbsp;&nbsp;Lindsay</td><td class="mc">1</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Teresa</td><td class="mc">1</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;ZZZ--New--</td><td class="mc">2</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;EmpReferral Total</td><td class="mc">4</td><td>3</td><td>3</td><td>100.0%</td><td>3</td><td>3</td><td>100.0%</td><td>0</td><td>0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">EVENT</td></tr>
+<tr><td>&nbsp;&nbsp;Cross Orchard Farmers Markets</td><td class="mc">4</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Fruita Farmers Markets</td><td class="mc">3</td><td>5</td><td>3</td><td class="w">60.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Mesa County Fair 2026</td><td class="mc">2</td><td>2</td><td>2</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose FUNC Fest</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Event Total</td><td class="mc">10</td><td>8</td><td>6</td><td>75.0%</td><td>3</td><td>2</td><td>66.7%</td><td>0</td><td>0.0%</td><td>2</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">HOME DEPOT</td></tr>
+<tr><td>&nbsp;&nbsp;Grand Junction 1513</td><td class="mc">29</td><td>22</td><td>20</td><td class="g">90.9%</td><td>15</td><td>11</td><td class="w">73.3%</td><td>5</td><td class="b">45.5%</td><td>2</td><td>$91,152</td></tr>
+<tr><td>&nbsp;&nbsp;Montrose 1537</td><td class="mc">4</td><td>3</td><td>3</td><td class="g">100.0%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Home Depot Total</td><td class="mc">33</td><td>25</td><td>23</td><td>92.0%</td><td>17</td><td>13</td><td>76.5%</td><td>5</td><td>38.5%</td><td>2</td><td>$91,152</td></tr>
+<tr class="div-row"><td colspan="12">INTERNET</td></tr>
+<tr><td>&nbsp;&nbsp;Contractor Appointments</td><td class="mc">50</td><td>2</td><td>2</td><td class="g">100.0%</td><td>2</td><td>1</td><td class="b">50.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Google</td><td class="mc">11</td><td>11</td><td>9</td><td class="g">81.8%</td><td>7</td><td>6</td><td class="g">85.7%</td><td>1</td><td class="b">16.7%</td><td>2</td><td>$500</td></tr>
+<tr><td>&nbsp;&nbsp;HomeBuddy</td><td class="mc">32</td><td>4</td><td>4</td><td class="g">100.0%</td><td>2</td><td>2</td><td class="g">100.0%</td><td>1</td><td class="b">50.0%</td><td>0</td><td>$22,421</td></tr>
+<tr><td>&nbsp;&nbsp;NCT Media</td><td class="mc">9</td><td>2</td><td>0</td><td class="b">0.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>2</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Networx</td><td class="mc">13</td><td>4</td><td>3</td><td class="w">75.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Stratum Digital</td><td class="mc">4</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Website</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Yelp</td><td class="mc">2</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Internet Total</td><td class="mc">122</td><td>23</td><td>18</td><td>78.3%</td><td>12</td><td>10</td><td>83.3%</td><td>2</td><td>20.0%</td><td>5</td><td>$22,921</td></tr>
+<tr class="div-row"><td colspan="12">RELOVE</td></tr>
+<tr><td>&nbsp;&nbsp;ReLove</td><td class="mc">2</td><td>2</td><td>2</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;ReLove Total</td><td class="mc">2</td><td>2</td><td>2</td><td>100.0%</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0.0%</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">STRATUM DIGITAL</td></tr>
+<tr><td>&nbsp;&nbsp;Google LSA</td><td class="mc">1</td><td>2</td><td>2</td><td class="g">100.0%</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Meta</td><td class="mc">15</td><td>4</td><td>3</td><td class="w">75.0%</td><td>3</td><td>2</td><td class="w">66.7%</td><td>1</td><td class="b">50.0%</td><td>1</td><td>$500</td></tr>
+<tr><td>&nbsp;&nbsp;Other</td><td class="mc">23</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
+<tr><td>&nbsp;&nbsp;Referral Program</td><td class="mc">2</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Stratum Digital Total</td><td class="mc">41</td><td>7</td><td>5</td><td>71.4%</td><td>4</td><td>2</td><td>50.0%</td><td>1</td><td>50.0%</td><td>2</td><td>$500</td></tr>
+<tr class="div-row"><td colspan="12">UNKNOWN</td></tr>
+<tr><td>&nbsp;&nbsp;Unknown</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Unknown Total</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">WEBSITE</td></tr>
+<tr><td>&nbsp;&nbsp;Google Search</td><td class="mc">5</td><td>4</td><td>4</td><td class="g">100.0%</td><td>4</td><td>4</td><td class="g">100.0%</td><td>1</td><td class="b">25.0%</td><td>0</td><td>$500</td></tr>
+<tr><td>&nbsp;&nbsp;Vision Board</td><td class="mc">9</td><td>3</td><td>2</td><td class="w">66.7%</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td class="g">100.0%</td><td>1</td><td>$23,366</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Website Total</td><td class="mc">14</td><td>7</td><td>6</td><td>85.7%</td><td>6</td><td>5</td><td>83.3%</td><td>2</td><td>40.0%</td><td>1</td><td>$23,866</td></tr>
+<tr class="div-row"><td colspan="12">EVENT (no raw leads this period)</td></tr>
+<tr><td>&nbsp;&nbsp;Lavender Festival 2026</td><td class="mc">—</td><td>2</td><td>1</td><td class="b">50.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Event Total</td><td class="mc">—</td><td>2</td><td>1</td><td>50.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
+<tr class="div-row"><td colspan="12">STRATUM DIGITAL (no raw leads this period)</td></tr>
+<tr><td>&nbsp;&nbsp;Organic Social</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Stratum Digital Total</td><td class="mc">—</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td>227</td><td>78</td><td>65</td><td>83.3%</td><td>46</td><td>36</td><td>78.3%</td><td>10</td><td>27.8%</td><td>13</td><td>$138,438</td></tr>
     </tbody></table>
   </div>
 </div>
@@ -351,12 +430,12 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   <div class="kpi-grid">
     <div class="kpi-card"><div class="kpi-source">Marketing Report</div><div class="kpi-label">Total Raw Leads</div><div class="kpi-value">1262</div><div class="kpi-sub">Leads received this period</div></div>
     <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">390</div><div class="kpi-sub">Appt date January 1 – August 17, 2026</div></div>
-    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">230</div><div class="kpi-sub">85.5% of net issued</div></div>
-    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">$1,431,219</div><div class="kpi-sub">49 sales &nbsp;·&nbsp; $29,209 avg sale</div></div>
-    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">86.4%</div><div class="kpi-sub">337 issued / 390 set</div></div>
-    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">85.5%</div><div class="kpi-sub">230 demos / 269 net issued</div></div>
-    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">21.3%</div><div class="kpi-sub">49 sales / 230 demos</div></div>
-    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">13.6%</div><div class="kpi-sub">53 dropped / 390 set</div></div>
+    <div class="kpi-card orange"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demos Run</div><div class="kpi-value">231</div><div class="kpi-sub">85.6% of net issued</div></div>
+    <div class="kpi-card purple"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Sales</div><div class="kpi-value">$1,431,719</div><div class="kpi-sub">50 sales &nbsp;·&nbsp; $28,634 avg sale</div></div>
+    <div class="kpi-card teal"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">86.7%</div><div class="kpi-sub">338 issued / 390 set</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">85.6%</div><div class="kpi-sub">231 demos / 270 net issued</div></div>
+    <div class="kpi-card green"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Gross Close %</div><div class="kpi-value">21.6%</div><div class="kpi-sub">50 sales / 231 demos</div></div>
+    <div class="kpi-card"><div class="kpi-source">Call Center Report</div><div class="kpi-label">Drop Rate</div><div class="kpi-value">13.3%</div><div class="kpi-sub">52 dropped / 390 set</div></div>
   </div>
 
   <div class="charts-grid">
@@ -457,17 +536,17 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr><td>&nbsp;&nbsp;Unknown</td><td class="mc">2</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
 <tr class="grp"><td>&nbsp;&nbsp;Unknown Total</td><td class="mc">2</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
 <tr class="div-row"><td colspan="12">WEBSITE</td></tr>
-<tr><td>&nbsp;&nbsp;Google Search</td><td class="mc">10</td><td>9</td><td>8</td><td class="g">88.9%</td><td>7</td><td>7</td><td class="g">100.0%</td><td>1</td><td class="b">14.3%</td><td>1</td><td>$500</td></tr>
+<tr><td>&nbsp;&nbsp;Google Search</td><td class="mc">10</td><td>9</td><td>9</td><td class="g">100.0%</td><td>8</td><td>8</td><td class="g">100.0%</td><td>2</td><td class="b">25.0%</td><td>0</td><td>$1,000</td></tr>
 <tr><td>&nbsp;&nbsp;Meta</td><td class="mc">2</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
 <tr><td>&nbsp;&nbsp;Other</td><td class="mc">13</td><td>1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>1</td><td>$0</td></tr>
 <tr><td>&nbsp;&nbsp;Referral Program</td><td class="mc">1</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>0</td><td>$0</td></tr>
 <tr><td>&nbsp;&nbsp;SEO</td><td class="mc">1</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
 <tr><td>&nbsp;&nbsp;Vision Board</td><td class="mc">17</td><td>3</td><td>2</td><td class="w">66.7%</td><td>2</td><td>1</td><td class="b">50.0%</td><td>1</td><td class="g">100.0%</td><td>1</td><td>$23,366</td></tr>
-<tr class="grp"><td>&nbsp;&nbsp;Website Total</td><td class="mc">44</td><td>15</td><td>12</td><td>80.0%</td><td>11</td><td>10</td><td>90.9%</td><td>2</td><td>20.0%</td><td>3</td><td>$23,866</td></tr>
+<tr class="grp"><td>&nbsp;&nbsp;Website Total</td><td class="mc">44</td><td>15</td><td>13</td><td>86.7%</td><td>12</td><td>11</td><td>91.7%</td><td>3</td><td>27.3%</td><td>2</td><td>$24,366</td></tr>
 <tr class="div-row"><td colspan="12">OTHER (no raw leads this period)</td></tr>
 <tr><td>&nbsp;&nbsp;Moose Lodge Craft Fair</td><td class="mc">—</td><td>1</td><td>1</td><td class="g">100.0%</td><td>1</td><td>1</td><td class="g">100.0%</td><td>0</td><td class="b">0.0%</td><td>0</td><td>$0</td></tr>
 <tr class="grp"><td>&nbsp;&nbsp;Other Total</td><td class="mc">—</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0.0%</td><td>0</td><td>$0</td></tr>
-<tr class="gtot"><td>GRAND TOTAL</td><td>1262</td><td>390</td><td>337</td><td>86.4%</td><td>269</td><td>230</td><td>85.5%</td><td>49</td><td>21.3%</td><td>53</td><td>$1,431,219</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td>1262</td><td>390</td><td>338</td><td>86.7%</td><td>270</td><td>231</td><td>85.6%</td><td>50</td><td>21.6%</td><td>52</td><td>$1,431,719</td></tr>
     </tbody></table>
   </div>
 </div>
@@ -476,7 +555,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <!-- ===== PRODUCTS ===== -->
 <div class="section" id="products">
   <div class="period-label">Product Performance &nbsp;•&nbsp; Appointment Statistics by Product</div>
-  <div class="period-toggle"><button class="ptab" onclick="showPeriod('products','prod-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('products','prod-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('products','prod-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('products','prod-ytd',this)">Year to Date</button></div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('products','prod-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('products','prod-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('products','prod-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('products','prod-l30',this)">Last 30 Days</button> <button class="ptab active" onclick="showPeriod('products','prod-ytd',this)">Year to Date</button></div>
 
   <div class="period-section" id="prod-pw">
     <div class="period-label">Prior Week &nbsp;•&nbsp; Aug 9 – Aug 15, 2026</div>
@@ -523,8 +602,8 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="table-note">Appointment Statistics by Product. Appointment dates August 1 – 17, 2026. Demo % = Demos ÷ Net Issued.</div>
       <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
       <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
-<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>7</td><td>5</td><td class="w">71.4%</td><td>4</td><td class="g">80.0%</td><td>1</td><td class="b">25.0%</td><td>$500</td></tr>
-<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>7</td><td>5</td><td class="w">71.4%</td><td>4</td><td class="g">80.0%</td><td>1</td><td>25.0%</td><td>$500</td></tr>
+<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>8</td><td>6</td><td class="w">75.0%</td><td>5</td><td class="g">83.3%</td><td>2</td><td class="b">40.0%</td><td>$1,000</td></tr>
+<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>8</td><td>6</td><td class="w">75.0%</td><td>5</td><td class="g">83.3%</td><td>2</td><td>40.0%</td><td>$1,000</td></tr>
 <tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
 <tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>20</td><td>13</td><td class="w">65.0%</td><td>9</td><td class="w">69.2%</td><td>3</td><td class="b">33.3%</td><td>$73,543</td></tr>
 <tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>6</td><td>5</td><td class="g">83.3%</td><td>4</td><td class="g">80.0%</td><td>1</td><td class="b">25.0%</td><td>$20,412</td></tr>
@@ -532,7 +611,26 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr class="grp-bathrooms"><td>&nbsp;&nbsp;Bathrooms Total</td><td></td><td>31</td><td>20</td><td class="w">64.5%</td><td>15</td><td class="w">75.0%</td><td>4</td><td>26.7%</td><td>$93,955</td></tr>
 <tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
 <tr><td colspan="10" style="text-align:center;color:#aaa;font-style:italic;padding:14px;">No appointments this period</td></tr>
-<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>38</td><td>25</td><td>65.8%</td><td>19</td><td>76.0%</td><td>5</td><td>26.3%</td><td>$94,455</td></tr></tbody></table>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>39</td><td>26</td><td>66.7%</td><td>20</td><td>76.9%</td><td>6</td><td>30.0%</td><td>$94,955</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="prod-l30">
+    <div class="period-label">Last 30 Days &nbsp;•&nbsp; Jul 19 – Aug 17, 2026</div>
+    <div class="table-card">
+      <div class="chart-title">Product Performance — Last 30 Days</div>
+      <div class="table-note">Appointment Statistics by Product. Appointment dates Jul 19 – Aug 17, 2026. Demo % = Demos ÷ Net Issued.</div>
+      <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
+      <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
+<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>14</td><td>10</td><td class="w">71.4%</td><td>9</td><td class="g">90.0%</td><td>3</td><td class="b">33.3%</td><td>$1,500</td></tr>
+<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>14</td><td>10</td><td class="w">71.4%</td><td>9</td><td class="g">90.0%</td><td>3</td><td>33.3%</td><td>$1,500</td></tr>
+<tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
+<tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>28</td><td>19</td><td class="w">67.9%</td><td>13</td><td class="w">68.4%</td><td>4</td><td class="b">30.8%</td><td>$96,909</td></tr>
+<tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>18</td><td>15</td><td class="g">83.3%</td><td>12</td><td class="g">80.0%</td><td>3</td><td class="b">25.0%</td><td>$40,029</td></tr>
+<tr><td>&nbsp;&nbsp;WAIT</td><td>Walk-in Tub</td><td>5</td><td>2</td><td class="b">40.0%</td><td>2</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
+<tr class="grp-bathrooms"><td>&nbsp;&nbsp;Bathrooms Total</td><td></td><td>51</td><td>36</td><td class="w">70.6%</td><td>27</td><td class="w">75.0%</td><td>7</td><td>25.9%</td><td>$136,938</td></tr>
+<tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
+<tr><td colspan="10" style="text-align:center;color:#aaa;font-style:italic;padding:14px;">No appointments this period</td></tr>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>65</td><td>46</td><td>70.8%</td><td>36</td><td>78.3%</td><td>10</td><td>27.8%</td><td>$138,438</td></tr></tbody></table>
     </div>
   </div>
   <div class="period-section active" id="prod-ytd">
@@ -543,8 +641,8 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <table><thead><tr><th>Product</th><th>Description</th><th>Issued</th><th>Net Iss</th><th>Net Iss %</th><th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th><th>Gross $</th></tr></thead>
       <tbody><tr class="div-kitchens"><td colspan="10">KITCHENS — CAB (Cabinets) + FK (Full Kitchen)</td></tr>
 <tr><td>&nbsp;&nbsp;CAB</td><td>Cabinets</td><td>22</td><td>18</td><td class="g">81.8%</td><td>17</td><td class="g">94.4%</td><td>4</td><td class="b">23.5%</td><td>$50,200</td></tr>
-<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>71</td><td>58</td><td class="g">81.7%</td><td>52</td><td class="g">89.7%</td><td>13</td><td class="b">25.0%</td><td>$717,920</td></tr>
-<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>93</td><td>76</td><td class="g">81.7%</td><td>69</td><td class="g">90.8%</td><td>17</td><td>24.6%</td><td>$768,120</td></tr>
+<tr><td>&nbsp;&nbsp;FK</td><td>Full Kitchen</td><td>72</td><td>59</td><td class="g">81.9%</td><td>53</td><td class="g">89.8%</td><td>14</td><td class="b">26.4%</td><td>$718,420</td></tr>
+<tr class="grp-kitchens"><td>&nbsp;&nbsp;Kitchens Total</td><td></td><td>94</td><td>77</td><td class="g">81.9%</td><td>70</td><td class="g">90.9%</td><td>18</td><td>25.7%</td><td>$768,620</td></tr>
 <tr class="div-bathrooms"><td colspan="10">BATHROOMS — FB (Full Bath) + WA (Wet Area) + WAIT (Walk-in Tub)</td></tr>
 <tr><td>&nbsp;&nbsp;FB</td><td>Full Bathroom</td><td>138</td><td>106</td><td class="w">76.8%</td><td>87</td><td class="g">82.1%</td><td>18</td><td class="b">20.7%</td><td>$425,620</td></tr>
 <tr><td>&nbsp;&nbsp;WA</td><td>Wet Area</td><td>89</td><td>74</td><td class="g">83.1%</td><td>62</td><td class="g">83.8%</td><td>14</td><td class="b">22.6%</td><td>$237,480</td></tr>
@@ -553,7 +651,526 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr class="div-windows"><td colspan="10">WINDOWS &amp; DOORS — WINDR</td></tr>
 <tr><td>&nbsp;&nbsp;WINDR</td><td>Windows & Doors</td><td>4</td><td>4</td><td class="g">100.0%</td><td>3</td><td class="w">75.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
 <tr class="grp-windows"><td>&nbsp;&nbsp;W&amp;D Total</td><td></td><td>4</td><td>4</td><td class="g">100.0%</td><td>3</td><td class="w">75.0%</td><td>0</td><td>0.0%</td><td>$0</td></tr>
-<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>337</td><td>269</td><td>79.8%</td><td>230</td><td>85.5%</td><td>49</td><td>21.3%</td><td>$1,431,219</td></tr></tbody></table>
+<tr class="gtot"><td>GRAND TOTAL</td><td></td><td>338</td><td>270</td><td>79.9%</td><td>231</td><td>85.6%</td><td>50</td><td>21.6%</td><td>$1,431,719</td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== SALES ===== -->
+<div class="section" id="sales">
+  <div class="period-label">Sales Performance &nbsp;•&nbsp; Appointment Statistics by Sales Rep</div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('sales','sales-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('sales','sales-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('sales','sales-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('sales','sales-l30',this)">Last 30 Days</button> <button class="ptab active" onclick="showPeriod('sales','sales-ytd',this)">Year to Date</button></div>
+
+  <div class="period-section" id="sales-pw">
+    <div class="period-label">Prior Week &nbsp;•&nbsp; Aug 9 – Aug 15, 2026</div>
+    
+    <div class="kpi-grid"><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Leads Issued</div><div class="kpi-value">22</div><div class="kpi-sub">3 active reps</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Issued</div><div class="kpi-value">14</div><div class="kpi-sub">63.6% of issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demos Run</div><div class="kpi-value">11</div><div class="kpi-sub">3 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demo %</div><div class="kpi-value">78.6%</div><div class="kpi-sub">11 demos / 14 net issued</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Close %</div><div class="kpi-value">27.3%</div><div class="kpi-sub">3 sales / 11 demos</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Average Sale</div><div class="kpi-value">$20,704</div><div class="kpi-sub">Gross ÷ 3 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Gross Sales Volume</div><div class="kpi-value">$62,113</div><div class="kpi-sub">Written business</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Sales Volume</div><div class="kpi-value">$39,692</div><div class="kpi-sub">After cancels &amp; declines</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">NSLI</div><div class="kpi-value">$1,804</div><div class="kpi-sub">Net volume ÷ leads issued</div></div><div class="kpi-card orange"><div class="kpi-source">Sales Efficiency by Source</div><div class="kpi-label">Referral Appts</div><div class="kpi-value">—</div><div class="kpi-sub">Not tracked for this period</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % and Close % by Sales Rep
+          <span class="chart-subtitle">Demo % = demos ÷ net issued &nbsp;·&nbsp; Close % = sales ÷ demos</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-conv-pw"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Sales Volume by Rep
+          <span class="chart-subtitle">Gross written vs. net of cancels and credit declines</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-vol-pw"></canvas></div>
+      </div>
+      
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Robertson, Kelly</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">9</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">8</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">75.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">33.3%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$19,846</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $39,692 &nbsp;|&nbsp; NSLI: $4,410 &nbsp;|&nbsp; Referrals: —</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Coleman, Maggie</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">100.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">20.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$22,421</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: —</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Koerner, Jesse</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">—</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">—</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: —</div>
+    </div></div>
+
+    <div class="table-card">
+      <div class="chart-title">Sales Rep Performance — Prior Week</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Sales Rep. Appointment dates Aug 9 – Aug 15, 2026. Sorted by net volume.<br>
+        Demo % = Demos ÷ Net Issued. Close % = Sales ÷ Demos. Avg Sale = Gross volume ÷ Sales.
+        NSLI = Net sales volume ÷ Leads issued (LP's definition on the Sales Efficiency report;
+        the Setters tab uses gross ÷ issued instead).<br>
+        Referral columns are blank here on purpose: the per-rep Sales Efficiency by Source reports are only pulled for Month to Date, Last 30 Days, Year to Date, since each period costs one extra download per sales rep.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Sales Rep</th><th>Leads Issued</th><th>Net Issued</th>
+          <th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th>
+          <th>Cust Ref</th><th>Emp Ref</th><th>Ref Total</th>
+          <th>Avg Sale</th><th>Gross Volume</th><th>Net Volume</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Robertson, Kelly</td><td>9</td><td class="ni-cell">8</td><td>6</td><td class="w">75.0%</td><td>2</td><td>33.3%</td><td>—</td><td>—</td><td>—</td><td>$19,846</td><td>$39,692</td><td>$39,692</td><td>$4,410</td></tr>
+<tr><td>Coleman, Maggie</td><td>7</td><td class="ni-cell">5</td><td>5</td><td class="g">100.0%</td><td>1</td><td>20.0%</td><td>—</td><td>—</td><td>—</td><td>$22,421</td><td>$22,421</td><td>$0</td><td>$0</td></tr>
+<tr><td>Koerner, Jesse</td><td>1</td><td class="ni-cell">1</td><td>0</td><td class="b">0.0%</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(SalesRep Unknown)</td><td>5</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>22</td><td>14</td><td>11</td><td>78.6%</td><td>3</td><td>27.3%</td><td>—</td><td>—</td><td>—</td><td>$20,704</td><td>$62,113</td><td>$39,692</td><td>$1,804</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="period-section" id="sales-pm">
+    <div class="period-label">Prior Month &nbsp;•&nbsp; July 1 – 31, 2026</div>
+    
+    <div class="kpi-grid"><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Leads Issued</div><div class="kpi-value">62</div><div class="kpi-sub">4 active reps</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Issued</div><div class="kpi-value">49</div><div class="kpi-sub">79.0% of issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demos Run</div><div class="kpi-value">40</div><div class="kpi-sub">9 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demo %</div><div class="kpi-value">81.6%</div><div class="kpi-sub">40 demos / 49 net issued</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Close %</div><div class="kpi-value">22.5%</div><div class="kpi-sub">9 sales / 40 demos</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Average Sale</div><div class="kpi-value">$13,111</div><div class="kpi-sub">Gross ÷ 9 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Gross Sales Volume</div><div class="kpi-value">$118,001</div><div class="kpi-sub">Written business</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Sales Volume</div><div class="kpi-value">$141,237</div><div class="kpi-sub">After cancels &amp; declines</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">NSLI</div><div class="kpi-value">$2,278</div><div class="kpi-sub">Net volume ÷ leads issued</div></div><div class="kpi-card orange"><div class="kpi-source">Sales Efficiency by Source</div><div class="kpi-label">Referral Appts</div><div class="kpi-value">—</div><div class="kpi-sub">Not tracked for this period</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % and Close % by Sales Rep
+          <span class="chart-subtitle">Demo % = demos ÷ net issued &nbsp;·&nbsp; Close % = sales ÷ demos</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-conv-pm"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Sales Volume by Rep
+          <span class="chart-subtitle">Gross written vs. net of cancels and credit declines</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-vol-pm"></canvas></div>
+      </div>
+      
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Maldonado, Brent</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">24</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">21</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">66.7%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">28.6%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$14,310</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $99,594 &nbsp;|&nbsp; NSLI: $4,150 &nbsp;|&nbsp; Referrals: —</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Coleman, Maggie</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">15</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">14</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">92.9%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">15.4%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$11,933</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $23,866 &nbsp;|&nbsp; NSLI: $1,591 &nbsp;|&nbsp; Referrals: —</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Robertson, Kelly</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">14</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">13</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">92.3%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">25.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$12,298</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $17,778 &nbsp;|&nbsp; NSLI: $1,270 &nbsp;|&nbsp; Referrals: —</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Abeyta, Rayden</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">100.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">—</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: —</div>
+    </div></div>
+
+    <div class="table-card">
+      <div class="chart-title">Sales Rep Performance — Prior Month</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Sales Rep. Appointment dates July 1 – 31, 2026. Sorted by net volume.<br>
+        Demo % = Demos ÷ Net Issued. Close % = Sales ÷ Demos. Avg Sale = Gross volume ÷ Sales.
+        NSLI = Net sales volume ÷ Leads issued (LP's definition on the Sales Efficiency report;
+        the Setters tab uses gross ÷ issued instead).<br>
+        Referral columns are blank here on purpose: the per-rep Sales Efficiency by Source reports are only pulled for Month to Date, Last 30 Days, Year to Date, since each period costs one extra download per sales rep.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Sales Rep</th><th>Leads Issued</th><th>Net Issued</th>
+          <th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th>
+          <th>Cust Ref</th><th>Emp Ref</th><th>Ref Total</th>
+          <th>Avg Sale</th><th>Gross Volume</th><th>Net Volume</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Maldonado, Brent</td><td>24</td><td class="ni-cell">21</td><td>14</td><td class="w">66.7%</td><td>4</td><td>28.6%</td><td>—</td><td>—</td><td>—</td><td>$14,310</td><td>$57,241</td><td>$99,594</td><td>$4,150</td></tr>
+<tr><td>Coleman, Maggie</td><td>15</td><td class="ni-cell">14</td><td>13</td><td class="g">92.9%</td><td>2</td><td>15.4%</td><td>—</td><td>—</td><td>—</td><td>$11,933</td><td>$23,866</td><td>$23,866</td><td>$1,591</td></tr>
+<tr><td>Robertson, Kelly</td><td>14</td><td class="ni-cell">13</td><td>12</td><td class="g">92.3%</td><td>3</td><td>25.0%</td><td>—</td><td>—</td><td>—</td><td>$12,298</td><td>$36,895</td><td>$17,778</td><td>$1,270</td></tr>
+<tr><td>Abeyta, Rayden</td><td>1</td><td class="ni-cell">1</td><td>1</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(SalesRep Unknown)</td><td>8</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>62</td><td>49</td><td>40</td><td>81.6%</td><td>9</td><td>22.5%</td><td>—</td><td>—</td><td>—</td><td>$13,111</td><td>$118,001</td><td>$141,237</td><td>$2,278</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="period-section" id="sales-mtd">
+    <div class="period-label">Month to Date &nbsp;•&nbsp; August 1 – 17, 2026</div>
+    
+    <div class="kpi-grid"><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Leads Issued</div><div class="kpi-value">39</div><div class="kpi-sub">4 active reps</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Issued</div><div class="kpi-value">26</div><div class="kpi-sub">66.7% of issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demos Run</div><div class="kpi-value">20</div><div class="kpi-sub">6 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demo %</div><div class="kpi-value">76.9%</div><div class="kpi-sub">20 demos / 26 net issued</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Close %</div><div class="kpi-value">30.0%</div><div class="kpi-sub">6 sales / 20 demos</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Average Sale</div><div class="kpi-value">$15,826</div><div class="kpi-sub">Gross ÷ 6 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Gross Sales Volume</div><div class="kpi-value">$94,955</div><div class="kpi-sub">Written business</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Sales Volume</div><div class="kpi-value">$40,692</div><div class="kpi-sub">After cancels &amp; declines</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">NSLI</div><div class="kpi-value">$1,043</div><div class="kpi-sub">Net volume ÷ leads issued</div></div><div class="kpi-card orange"><div class="kpi-source">Sales Efficiency by Source</div><div class="kpi-label">Referral Appts</div><div class="kpi-value">2</div><div class="kpi-sub">0 customer &nbsp;·&nbsp; 2 employee</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % and Close % by Sales Rep
+          <span class="chart-subtitle">Demo % = demos ÷ net issued &nbsp;·&nbsp; Close % = sales ÷ demos</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-conv-mtd"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Sales Volume by Rep
+          <span class="chart-subtitle">Gross written vs. net of cancels and credit declines</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-vol-mtd"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Referral Appointments by Rep
+          <span class="chart-subtitle">Issued appointments from CustRef and EmpReferral sources</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-ref-mtd"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Robertson, Kelly</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">14</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">12</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">83.3%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">50.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$14,507</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $40,692 &nbsp;|&nbsp; NSLI: $2,907 &nbsp;|&nbsp; Referrals: 0 (0 cust / 0 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Coleman, Maggie</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">100.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">20.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$22,421</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: 1 (0 cust / 1 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Koerner, Jesse</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">50.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">—</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: 0 (0 cust / 0 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Maldonado, Brent</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">8</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">57.1%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">—</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: 1 (0 cust / 1 emp)</div>
+    </div></div>
+
+    <div class="table-card">
+      <div class="chart-title">Sales Rep Performance — Month to Date</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Sales Rep. Appointment dates August 1 – 17, 2026. Sorted by net volume.<br>
+        Demo % = Demos ÷ Net Issued. Close % = Sales ÷ Demos. Avg Sale = Gross volume ÷ Sales.
+        NSLI = Net sales volume ÷ Leads issued (LP's definition on the Sales Efficiency report;
+        the Setters tab uses gross ÷ issued instead).<br>
+        Referral counts are issued appointments from the CustRef and EmpReferral sources, read from one Sales Efficiency by Source report per rep.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Sales Rep</th><th>Leads Issued</th><th>Net Issued</th>
+          <th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th>
+          <th>Cust Ref</th><th>Emp Ref</th><th>Ref Total</th>
+          <th>Avg Sale</th><th>Gross Volume</th><th>Net Volume</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Robertson, Kelly</td><td>14</td><td class="ni-cell">12</td><td>10</td><td class="g">83.3%</td><td>5</td><td>50.0%</td><td>0</td><td>0</td><td>0</td><td>$14,507</td><td>$72,535</td><td>$40,692</td><td>$2,907</td></tr>
+<tr><td>Coleman, Maggie</td><td>7</td><td class="ni-cell">5</td><td>5</td><td class="g">100.0%</td><td>1</td><td>20.0%</td><td>0</td><td>1</td><td>1</td><td>$22,421</td><td>$22,421</td><td>$0</td><td>$0</td></tr>
+<tr><td>Koerner, Jesse</td><td>2</td><td class="ni-cell">2</td><td>1</td><td class="b">50.0%</td><td>0</td><td>0.0%</td><td>0</td><td>0</td><td>0</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Maldonado, Brent</td><td>8</td><td class="ni-cell">7</td><td>4</td><td class="b">57.1%</td><td>0</td><td>0.0%</td><td>0</td><td>1</td><td>1</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(Unassigned)</td><td>1</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(SalesRep Unknown)</td><td>7</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>39</td><td>26</td><td>20</td><td>76.9%</td><td>6</td><td>30.0%</td><td>0</td><td>2</td><td>2</td><td>$15,826</td><td>$94,955</td><td>$40,692</td><td>$1,043</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="period-section" id="sales-l30">
+    <div class="period-label">Last 30 Days &nbsp;•&nbsp; Jul 19 – Aug 17, 2026</div>
+    
+    <div class="kpi-grid"><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Leads Issued</div><div class="kpi-value">65</div><div class="kpi-sub">4 active reps</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Issued</div><div class="kpi-value">46</div><div class="kpi-sub">70.8% of issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demos Run</div><div class="kpi-value">36</div><div class="kpi-sub">10 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demo %</div><div class="kpi-value">78.3%</div><div class="kpi-sub">36 demos / 46 net issued</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Close %</div><div class="kpi-value">27.8%</div><div class="kpi-sub">10 sales / 36 demos</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Average Sale</div><div class="kpi-value">$13,844</div><div class="kpi-sub">Gross ÷ 10 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Gross Sales Volume</div><div class="kpi-value">$138,438</div><div class="kpi-sub">Written business</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Sales Volume</div><div class="kpi-value">$107,661</div><div class="kpi-sub">After cancels &amp; declines</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">NSLI</div><div class="kpi-value">$1,656</div><div class="kpi-sub">Net volume ÷ leads issued</div></div><div class="kpi-card orange"><div class="kpi-source">Sales Efficiency by Source</div><div class="kpi-label">Referral Appts</div><div class="kpi-value">3</div><div class="kpi-sub">0 customer &nbsp;·&nbsp; 3 employee</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % and Close % by Sales Rep
+          <span class="chart-subtitle">Demo % = demos ÷ net issued &nbsp;·&nbsp; Close % = sales ÷ demos</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-conv-l30"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Sales Volume by Rep
+          <span class="chart-subtitle">Gross written vs. net of cancels and credit declines</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-vol-l30"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Referral Appointments by Rep
+          <span class="chart-subtitle">Issued appointments from CustRef and EmpReferral sources</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="sales-ref-l30"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Maldonado, Brent</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">20</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">16</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">62.5%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">10.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$500</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $43,103 &nbsp;|&nbsp; NSLI: $2,155 &nbsp;|&nbsp; Referrals: 2 (0 cust / 2 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Robertson, Kelly</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">21</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">18</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">83.3%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">6</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">40.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$15,275</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $40,692 &nbsp;|&nbsp; NSLI: $1,938 &nbsp;|&nbsp; Referrals: 0 (0 cust / 0 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Coleman, Maggie</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">12</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">10</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">100.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">30.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$15,429</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $23,866 &nbsp;|&nbsp; NSLI: $1,989 &nbsp;|&nbsp; Referrals: 1 (0 cust / 1 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Koerner, Jesse</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">50.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">—</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: 0 (0 cust / 0 emp)</div>
+    </div></div>
+
+    <div class="table-card">
+      <div class="chart-title">Sales Rep Performance — Last 30 Days</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Sales Rep. Appointment dates Jul 19 – Aug 17, 2026. Sorted by net volume.<br>
+        Demo % = Demos ÷ Net Issued. Close % = Sales ÷ Demos. Avg Sale = Gross volume ÷ Sales.
+        NSLI = Net sales volume ÷ Leads issued (LP's definition on the Sales Efficiency report;
+        the Setters tab uses gross ÷ issued instead).<br>
+        Referral counts are issued appointments from the CustRef and EmpReferral sources, read from one Sales Efficiency by Source report per rep.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Sales Rep</th><th>Leads Issued</th><th>Net Issued</th>
+          <th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th>
+          <th>Cust Ref</th><th>Emp Ref</th><th>Ref Total</th>
+          <th>Avg Sale</th><th>Gross Volume</th><th>Net Volume</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Maldonado, Brent</td><td>20</td><td class="ni-cell">16</td><td>10</td><td class="w">62.5%</td><td>1</td><td>10.0%</td><td>0</td><td>2</td><td>2</td><td>$500</td><td>$500</td><td>$43,103</td><td>$2,155</td></tr>
+<tr><td>Robertson, Kelly</td><td>21</td><td class="ni-cell">18</td><td>15</td><td class="g">83.3%</td><td>6</td><td>40.0%</td><td>0</td><td>0</td><td>0</td><td>$15,275</td><td>$91,652</td><td>$40,692</td><td>$1,938</td></tr>
+<tr><td>Coleman, Maggie</td><td>12</td><td class="ni-cell">10</td><td>10</td><td class="g">100.0%</td><td>3</td><td>30.0%</td><td>0</td><td>1</td><td>1</td><td>$15,429</td><td>$46,286</td><td>$23,866</td><td>$1,989</td></tr>
+<tr><td>Koerner, Jesse</td><td>2</td><td class="ni-cell">2</td><td>1</td><td class="b">50.0%</td><td>0</td><td>0.0%</td><td>0</td><td>0</td><td>0</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(Unassigned)</td><td>1</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(SalesRep Unknown)</td><td>9</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>65</td><td>46</td><td>36</td><td>78.3%</td><td>10</td><td>27.8%</td><td>0</td><td>3</td><td>3</td><td>$13,844</td><td>$138,438</td><td>$107,661</td><td>$1,656</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="period-section active" id="sales-ytd">
+    <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – August 17, 2026</div>
+    
+    <div class="kpi-grid"><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Leads Issued</div><div class="kpi-value">338</div><div class="kpi-sub">6 active reps</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Issued</div><div class="kpi-value">270</div><div class="kpi-sub">79.9% of issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demos Run</div><div class="kpi-value">231</div><div class="kpi-sub">50 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Demo %</div><div class="kpi-value">85.6%</div><div class="kpi-sub">231 demos / 270 net issued</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Close %</div><div class="kpi-value">21.6%</div><div class="kpi-sub">50 sales / 231 demos</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Average Sale</div><div class="kpi-value">$28,634</div><div class="kpi-sub">Gross ÷ 50 sales</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Gross Sales Volume</div><div class="kpi-value">$1,431,719</div><div class="kpi-sub">Written business</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">Net Sales Volume</div><div class="kpi-value">$1,402,381</div><div class="kpi-sub">After cancels &amp; declines</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sales Rep</div><div class="kpi-label">NSLI</div><div class="kpi-value">$4,149</div><div class="kpi-sub">Net volume ÷ leads issued</div></div><div class="kpi-card orange"><div class="kpi-source">Sales Efficiency by Source</div><div class="kpi-label">Referral Appts</div><div class="kpi-value">10</div><div class="kpi-sub">1 customer &nbsp;·&nbsp; 9 employee</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Demo % and Close % by Sales Rep
+          <span class="chart-subtitle">Demo % = demos ÷ net issued &nbsp;·&nbsp; Close % = sales ÷ demos</span>
+        </div>
+        <div class="chart-wrap" style="height:276px"><canvas id="sales-conv-ytd"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Sales Volume by Rep
+          <span class="chart-subtitle">Gross written vs. net of cancels and credit declines</span>
+        </div>
+        <div class="chart-wrap" style="height:276px"><canvas id="sales-vol-ytd"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Referral Appointments by Rep
+          <span class="chart-subtitle">Issued appointments from CustRef and EmpReferral sources</span>
+        </div>
+        <div class="chart-wrap" style="height:276px"><canvas id="sales-ref-ytd"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Robertson, Kelly</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">129</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">121</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">89.3%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">29</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">26.9%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$29,559</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $860,167 &nbsp;|&nbsp; NSLI: $6,668 &nbsp;|&nbsp; Referrals: 4 (0 cust / 4 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Coleman, Maggie</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">93</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">80</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">87.5%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">16</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">22.9%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$28,751</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $385,385 &nbsp;|&nbsp; NSLI: $4,144 &nbsp;|&nbsp; Referrals: 3 (1 cust / 2 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Maldonado, Brent</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">49</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">44</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">68.2%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">13.3%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$14,310</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $99,594 &nbsp;|&nbsp; NSLI: $2,033 &nbsp;|&nbsp; Referrals: 3 (0 cust / 3 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Koerner, Jesse</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">75.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">33.3%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">$57,235</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $57,235 &nbsp;|&nbsp; NSLI: $11,447 &nbsp;|&nbsp; Referrals: 0 (0 cust / 0 emp)</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Abeyta, Rayden</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">14</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">13</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">92.3%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">—</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: —</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Woodden, Mykal</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Issued</div><div class="rstat-val">10</div></div>
+        <div><div class="rstat-label">Net Iss</div><div class="rstat-val">8</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">100.0%</div></div>
+        <div><div class="rstat-label">Sales</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Close %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Avg Sale</div><div class="rstat-val">—</div></div>
+      </div>
+      <div class="rep-gross">Net Vol: $0 &nbsp;|&nbsp; NSLI: $0 &nbsp;|&nbsp; Referrals: —</div>
+    </div></div>
+
+    <div class="table-card">
+      <div class="chart-title">Sales Rep Performance — Year to Date</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Sales Rep. Appointment dates January 1 – August 17, 2026. Sorted by net volume.<br>
+        Demo % = Demos ÷ Net Issued. Close % = Sales ÷ Demos. Avg Sale = Gross volume ÷ Sales.
+        NSLI = Net sales volume ÷ Leads issued (LP's definition on the Sales Efficiency report;
+        the Setters tab uses gross ÷ issued instead).<br>
+        Referral counts are issued appointments from the CustRef and EmpReferral sources, read from one Sales Efficiency by Source report per rep. LP offers no Sales Rep filter on that report for Abeyta, Rayden, Woodden, Mykal, so they show — and are not in the referral total, which can therefore run below the company-wide referral count.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Sales Rep</th><th>Leads Issued</th><th>Net Issued</th>
+          <th>Demos</th><th>Demo %</th><th>Sales</th><th>Close %</th>
+          <th>Cust Ref</th><th>Emp Ref</th><th>Ref Total</th>
+          <th>Avg Sale</th><th>Gross Volume</th><th>Net Volume</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Robertson, Kelly</td><td>129</td><td class="ni-cell">121</td><td>108</td><td class="g">89.3%</td><td>29</td><td>26.9%</td><td>0</td><td>4</td><td>4</td><td>$29,559</td><td>$857,221</td><td>$860,167</td><td>$6,668</td></tr>
+<tr><td>Coleman, Maggie</td><td>93</td><td class="ni-cell">80</td><td>70</td><td class="g">87.5%</td><td>16</td><td>22.9%</td><td>1</td><td>2</td><td>3</td><td>$28,751</td><td>$460,022</td><td>$385,385</td><td>$4,144</td></tr>
+<tr><td>Maldonado, Brent</td><td>49</td><td class="ni-cell">44</td><td>30</td><td class="w">68.2%</td><td>4</td><td>13.3%</td><td>0</td><td>3</td><td>3</td><td>$14,310</td><td>$57,241</td><td>$99,594</td><td>$2,033</td></tr>
+<tr><td>Koerner, Jesse</td><td>5</td><td class="ni-cell">4</td><td>3</td><td class="w">75.0%</td><td>1</td><td>33.3%</td><td>0</td><td>0</td><td>0</td><td>$57,235</td><td>$57,235</td><td>$57,235</td><td>$11,447</td></tr>
+<tr><td>Abeyta, Rayden</td><td>14</td><td class="ni-cell">13</td><td>12</td><td class="g">92.3%</td><td>0</td><td>0.0%</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Woodden, Mykal</td><td>10</td><td class="ni-cell">8</td><td>8</td><td class="g">100.0%</td><td>0</td><td>0.0%</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(Unassigned)</td><td>9</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>(SalesRep Unknown)</td><td>29</td><td class="ni-cell">0</td><td>0</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>338</td><td>270</td><td>231</td><td>85.6%</td><td>50</td><td>21.6%</td><td>1</td><td>9</td><td>10</td><td>$28,634</td><td>$1,431,719</td><td>$1,402,381</td><td>$4,149</td></tr></tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -562,7 +1179,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <!-- ===== SETTERS ===== -->
 <div class="section" id="salesreps">
   <div class="period-label">Setter Performance &nbsp;•&nbsp; Appointment Statistics by Setter</div>
-  <div class="period-toggle"><button class="ptab" onclick="showPeriod('salesreps','rep-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('salesreps','rep-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('salesreps','rep-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('salesreps','rep-ytd',this)">Year to Date</button></div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('salesreps','rep-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('salesreps','rep-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('salesreps','rep-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('salesreps','rep-l30',this)">Last 30 Days</button> <button class="ptab active" onclick="showPeriod('salesreps','rep-ytd',this)">Year to Date</button></div>
 
   <div class="period-section" id="rep-pw">
     <div class="period-label">Prior Week &nbsp;•&nbsp; Aug 9 – Aug 15, 2026</div>
@@ -830,7 +1447,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
   </div>
   <div class="period-section" id="rep-mtd">
     <div class="period-label">Month to Date &nbsp;•&nbsp; August 1 – 17, 2026</div>
-    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">46</div><div class="kpi-sub">5 active setters</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Net Issued</div><div class="kpi-value">25</div><div class="kpi-sub">37 gross issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">19</div><div class="kpi-sub">5 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">76.0%</div><div class="kpi-sub">19 demos / 25 net issued · Target 70%</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">$2,553</div><div class="kpi-sub">Gross $ ÷ Issued Leads</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$94,455</div><div class="kpi-sub">Net: $40,192</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">2</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">3</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">7</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">46</div><div class="kpi-sub">5 active setters</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Net Issued</div><div class="kpi-value">26</div><div class="kpi-sub">37 gross issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">20</div><div class="kpi-sub">6 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">76.9%</div><div class="kpi-sub">20 demos / 26 net issued · Target 70%</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">$2,566</div><div class="kpi-sub">Gross $ ÷ Issued Leads</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$94,955</div><div class="kpi-sub">Net: $40,692</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">2</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">3</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">7</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
 
     <div class="charts-grid">
       <div class="chart-card">
@@ -864,13 +1481,13 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="rep-name">Messano, Angela</div>
       <div class="rep-stats">
         <div><div class="rstat-label">Set</div><div class="rstat-val">32</div></div>
-        <div><div class="rstat-label">Demo</div><div class="rstat-val">16</div></div>
-        <div><div class="rstat-label">Demo %</div><div class="rstat-val">84.2%</div></div>
-        <div><div class="rstat-label">Sale</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">17</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">85.0%</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">5</div></div>
         <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
         <div><div class="rstat-label">1-Leg</div><div class="rstat-val">2</div></div>
       </div>
-      <div class="rep-gross">NSLI: $2,159 &nbsp;|&nbsp; CXL: 2 &nbsp;|&nbsp; Drop: 3</div>
+      <div class="rep-gross">NSLI: $2,176 &nbsp;|&nbsp; CXL: 2 &nbsp;|&nbsp; Drop: 3</div>
     </div>
     <div class="rep-card">
       <div class="rep-name">Palacio, Angel</div>
@@ -922,11 +1539,11 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
           <th>Gross $</th><th>Net $</th><th>NSLI</th>
         </tr></thead>
         <tbody><tr><td>Bates, Austin</td><td>3</td><td>2</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>$0</td></tr>
-<tr><td>Messano, Angela</td><td>32</td><td>29</td><td>19</td><td>16</td><td>84.2%</td><td>4</td><td>0</td><td>2</td><td>2</td><td>0</td><td>3</td><td>$62,613</td><td>$40,192</td><td>$2,159</td></tr>
+<tr><td>Messano, Angela</td><td>32</td><td>29</td><td>20</td><td>17</td><td>85.0%</td><td>5</td><td>0</td><td>2</td><td>2</td><td>0</td><td>3</td><td>$63,113</td><td>$40,692</td><td>$2,176</td></tr>
 <tr><td>Palacio, Angel</td><td>4</td><td>1</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>1</td><td>0</td><td>2</td><td>0</td><td>3</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Robinson, Teresa</td><td>4</td><td>2</td><td>2</td><td>2</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Trombley, Andrew</td><td>3</td><td>3</td><td>2</td><td>1</td><td>50.0%</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$31,842</td><td>$0</td><td>$10,614</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>46</td><td>37</td><td>25</td><td>19</td><td>76.0%</td><td>5</td><td>2</td><td>3</td><td>7</td><td>0</td><td>9</td><td>$94,455</td><td>$40,192</td><td>$2,553</td></tr></tbody>
+<tr class="gtot"><td>TOTAL</td><td>46</td><td>37</td><td>26</td><td>20</td><td>76.9%</td><td>6</td><td>2</td><td>3</td><td>7</td><td>0</td><td>9</td><td>$94,955</td><td>$40,692</td><td>$2,566</td></tr></tbody>
       </table>
     </div>
     
@@ -947,9 +1564,128 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       </table>
     </div>
   </div>
+  <div class="period-section" id="rep-l30">
+    <div class="period-label">Last 30 Days &nbsp;•&nbsp; Jul 19 – Aug 17, 2026</div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">78</div><div class="kpi-sub">5 active setters</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Net Issued</div><div class="kpi-value">46</div><div class="kpi-sub">60 gross issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">36</div><div class="kpi-sub">10 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">78.3%</div><div class="kpi-sub">36 demos / 46 net issued · Target 70%</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">$2,307</div><div class="kpi-sub">Gross $ ÷ Issued Leads</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$138,438</div><div class="kpi-sub">Net: $107,661</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">2</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">7</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">10</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">Appointment Results Breakdown
+          <span class="chart-subtitle">All setters combined — Last 30 Days</span>
+        </div>
+        <div class="chart-wrap"><canvas id="setter-results-pie-l30"></canvas></div>
+      </div>
+      <div class="chart-card full">
+        <div class="chart-title">Demo % vs. 70% Target — by Setter
+          <span class="chart-subtitle">Demos ÷ Net Issued &nbsp;·&nbsp; Green = at or above target &nbsp;·&nbsp; Red = below target</span>
+        </div>
+        <div class="chart-wrap" style="height:220px"><canvas id="setter-demo-pct-l30"></canvas></div>
+      </div>
+    </div>
+
+    <div class="rep-grid">
+    <div class="rep-card">
+      <div class="rep-name">Bates, Austin</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">1</div></div>
+      </div>
+      <div class="rep-gross">NSLI: $0 &nbsp;|&nbsp; CXL: 2 &nbsp;|&nbsp; Drop: 2</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Messano, Angela</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">59</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">31</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">83.8%</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">7</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">6</div></div>
+      </div>
+      <div class="rep-gross">NSLI: $1,775 &nbsp;|&nbsp; CXL: 3 &nbsp;|&nbsp; Drop: 10</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Palacio, Angel</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">4</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">0.0%</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">NSLI: $0 &nbsp;|&nbsp; CXL: 2 &nbsp;|&nbsp; Drop: 2</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Robinson, Teresa</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">5</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">2</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">100.0%</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">0</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">NSLI: $0 &nbsp;|&nbsp; CXL: 3 &nbsp;|&nbsp; Drop: 3</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-name">Trombley, Andrew</div>
+      <div class="rep-stats">
+        <div><div class="rstat-label">Set</div><div class="rstat-val">6</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">75.0%</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">3</div></div>
+        <div><div class="rstat-label">CNS</div><div class="rstat-val">1</div></div>
+        <div><div class="rstat-label">1-Leg</div><div class="rstat-val">0</div></div>
+      </div>
+      <div class="rep-gross">NSLI: $10,292 &nbsp;|&nbsp; CXL: 0 &nbsp;|&nbsp; Drop: 1</div>
+    </div></div>
+
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Setter — Last 30 Days</div>
+      <div class="table-note">
+        Source: Appointment Statistics by Setter. Appointment dates Jul 19 – Aug 17, 2026.<br>
+        Demo % = Demos ÷ Net Issued. NSLI = Gross Revenue ÷ Gross Issued Leads ($ per issued lead). CNS=Customer No-Show · 1Leg=One Leg Reset · CXL=Cancel prior to Issue · NG=No Good.
+      </div>
+      <table>
+        <thead><tr>
+          <th>Setter</th><th>Set</th><th>Issued</th><th>Net Iss</th><th>Demo</th><th>Demo %</th><th>Sale</th>
+          <th>CNS</th><th>1-Leg</th><th>CXL</th><th>NG</th><th>Drop</th>
+          <th>Gross $</th><th>Net $</th><th>NSLI</th>
+        </tr></thead>
+        <tbody><tr><td>Bates, Austin</td><td>4</td><td>2</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>0</td><td>1</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Messano, Angela</td><td>59</td><td>49</td><td>37</td><td>31</td><td>83.8%</td><td>7</td><td>0</td><td>6</td><td>3</td><td>0</td><td>10</td><td>$86,979</td><td>$64,558</td><td>$1,775</td></tr>
+<tr><td>Palacio, Angel</td><td>4</td><td>2</td><td>2</td><td>0</td><td>0.0%</td><td>0</td><td>1</td><td>0</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Robinson, Teresa</td><td>5</td><td>2</td><td>2</td><td>2</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>3</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Trombley, Andrew</td><td>6</td><td>5</td><td>4</td><td>3</td><td>75.0%</td><td>3</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$51,459</td><td>$43,103</td><td>$10,292</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>78</td><td>60</td><td>46</td><td>36</td><td>78.3%</td><td>10</td><td>2</td><td>7</td><td>10</td><td>0</td><td>18</td><td>$138,438</td><td>$107,661</td><td>$2,307</td></tr></tbody>
+      </table>
+    </div>
+    
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-title">Dispo Distribution — Last 30 Days
+          <span class="chart-subtitle">Source: Call Center Dispo Distribution report. All appointments including issued and not issued.</span>
+        </div>
+        <div class="chart-wrap" style="height:300px"><canvas id="dispo-pie-l30"></canvas></div>
+      </div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Dispo Distribution by Setter — Last 30 Days</div>
+      <div class="table-note">Source: Call Center Dispo Distribution. Appointment dates Jul 19 – Aug 17, 2026. Columns ordered most to least frequent (YTD).</div>
+      <table>
+        <thead><tr><th>Setter</th><th>Total</th><th>SNS</th><th>CXL</th><th>Sale</th><th>Cancel</th><th>Set</th><th>1Leg</th><th>Issue</th><th>CNS</th><th>UnCon</th><th>SRS</th><th>CRS</th><th>Design</th><th>FTD</th><th>ND</th><th>PDNS</th></tr></thead>
+        <tbody><tr><td>Bates, Austin</td><td>4</td><td>—</td><td>2 (2%)</td><td>—</td><td>—</td><td>—</td><td>1 (1%)</td><td>1 (1%)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Messano, Angela</td><td>59</td><td>21 (26%)</td><td>3 (4%)</td><td>7 (9%)</td><td>7 (9%)</td><td>5 (6%)</td><td>6 (8%)</td><td>4 (5%)</td><td>—</td><td>1 (1%)</td><td>1 (1%)</td><td>1 (1%)</td><td>1 (1%)</td><td>—</td><td>1 (1%)</td><td>1 (1%)</td></tr><tr><td>Palacio, Angel</td><td>6</td><td>1 (1%)</td><td>2 (2%)</td><td>—</td><td>—</td><td>1 (1%)</td><td>—</td><td>—</td><td>1 (1%)</td><td>1 (1%)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Robinson, Teresa</td><td>5</td><td>1 (1%)</td><td>3 (4%)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>1 (1%)</td><td>—</td><td>—</td></tr><tr><td>Trombley, Andrew</td><td>6</td><td>—</td><td>—</td><td>3 (4%)</td><td>1 (1%)</td><td>1 (1%)</td><td>—</td><td>—</td><td>1 (1%)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr class="gtot"><td>TOTAL</td><td>80</td><td><strong>23 (29%)</strong></td><td><strong>10 (12%)</strong></td><td><strong>10 (12%)</strong></td><td><strong>8 (10%)</strong></td><td><strong>7 (9%)</strong></td><td><strong>7 (9%)</strong></td><td><strong>5 (6%)</strong></td><td><strong>2 (2%)</strong></td><td><strong>2 (2%)</strong></td><td><strong>1 (1%)</strong></td><td><strong>1 (1%)</strong></td><td><strong>1 (1%)</strong></td><td><strong>1 (1%)</strong></td><td><strong>1 (1%)</strong></td><td><strong>1 (1%)</strong></td></tr></tbody>
+      </table>
+    </div>
+  </div>
   <div class="period-section active" id="rep-ytd">
     <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – August 17, 2026</div>
-    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">389</div><div class="kpi-sub">15 active setters</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Net Issued</div><div class="kpi-value">270</div><div class="kpi-sub">311 gross issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">230</div><div class="kpi-sub">49 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">85.2%</div><div class="kpi-sub">230 demos / 270 net issued · Target 70%</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">$4,602</div><div class="kpi-sub">Gross $ ÷ Issued Leads</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$1,431,219</div><div class="kpi-sub">Net: $1,401,881</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">21</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">17</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">36</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
+    <div class="kpi-grid"><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">389</div><div class="kpi-sub">15 active setters</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Net Issued</div><div class="kpi-value">271</div><div class="kpi-sub">311 gross issued</div></div><div class="kpi-card orange"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demos Run</div><div class="kpi-value">231</div><div class="kpi-sub">50 sales</div></div><div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Demo %</div><div class="kpi-value">85.2%</div><div class="kpi-sub">231 demos / 271 net issued · Target 70%</div></div><div class="kpi-card teal"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">NSLI</div><div class="kpi-value">$4,604</div><div class="kpi-sub">Gross $ ÷ Issued Leads</div></div><div class="kpi-card purple"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Gross Revenue</div><div class="kpi-value">$1,431,719</div><div class="kpi-sub">Net: $1,402,381</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CNS</div><div class="kpi-value">21</div><div class="kpi-sub">Customer No-Show</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">1-Leg Resets</div><div class="kpi-value">17</div><div class="kpi-sub">One leg reset</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">CXL</div><div class="kpi-value">36</div><div class="kpi-sub">Cancel prior to issue</div></div><div class="kpi-card"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">No Good (NG)</div><div class="kpi-value">0</div><div class="kpi-sub">No good appointments</div></div></div>
 
     <div class="charts-grid">
       <div class="chart-card">
@@ -1067,13 +1803,13 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <div class="rep-name">Messano, Angela</div>
       <div class="rep-stats">
         <div><div class="rstat-label">Set</div><div class="rstat-val">146</div></div>
-        <div><div class="rstat-label">Demo</div><div class="rstat-val">85</div></div>
-        <div><div class="rstat-label">Demo %</div><div class="rstat-val">84.2%</div></div>
-        <div><div class="rstat-label">Sale</div><div class="rstat-val">10</div></div>
+        <div><div class="rstat-label">Demo</div><div class="rstat-val">86</div></div>
+        <div><div class="rstat-label">Demo %</div><div class="rstat-val">84.3%</div></div>
+        <div><div class="rstat-label">Sale</div><div class="rstat-val">11</div></div>
         <div><div class="rstat-label">CNS</div><div class="rstat-val">4</div></div>
         <div><div class="rstat-label">1-Leg</div><div class="rstat-val">13</div></div>
       </div>
-      <div class="rep-gross">NSLI: $1,653 &nbsp;|&nbsp; CXL: 11 &nbsp;|&nbsp; Drop: 27</div>
+      <div class="rep-gross">NSLI: $1,657 &nbsp;|&nbsp; CXL: 11 &nbsp;|&nbsp; Drop: 27</div>
     </div>
     <div class="rep-card">
       <div class="rep-name">Mestas, Jazmin</div>
@@ -1168,14 +1904,14 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr><td>Knecht, Lindsay</td><td>69</td><td>58</td><td>49</td><td>44</td><td>89.8%</td><td>7</td><td>2</td><td>3</td><td>4</td><td>0</td><td>11</td><td>$117,531</td><td>$116,300</td><td>$2,026</td></tr>
 <tr><td>Koerner, Jesse</td><td>11</td><td>8</td><td>7</td><td>8</td><td>114.3%</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>$97,623</td><td>$97,818</td><td>$12,203</td></tr>
 <tr><td>Maughan, Samantha</td><td>1</td><td>1</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>$0</td></tr>
-<tr><td>Messano, Angela</td><td>146</td><td>119</td><td>101</td><td>85</td><td>84.2%</td><td>10</td><td>4</td><td>13</td><td>11</td><td>0</td><td>27</td><td>$196,718</td><td>$174,047</td><td>$1,653</td></tr>
+<tr><td>Messano, Angela</td><td>146</td><td>119</td><td>102</td><td>86</td><td>84.3%</td><td>11</td><td>4</td><td>13</td><td>11</td><td>0</td><td>27</td><td>$197,218</td><td>$174,547</td><td>$1,657</td></tr>
 <tr><td>Mestas, Jazmin</td><td>3</td><td>2</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$500</td><td>$0</td></tr>
 <tr><td>Palacio, Angel</td><td>4</td><td>2</td><td>2</td><td>0</td><td>0.0%</td><td>0</td><td>1</td><td>0</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Robertson, Kelly</td><td>28</td><td>24</td><td>21</td><td>18</td><td>85.7%</td><td>9</td><td>3</td><td>0</td><td>2</td><td>0</td><td>4</td><td>$456,902</td><td>$492,769</td><td>$19,038</td></tr>
 <tr><td>Robinson, Teresa</td><td>11</td><td>5</td><td>5</td><td>5</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>4</td><td>0</td><td>6</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>test, test</td><td>4</td><td>3</td><td>2</td><td>1</td><td>50.0%</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Trombley, Andrew</td><td>11</td><td>9</td><td>8</td><td>7</td><td>87.5%</td><td>3</td><td>1</td><td>0</td><td>1</td><td>0</td><td>2</td><td>$51,459</td><td>$43,103</td><td>$5,718</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>389</td><td>311</td><td>270</td><td>230</td><td>85.2%</td><td>49</td><td>21</td><td>17</td><td>36</td><td>0</td><td>78</td><td>$1,431,219</td><td>$1,401,881</td><td>$4,602</td></tr></tbody>
+<tr class="gtot"><td>TOTAL</td><td>389</td><td>311</td><td>271</td><td>231</td><td>85.2%</td><td>50</td><td>21</td><td>17</td><td>36</td><td>0</td><td>78</td><td>$1,431,719</td><td>$1,402,381</td><td>$4,604</td></tr></tbody>
       </table>
     </div>
     
@@ -1202,7 +1938,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <!-- ===== CALL CENTER ===== -->
 <div class="section" id="callcenter">
   <div class="period-label">Call Center Performance &nbsp;•&nbsp; Appointment Statistics Reports</div>
-  <div class="period-toggle"><button class="ptab" onclick="showPeriod('callcenter','cc-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('callcenter','cc-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('callcenter','cc-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('callcenter','cc-ytd',this)">Year to Date</button></div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('callcenter','cc-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('callcenter','cc-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('callcenter','cc-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('callcenter','cc-l30',this)">Last 30 Days</button> <button class="ptab active" onclick="showPeriod('callcenter','cc-ytd',this)">Year to Date</button></div>
 
   <div class="period-section" id="cc-pw">
     <div class="period-label">Prior Week &nbsp;•&nbsp; Aug 9 – Aug 15, 2026</div>
@@ -1291,11 +2027,11 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
     <div class="period-label">Month to Date &nbsp;•&nbsp; August 1 – 17, 2026</div>
     <div class="kpi-grid">
       <div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">46</div><div class="kpi-sub">5 active setters</div></div>
-      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">19</div><div class="kpi-sub">76.0% of net issued</div></div>
-      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">5</div><div class="kpi-sub">$94,455 gross revenue</div></div>
-      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">82.6%</div><div class="kpi-sub">38 issued / 46 set</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">76.0%</div><div class="kpi-sub">19 demos / 25 net issued</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">26.3%</div><div class="kpi-sub">5 sales / 19 demos</div></div>
+      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">20</div><div class="kpi-sub">76.9% of net issued</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">6</div><div class="kpi-sub">$94,955 gross revenue</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">84.8%</div><div class="kpi-sub">39 issued / 46 set</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">76.9%</div><div class="kpi-sub">20 demos / 26 net issued</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">30.0%</div><div class="kpi-sub">6 sales / 20 demos</div></div>
     </div>
     <div class="charts-grid">
       <div class="chart-card"><div class="chart-title">Set by Setter<span class="chart-subtitle">Month to Date — 46 total</span></div><div class="chart-wrap"><canvas id="cc-mtd-setter-pie"></canvas></div></div>
@@ -1310,32 +2046,72 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
         <th>Gross $</th><th>Net $</th><th>NSLI</th>
       </tr></thead>
       <tbody><tr><td>Bates, Austin</td><td>3</td><td>2</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>$0</td></tr>
-<tr><td>Messano, Angela</td><td>32</td><td>29</td><td>19</td><td>16</td><td>84.2%</td><td>4</td><td>0</td><td>2</td><td>2</td><td>0</td><td>3</td><td>$62,613</td><td>$40,192</td><td>$2,159</td></tr>
+<tr><td>Messano, Angela</td><td>32</td><td>29</td><td>20</td><td>17</td><td>85.0%</td><td>5</td><td>0</td><td>2</td><td>2</td><td>0</td><td>3</td><td>$63,113</td><td>$40,692</td><td>$2,176</td></tr>
 <tr><td>Palacio, Angel</td><td>4</td><td>1</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>1</td><td>0</td><td>2</td><td>0</td><td>3</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Robinson, Teresa</td><td>4</td><td>2</td><td>2</td><td>2</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Trombley, Andrew</td><td>3</td><td>3</td><td>2</td><td>1</td><td>50.0%</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$31,842</td><td>$0</td><td>$10,614</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>46</td><td>37</td><td>25</td><td>19</td><td>76.0%</td><td>5</td><td>2</td><td>3</td><td>7</td><td>0</td><td>9</td><td>$94,455</td><td>$40,192</td><td>$2,553</td></tr></tbody></table>
+<tr class="gtot"><td>TOTAL</td><td>46</td><td>37</td><td>26</td><td>20</td><td>76.9%</td><td>6</td><td>2</td><td>3</td><td>7</td><td>0</td><td>9</td><td>$94,955</td><td>$40,692</td><td>$2,566</td></tr></tbody></table>
     </div>
     <div class="table-card">
       <div class="chart-title">Appointment Statistics by Product — Month to Date</div>
       <div class="table-note">Appt dates August 1 – 17, 2026.</div>
       <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
       <tbody><tr><td>Full Bathroom (FB)</td><td>24</td><td>3</td><td>—</td></tr>
-<tr><td>Full Kitchen (FK)</td><td>10</td><td>1</td><td>—</td></tr>
+<tr><td>Full Kitchen (FK)</td><td>10</td><td>2</td><td>—</td></tr>
 <tr><td>Wet Area (WA)</td><td>7</td><td>1</td><td>—</td></tr>
 <tr><td>Walk-in Tub (WAIT)</td><td>5</td><td>0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>46</td><td>5</td><td>$94,455</td></tr></tbody></table>
+<tr class="gtot"><td>TOTAL</td><td>46</td><td>6</td><td>$94,955</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="period-section" id="cc-l30">
+    <div class="period-label">Last 30 Days &nbsp;•&nbsp; Jul 19 – Aug 17, 2026</div>
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">78</div><div class="kpi-sub">5 active setters</div></div>
+      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">36</div><div class="kpi-sub">78.3% of net issued</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">10</div><div class="kpi-sub">$138,438 gross revenue</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">83.3%</div><div class="kpi-sub">65 issued / 78 set</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">78.3%</div><div class="kpi-sub">36 demos / 46 net issued</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">27.8%</div><div class="kpi-sub">10 sales / 36 demos</div></div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card"><div class="chart-title">Set by Setter<span class="chart-subtitle">Last 30 Days — 78 total</span></div><div class="chart-wrap"><canvas id="cc-l30-setter-pie"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Set by Product<span class="chart-subtitle">Last 30 Days — 78 total</span></div><div class="chart-wrap"><canvas id="cc-l30-product-pie"></canvas></div></div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Setter — Last 30 Days</div>
+      <div class="table-note">Appt dates Jul 19 – Aug 17, 2026. Demo % = Demos ÷ Net Issued.</div>
+      <table><thead><tr>
+        <th>Setter</th><th>Set</th><th>Issued</th><th>Net Iss</th><th>Demo</th><th>Demo %</th><th>Sale</th>
+        <th>CNS</th><th>1-Leg</th><th>CXL</th><th>NG</th><th>Drop</th>
+        <th>Gross $</th><th>Net $</th><th>NSLI</th>
+      </tr></thead>
+      <tbody><tr><td>Bates, Austin</td><td>4</td><td>2</td><td>1</td><td>0</td><td>0.0%</td><td>0</td><td>0</td><td>1</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Messano, Angela</td><td>59</td><td>49</td><td>37</td><td>31</td><td>83.8%</td><td>7</td><td>0</td><td>6</td><td>3</td><td>0</td><td>10</td><td>$86,979</td><td>$64,558</td><td>$1,775</td></tr>
+<tr><td>Palacio, Angel</td><td>4</td><td>2</td><td>2</td><td>0</td><td>0.0%</td><td>0</td><td>1</td><td>0</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Robinson, Teresa</td><td>5</td><td>2</td><td>2</td><td>2</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>3</td><td>$0</td><td>$0</td><td>$0</td></tr>
+<tr><td>Trombley, Andrew</td><td>6</td><td>5</td><td>4</td><td>3</td><td>75.0%</td><td>3</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$51,459</td><td>$43,103</td><td>$10,292</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>78</td><td>60</td><td>46</td><td>36</td><td>78.3%</td><td>10</td><td>2</td><td>7</td><td>10</td><td>0</td><td>18</td><td>$138,438</td><td>$107,661</td><td>$2,307</td></tr></tbody></table>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Appointment Statistics by Product — Last 30 Days</div>
+      <div class="table-note">Appt dates Jul 19 – Aug 17, 2026.</div>
+      <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
+      <tbody><tr><td>Full Bathroom (FB)</td><td>34</td><td>4</td><td>—</td></tr>
+<tr><td>Full Kitchen (FK)</td><td>20</td><td>3</td><td>—</td></tr>
+<tr><td>Wet Area (WA)</td><td>19</td><td>3</td><td>—</td></tr>
+<tr><td>Walk-in Tub (WAIT)</td><td>5</td><td>0</td><td>—</td></tr>
+<tr class="gtot"><td>TOTAL</td><td>78</td><td>10</td><td>$138,438</td></tr></tbody></table>
     </div>
   </div>
   <div class="period-section active" id="cc-ytd">
     <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – August 17, 2026</div>
     <div class="kpi-grid">
       <div class="kpi-card green"><div class="kpi-source">Appt Stats by Setter</div><div class="kpi-label">Appointments Set</div><div class="kpi-value">390</div><div class="kpi-sub">15 active setters</div></div>
-      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">230</div><div class="kpi-sub">85.5% of net issued</div></div>
-      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">49</div><div class="kpi-sub">$1,431,219 gross revenue</div></div>
-      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">86.4%</div><div class="kpi-sub">337 issued / 390 set</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">85.5%</div><div class="kpi-sub">230 demos / 269 net issued</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">21.3%</div><div class="kpi-sub">49 sales / 230 demos</div></div>
+      <div class="kpi-card orange"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demos Run</div><div class="kpi-value">231</div><div class="kpi-sub">85.6% of net issued</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Sales</div><div class="kpi-value">50</div><div class="kpi-sub">$1,431,719 gross revenue</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Gross Issue Rate</div><div class="kpi-value">86.7%</div><div class="kpi-sub">338 issued / 390 set</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Demo Rate</div><div class="kpi-value">85.6%</div><div class="kpi-sub">231 demos / 270 net issued</div></div>
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Sub-Source</div><div class="kpi-label">Close Rate</div><div class="kpi-value">21.6%</div><div class="kpi-sub">50 sales / 231 demos</div></div>
     </div>
     <div class="charts-grid">
       <div class="chart-card"><div class="chart-title">Set by Setter<span class="chart-subtitle">Year to Date — 390 total</span></div><div class="chart-wrap"><canvas id="cc-ytd-setter-pie"></canvas></div></div>
@@ -1357,14 +2133,14 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <tr><td>Knecht, Lindsay</td><td>69</td><td>58</td><td>49</td><td>44</td><td>89.8%</td><td>7</td><td>2</td><td>3</td><td>4</td><td>0</td><td>11</td><td>$117,531</td><td>$116,300</td><td>$2,026</td></tr>
 <tr><td>Koerner, Jesse</td><td>11</td><td>8</td><td>7</td><td>8</td><td>114.3%</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>$97,623</td><td>$97,818</td><td>$12,203</td></tr>
 <tr><td>Maughan, Samantha</td><td>1</td><td>1</td><td>1</td><td>1</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0</td><td>$0</td><td>$0</td></tr>
-<tr><td>Messano, Angela</td><td>146</td><td>119</td><td>101</td><td>85</td><td>84.2%</td><td>10</td><td>4</td><td>13</td><td>11</td><td>0</td><td>27</td><td>$196,718</td><td>$174,047</td><td>$1,653</td></tr>
+<tr><td>Messano, Angela</td><td>146</td><td>119</td><td>102</td><td>86</td><td>84.3%</td><td>11</td><td>4</td><td>13</td><td>11</td><td>0</td><td>27</td><td>$197,218</td><td>$174,547</td><td>$1,657</td></tr>
 <tr><td>Mestas, Jazmin</td><td>3</td><td>2</td><td>1</td><td>1</td><td>100.0%</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>$0</td><td>$500</td><td>$0</td></tr>
 <tr><td>Palacio, Angel</td><td>4</td><td>2</td><td>2</td><td>0</td><td>0.0%</td><td>0</td><td>1</td><td>0</td><td>2</td><td>0</td><td>2</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Robertson, Kelly</td><td>28</td><td>24</td><td>21</td><td>18</td><td>85.7%</td><td>9</td><td>3</td><td>0</td><td>2</td><td>0</td><td>4</td><td>$456,902</td><td>$492,769</td><td>$19,038</td></tr>
 <tr><td>Robinson, Teresa</td><td>11</td><td>5</td><td>5</td><td>5</td><td>100.0%</td><td>0</td><td>0</td><td>0</td><td>4</td><td>0</td><td>6</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>test, test</td><td>4</td><td>3</td><td>2</td><td>1</td><td>50.0%</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>$0</td><td>$0</td><td>$0</td></tr>
 <tr><td>Trombley, Andrew</td><td>11</td><td>9</td><td>8</td><td>7</td><td>87.5%</td><td>3</td><td>1</td><td>0</td><td>1</td><td>0</td><td>2</td><td>$51,459</td><td>$43,103</td><td>$5,718</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>389</td><td>311</td><td>270</td><td>230</td><td>85.2%</td><td>49</td><td>21</td><td>17</td><td>36</td><td>0</td><td>78</td><td>$1,431,219</td><td>$1,401,881</td><td>$4,602</td></tr></tbody></table>
+<tr class="gtot"><td>TOTAL</td><td>389</td><td>311</td><td>271</td><td>231</td><td>85.2%</td><td>50</td><td>21</td><td>17</td><td>36</td><td>0</td><td>78</td><td>$1,431,719</td><td>$1,402,381</td><td>$4,604</td></tr></tbody></table>
     </div>
     <div class="table-card">
       <div class="chart-title">Appointment Statistics by Product — Year to Date</div>
@@ -1372,12 +2148,12 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       <table><thead><tr><th>Product</th><th>Set</th><th>Sales</th><th>Gross $</th></tr></thead>
       <tbody><tr><td>Cabinets (CAB)</td><td>27</td><td>4</td><td>—</td></tr>
 <tr><td>Full Bathroom (FB)</td><td>157</td><td>18</td><td>—</td></tr>
-<tr><td>Full Kitchen (FK)</td><td>91</td><td>13</td><td>—</td></tr>
+<tr><td>Full Kitchen (FK)</td><td>91</td><td>14</td><td>—</td></tr>
 <tr><td>MULTI (MULTI)</td><td>1</td><td>0</td><td>—</td></tr>
 <tr><td>Wet Area (WA)</td><td>96</td><td>14</td><td>—</td></tr>
 <tr><td>Walk-in Tub (WAIT)</td><td>11</td><td>0</td><td>—</td></tr>
 <tr><td>Windows & Doors (WINDR)</td><td>5</td><td>0</td><td>—</td></tr>
-<tr class="gtot"><td>TOTAL</td><td>390</td><td>49</td><td>$1,431,219</td></tr></tbody></table>
+<tr class="gtot"><td>TOTAL</td><td>390</td><td>50</td><td>$1,431,719</td></tr></tbody></table>
     </div>
   </div>
 </div>
@@ -1386,7 +2162,7 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <!-- ===== PROMOTER BONUS TRACKING ===== -->
 <div class="section" id="promoter">
   <div class="period-label">Promoter Bonus Tracking &nbsp;•&nbsp; Net Issued Leads</div>
-  <div class="period-toggle"><button class="ptab" onclick="showPeriod('promoter','promo-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('promoter','promo-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('promoter','promo-mtd',this)">Month to Date</button> <button class="ptab active" onclick="showPeriod('promoter','promo-ytd',this)">Year to Date</button></div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('promoter','promo-pw',this)">Prior Week</button> <button class="ptab" onclick="showPeriod('promoter','promo-pm',this)">Prior Month</button> <button class="ptab" onclick="showPeriod('promoter','promo-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('promoter','promo-l30',this)">Last 30 Days</button> <button class="ptab active" onclick="showPeriod('promoter','promo-ytd',this)">Year to Date</button></div>
 
   <div class="period-section" id="promo-pw">
     <div class="period-label">Prior Week &nbsp;•&nbsp; Aug 9 – Aug 15, 2026</div>
@@ -1611,6 +2387,77 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
       </table>
     </div>
   </div>
+  <div class="period-section" id="promo-l30">
+    <div class="period-label">Last 30 Days &nbsp;•&nbsp; Jul 19 – Aug 17, 2026</div>
+    
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-source">Appt Stats by Promoter</div><div class="kpi-label">Total Appointments Set</div><div class="kpi-value">32</div><div class="kpi-sub">4 active promoters</div></div>
+      <div class="kpi-card teal"><div class="kpi-source">Appt Stats by Promoter</div><div class="kpi-label">Gross Issued Leads</div><div class="kpi-value">26</div><div class="kpi-sub">Leads passed to sales</div></div>
+      <div class="kpi-card purple"><div class="kpi-source">Appt Stats by Promoter</div><div class="kpi-label">Net Issued Leads</div><div class="kpi-value">17</div><div class="kpi-sub">After 9 drops removed</div></div>
+    </div>
+    <div class="promo-bonus-grid"><div class="promo-bonus-card" style="">
+  <div class="promo-bonus-name">Sara</div>
+  <div class="promo-bonus-count">1 <span>net issued</span></div>
+  
+  <div class="promo-bonus-trophies"><span style="color:#aaa;font-size:12px">none yet</span></div>
+  <div class="promo-bonus-label">0 paycheck bonuses earned</div>
+  <div class="promo-progress-wrap">
+    <div class="promo-progress-bar" style="width:10%"></div>
+  </div>
+  <div class="promo-progress-label">1/10 &nbsp;—&nbsp; 9 more to next bonus</div>
+</div><div class="promo-bonus-card" style="">
+  <div class="promo-bonus-name">Angel</div>
+  <div class="promo-bonus-count">8 <span>net issued</span></div>
+  
+  <div class="promo-bonus-trophies"><span style="color:#aaa;font-size:12px">none yet</span></div>
+  <div class="promo-bonus-label">0 paycheck bonuses earned</div>
+  <div class="promo-progress-wrap">
+    <div class="promo-progress-bar" style="width:80%"></div>
+  </div>
+  <div class="promo-progress-label">8/10 &nbsp;—&nbsp; 2 more to next bonus</div>
+</div><div class="promo-bonus-card" style="">
+  <div class="promo-bonus-name">Teresa</div>
+  <div class="promo-bonus-count">3 <span>net issued</span></div>
+  
+  <div class="promo-bonus-trophies"><span style="color:#aaa;font-size:12px">none yet</span></div>
+  <div class="promo-bonus-label">0 paycheck bonuses earned</div>
+  <div class="promo-progress-wrap">
+    <div class="promo-progress-bar" style="width:30%"></div>
+  </div>
+  <div class="promo-progress-label">3/10 &nbsp;—&nbsp; 7 more to next bonus</div>
+</div><div class="promo-bonus-card" style="">
+  <div class="promo-bonus-name">Andrew</div>
+  <div class="promo-bonus-count">5 <span>net issued</span></div>
+  
+  <div class="promo-bonus-trophies"><span style="color:#aaa;font-size:12px">none yet</span></div>
+  <div class="promo-bonus-label">0 paycheck bonuses earned</div>
+  <div class="promo-progress-wrap">
+    <div class="promo-progress-bar" style="width:50%"></div>
+  </div>
+  <div class="promo-progress-label">5/10 &nbsp;—&nbsp; 5 more to next bonus</div>
+</div></div>
+    <div class="charts-grid" style="grid-template-columns:1fr;">
+      <div class="chart-card">
+        <div class="chart-title">Net Issued Leads by Promoter
+          <span class="chart-subtitle">Last 30 Days — 17 total net issued</span>
+        </div>
+        <div class="chart-wrap" style="height:280px;">
+          <canvas id="promo-l30-bar"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="table-card">
+      <div class="chart-title">Promoter Net Issued Lead Tally — Last 30 Days</div>
+      <div class="table-note">Net Issued = Gross Issued − Drops. &nbsp;Every 10 net issued = paycheck bonus. &nbsp;Source: Appt Stats by Promoter.</div>
+      <table>
+        <thead><tr>
+          <th>Promoter</th><th>Appts Set</th><th>Gross Issued</th>
+          <th>Drops</th><th>Net Issued ★</th><th>Drop %</th>
+        </tr></thead>
+        <tbody><tr><td>Jones, Sara</td><td>1</td><td>1</td><td>0</td><td class="ni-cell"><strong>1</strong></td><td>0.0%</td></tr><tr><td>Palacio, Angel</td><td>12</td><td>10</td><td>2</td><td class="ni-cell"><strong>8</strong></td><td>20.0%</td></tr><tr><td>Robinson, Teresa</td><td>9</td><td>7</td><td>4</td><td class="ni-cell"><strong>3</strong></td><td>57.1%</td></tr><tr><td>Trombley, Andrew</td><td>10</td><td>8</td><td>3</td><td class="ni-cell"><strong>5</strong></td><td>37.5%</td></tr><tr class="gtot"><td>TOTAL</td><td>32</td><td>26</td><td>9</td><td><strong>17</strong></td><td>34.6%</td></tr></tbody>
+      </table>
+    </div>
+  </div>
   <div class="period-section active" id="promo-ytd">
     <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – August 17, 2026</div>
     
@@ -1788,89 +2635,8 @@ tbody td { padding: 7px 9px; text-align: right; white-space: nowrap; } tbody td:
 <!-- ===== MARKETING COSTS ===== -->
 <div class="section" id="mktcosts">
   <div class="period-label">Marketing Costs &nbsp;•&nbsp; Spend, Marketing %, Cost Per Lead &amp; Cost Per Demo</div>
-  <div class="period-toggle"><button class="ptab" onclick="showPeriod('mktcosts','costs-pm',this)">Prior Month</button> <button class="ptab active" onclick="showPeriod('mktcosts','costs-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('mktcosts','costs-ytd',this)">Year to Date</button></div>
-
-  <div class="period-section" id="costs-pm">
-    <div class="period-label">Prior Month &nbsp;•&nbsp; July 1 – 31, 2026</div>
-    <div class="kpi-grid">
-      <div class="kpi-card purple"><div class="kpi-source">Cost Sheet</div><div class="kpi-label">Total Spend</div><div class="kpi-value">$28,070</div><div class="kpi-sub">All marketing sources</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Cost Sheet + Setter Report</div><div class="kpi-label">Total ROI</div><div class="kpi-value">+320%</div><div class="kpi-sub">$118,001 gross revenue</div></div>
-      <div class="kpi-card red"><div class="kpi-source">Cost Sheet + Setter Report</div><div class="kpi-label">Marketing %</div><div class="kpi-value">23.8%</div><div class="kpi-sub">Spend ÷ gross revenue</div></div>
-      <div class="kpi-card orange"><div class="kpi-source">Cost Sheet + CC Report</div><div class="kpi-label">Cost Per Demo</div><div class="kpi-value">$702</div><div class="kpi-sub">40 demos run</div></div>
-      <div class="kpi-card teal"><div class="kpi-source">Cost Sheet + Marketing Report</div><div class="kpi-label">Cost Per Lead</div><div class="kpi-value">$121</div><div class="kpi-sub">232 raw leads</div></div>
-    </div>
-    <div class="table-card">
-      <div class="chart-title">Marketing Spend by Source — Prior Month</div>
-      <div class="table-note">
-        CPL-based: Spend = Cost Per Lead × Raw Leads for the period. &nbsp;
-        Budget-based: Actual budget from prior month tab. &nbsp;
-        ROI = (Gross Revenue − Spend) ÷ Spend. Revenue shown only for sources matched in LP reports. &nbsp;
-        Source: <em>Marketing Cost for Dashboard</em> (Google Sheet).
-      </div>
-      <table>
-        <thead><tr>
-          <th>Source</th><th>Method</th><th>Spend</th><th>ROI</th>
-          <th class="src-col">Raw Leads</th><th>Cost / Lead</th>
-          <th>Demos</th><th>Cost / Demo</th>
-        </tr></thead>
-        <tbody><tr><td>TownSquare</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Monthly Budget</td><td>$8,000</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Stratum</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Monthly Budget</td><td>$7,000</td><td class="red">-100%</td><td class="mc">24</td><td>$291.67</td><td>1</td><td>$7,000</td></tr><tr><td>Other Expenses</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Monthly Budget</td><td>$5,500</td><td class="red">-100%</td><td class="mc">1</td><td>$5,500.00</td><td>—</td><td>—</td></tr><tr><td>Home Buddy</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$3,010</td><td class="green">+199%</td><td class="mc">43</td><td>$70.00</td><td>3</td><td>$1,003</td></tr><tr><td>Contractor Appointments</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$2,340</td><td class="green">+919%</td><td class="mc">52</td><td>$45.00</td><td>4</td><td>$585</td></tr><tr><td>Networx</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$680</td><td class="red">-100%</td><td class="mc">17</td><td>$40.00</td><td>—</td><td>—</td></tr><tr><td>Radio</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Monthly Budget</td><td>$650</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Houz</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Monthly Budget</td><td>$500</td><td class="red">-100%</td><td class="mc">1</td><td>$500.00</td><td>—</td><td>—</td></tr><tr><td>Events</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Monthly Budget</td><td>$390</td><td class="green">+6,034%</td><td class="mc">22</td><td>$17.71</td><td>6</td><td>$65</td></tr><tr><td>NCT Leads</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$0</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr style="background:#f8f9fa;color:#666;font-style:italic;"><td><strong style="color:#555;">Other</strong> <span style="font-size:0.68rem;font-weight:normal;">EmpReferral, Home Depot, ReLove, Unknown…</span></td><td style="font-size:0.68rem;color:#aaa;">No tracked spend</td><td>—</td><td>—</td><td class="mc">29</td><td>—</td><td>11</td><td>—</td></tr><tr class="gtot"><td>TOTAL</td><td></td><td>$28,070</td><td>+320%</td><td>232</td><td>$120.99</td><td>40</td><td>$702</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-  <div class="period-section active" id="costs-mtd">
-    <div class="period-label">Month to Date &nbsp;•&nbsp; August 1 – 17, 2026</div>
-    <div class="kpi-grid">
-      <div class="kpi-card purple"><div class="kpi-source">Cost Sheet</div><div class="kpi-label">Total Spend</div><div class="kpi-value">$15,207</div><div class="kpi-sub">All marketing sources</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Cost Sheet + Setter Report</div><div class="kpi-label">Total ROI</div><div class="kpi-value">+521%</div><div class="kpi-sub">$94,455 gross revenue</div></div>
-      <div class="kpi-card red"><div class="kpi-source">Cost Sheet + Setter Report</div><div class="kpi-label">Marketing %</div><div class="kpi-value">16.1%</div><div class="kpi-sub">Spend ÷ gross revenue</div></div>
-      <div class="kpi-card orange"><div class="kpi-source">Cost Sheet + CC Report</div><div class="kpi-label">Cost Per Demo</div><div class="kpi-value">$800</div><div class="kpi-sub">19 demos run</div></div>
-      <div class="kpi-card teal"><div class="kpi-source">Cost Sheet + Marketing Report</div><div class="kpi-label">Cost Per Lead</div><div class="kpi-value">$121</div><div class="kpi-sub">126 raw leads</div></div>
-    </div>
-    <div class="table-card">
-      <div class="chart-title">Marketing Spend by Source — Month to Date</div>
-      <div class="table-note">
-        CPL-based: Spend = Cost Per Lead × Raw Leads for the period. &nbsp;
-        Budget-based: Monthly budgets prorated by days elapsed (17/31). &nbsp;
-        ROI = (Gross Revenue − Spend) ÷ Spend. Revenue shown only for sources matched in LP reports. &nbsp;
-        Source: <em>Marketing Cost for Dashboard</em> (Google Sheet).
-      </div>
-      <table>
-        <thead><tr>
-          <th>Source</th><th>Method</th><th>Spend</th><th>ROI</th>
-          <th class="src-col">Raw Leads</th><th>Cost / Lead</th>
-          <th>Demos</th><th>Cost / Demo</th>
-        </tr></thead>
-        <tbody><tr><td>TownSquare</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Budget (prorated)</td><td>$4,387</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Stratum</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Budget (prorated)</td><td>$3,839</td><td class="red">-87%</td><td class="mc">22</td><td>$174.49</td><td>2</td><td>$1,919</td></tr><tr><td>Other Expenses</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Budget (prorated)</td><td>$3,016</td><td class="red">-100%</td><td class="mc">11</td><td>$274.19</td><td>—</td><td>—</td></tr><tr><td>Contractor Appointments</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$1,530</td><td class="red">-100%</td><td class="mc">34</td><td>$45.00</td><td>1</td><td>$1,530</td></tr><tr><td>Home Buddy</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$1,190</td><td class="green">+1,784%</td><td class="mc">17</td><td>$70.00</td><td>2</td><td>$595</td></tr><tr><td>Networx</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$360</td><td class="red">-100%</td><td class="mc">9</td><td>$40.00</td><td>1</td><td>$360</td></tr><tr><td>Radio</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Budget (prorated)</td><td>$356</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Houz</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Budget (prorated)</td><td>$274</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Events</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Budget (prorated)</td><td>$255</td><td class="red">-100%</td><td class="mc">8</td><td>$31.84</td><td>—</td><td>—</td></tr><tr><td>NCT Leads</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$0</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr style="background:#f8f9fa;color:#666;font-style:italic;"><td><strong style="color:#555;">Other</strong> <span style="font-size:0.68rem;font-weight:normal;">EmpReferral, Home Depot, ReLove, Website…</span></td><td style="font-size:0.68rem;color:#aaa;">No tracked spend</td><td>—</td><td>—</td><td class="mc">27</td><td>—</td><td>9</td><td>—</td></tr><tr class="gtot"><td>TOTAL</td><td></td><td>$15,207</td><td>+521%</td><td>126</td><td>$120.69</td><td>19</td><td>$800</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-  <div class="period-section" id="costs-ytd">
-    <div class="period-label">Year to Date &nbsp;•&nbsp; January 1 – August 17, 2026</div>
-    <div class="kpi-grid">
-      <div class="kpi-card purple"><div class="kpi-source">Cost Sheet</div><div class="kpi-label">Total Spend</div><div class="kpi-value">$137,103</div><div class="kpi-sub">All marketing sources</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Cost Sheet + Setter Report</div><div class="kpi-label">Total ROI</div><div class="kpi-value">+944%</div><div class="kpi-sub">$1,431,219 gross revenue</div></div>
-      <div class="kpi-card green"><div class="kpi-source">Cost Sheet + Setter Report</div><div class="kpi-label">Marketing %</div><div class="kpi-value">9.6%</div><div class="kpi-sub">Spend ÷ gross revenue</div></div>
-      <div class="kpi-card orange"><div class="kpi-source">Cost Sheet + CC Report</div><div class="kpi-label">Cost Per Demo</div><div class="kpi-value">$596</div><div class="kpi-sub">230 demos run</div></div>
-      <div class="kpi-card teal"><div class="kpi-source">Cost Sheet + Marketing Report</div><div class="kpi-label">Cost Per Lead</div><div class="kpi-value">$109</div><div class="kpi-sub">1262 raw leads</div></div>
-    </div>
-    <div class="table-card">
-      <div class="chart-title">Marketing Spend by Source — Year to Date</div>
-      <div class="table-note">
-        CPL-based: Spend = Cost Per Lead × Raw Leads for the period. &nbsp;
-        Budget-based: Actual monthly budgets summed (Jan, Feb, Mar, Apr, May, Jun, Jul, Aug); current month prorated. &nbsp;
-        ROI = (Gross Revenue − Spend) ÷ Spend. Revenue shown only for sources matched in LP reports. &nbsp;
-        Source: <em>Marketing Cost for Dashboard</em> (Google Sheet).
-      </div>
-      <table>
-        <thead><tr>
-          <th>Source</th><th>Method</th><th>Spend</th><th>ROI</th>
-          <th class="src-col">Raw Leads</th><th>Cost / Lead</th>
-          <th>Demos</th><th>Cost / Demo</th>
-        </tr></thead>
-        <tbody><tr><td>Other Expenses</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Actual Budgets</td><td>$41,516</td><td class="red">-100%</td><td class="mc">13</td><td>$3,193.55</td><td>—</td><td>—</td></tr><tr><td>Stratum</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Actual Budgets</td><td>$22,839</td><td class="red">-100%</td><td class="mc">46</td><td>$496.49</td><td>1</td><td>$22,839</td></tr><tr><td>TownSquare</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Actual Budgets</td><td>$20,387</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Built Right</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Actual Budgets</td><td>$18,995</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Home Buddy</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$7,910</td><td class="green">+509%</td><td class="mc">113</td><td>$70.00</td><td>14</td><td>$565</td></tr><tr><td>Radio</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Actual Budgets</td><td>$6,118</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Events</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Actual Budgets</td><td>$6,008</td><td class="green">+13,346%</td><td class="mc">292</td><td>$20.58</td><td>81</td><td>$74</td></tr><tr><td>Contractor Appointments</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$5,355</td><td class="green">+345%</td><td class="mc">119</td><td>$45.00</td><td>11</td><td>$487</td></tr><tr><td>Networx</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$4,200</td><td class="green">+305%</td><td class="mc">105</td><td>$40.00</td><td>12</td><td>$350</td></tr><tr><td>Houz</td><td style="font-size:0.68rem;color:#888;font-style:italic;">Actual Budgets</td><td>$3,774</td><td class="green">+589%</td><td class="mc">4</td><td>$943.55</td><td>3</td><td>$1,258</td></tr><tr><td>NCT Leads</td><td style="font-size:0.68rem;color:#888;font-style:italic;">CPL × Leads</td><td>$0</td><td>—</td><td class="mc">—</td><td>—</td><td>—</td><td>—</td></tr><tr style="background:#f8f9fa;color:#666;font-style:italic;"><td><strong style="color:#555;">Other</strong> <span style="font-size:0.68rem;font-weight:normal;">BCI, CustRef, EmpReferral, Facebook…</span></td><td style="font-size:0.68rem;color:#aaa;">No tracked spend</td><td>—</td><td>—</td><td class="mc">219</td><td>—</td><td>34</td><td>—</td></tr><tr class="gtot"><td>TOTAL</td><td></td><td>$137,103</td><td>+944%</td><td>1262</td><td>$108.64</td><td>230</td><td>$596</td></tr></tbody>
-      </table>
-    </div>
-  </div>
+  <div class="period-toggle"><button class="ptab" onclick="showPeriod('mktcosts','costs-pm',this)">Prior Month</button> <button class="ptab active" onclick="showPeriod('mktcosts','costs-mtd',this)">Month to Date</button> <button class="ptab" onclick="showPeriod('mktcosts','costs-l30',this)">Last 30 Days</button> <button class="ptab" onclick="showPeriod('mktcosts','costs-ytd',this)">Year to Date</button></div>
+<div class="period-section" id="costs-pm"><div class="period-label">Prior Month</div><p style="padding:24px;color:#aaa;font-style:italic;">No marketing cost data available. Create a Google Sheet titled <strong>Marketing Cost for Dashboard</strong> with one tab per month (e.g. "January 2026") containing columns: Source, Cost Per Lead, Monthly Budget.</p></div><div class="period-section active" id="costs-mtd"><div class="period-label">Month to Date</div><p style="padding:24px;color:#aaa;font-style:italic;">No marketing cost data available. Create a Google Sheet titled <strong>Marketing Cost for Dashboard</strong> with one tab per month (e.g. "January 2026") containing columns: Source, Cost Per Lead, Monthly Budget.</p></div><div class="period-section" id="costs-l30"><div class="period-label">Last 30 Days</div><p style="padding:24px;color:#aaa;font-style:italic;">No marketing cost data available. Create a Google Sheet titled <strong>Marketing Cost for Dashboard</strong> with one tab per month (e.g. "January 2026") containing columns: Source, Cost Per Lead, Monthly Budget.</p></div><div class="period-section" id="costs-ytd"><div class="period-label">Year to Date</div><p style="padding:24px;color:#aaa;font-style:italic;">No marketing cost data available. Create a Google Sheet titled <strong>Marketing Cost for Dashboard</strong> with one tab per month (e.g. "January 2026") containing columns: Source, Cost Per Lead, Monthly Budget.</p></div>
 </div>
 
 
@@ -1884,9 +2650,9 @@ function hbar(id,labels,data,colors){var el=document.getElementById(id);if(!el)r
 function bar(id,labels,datasets){var el=document.getElementById(id);if(!el)return;new Chart(el,{type:'bar',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{x:{ticks:{font:{size:10}}},y:{beginAtZero:true}}}})}
 function mtrend(id,selId,type,labels,byMetric,def0,money){var el=document.getElementById(id);if(!el)return;money=money||[];var cur=def0;var isMoney=function(){return money.indexOf(cur)>=0};var usd=function(v){return '$'+Math.round(v).toLocaleString()};var fmt=function(v){return isMoney()?usd(v):v};var ch=new Chart(el,{type:type,data:{labels:labels,datasets:byMetric[def0]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+fmt(c.parsed.y)}}}},scales:{x:{ticks:{font:{size:11}}},y:{beginAtZero:true,ticks:{precision:0,callback:function(v){return fmt(v)}}}}}});var sel=document.getElementById(selId);if(sel)sel.addEventListener('change',function(){cur=this.value;ch.data.datasets=byMetric[cur];ch.update();});}
 
-bar('ytd-mo-overall',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],[{"label": "Raw Leads", "data": [43, 36, 134, 200, 321, 170, 232, 126], "backgroundColor": "#6f42c1", "borderRadius": 3}, {"label": "Set", "data": [38, 13, 63, 51, 48, 57, 74, 46], "backgroundColor": "#2d5a8e", "borderRadius": 3}, {"label": "Issued", "data": [32, 11, 53, 47, 42, 52, 62, 38], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Demos", "data": [20, 8, 42, 29, 31, 39, 40, 19], "backgroundColor": "#28a745", "borderRadius": 3}, {"label": "Sales", "data": [3, 3, 11, 9, 6, 3, 9, 5], "backgroundColor": "#fd7e14", "borderRadius": 3}]);
-mtrend('ytd-mo-prod','ytd-mo-prod-sel','bar',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],{"Set": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [29, 8, 36, 34, 32, 42, 47, 36], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [9, 5, 25, 17, 14, 13, 25, 10], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 0, 2, 0, 1, 2, 0, 0], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other \u2014 MULTI", "data": [0, 0, 0, 0, 0, 0, 1, 0], "backgroundColor": "#adb5bd", "borderRadius": 3}], "Issued": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [25, 7, 30, 34, 28, 40, 43, 31], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [7, 4, 21, 13, 13, 11, 17, 7], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 0, 2, 0, 1, 1, 0, 0], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other \u2014 MULTI", "data": [0, 0, 0, 0, 0, 0, 1, 0], "backgroundColor": "#adb5bd", "borderRadius": 3}], "Demos": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [14, 5, 21, 21, 21, 30, 27, 15], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [6, 3, 20, 8, 9, 8, 11, 4], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 0, 1, 0, 1, 1, 0, 0], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other \u2014 MULTI", "data": [0, 0, 0, 0, 0, 0, 1, 0], "backgroundColor": "#adb5bd", "borderRadius": 3}], "Sales": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [3, 2, 5, 6, 3, 2, 7, 4], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [0, 1, 6, 3, 3, 1, 2, 1], "backgroundColor": "#fd7e14", "borderRadius": 3}], "Gross Revenue": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [79283, 14476, 127863, 132198, 63353, 34971, 117001, 93955], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [0, 16992, 275120, 264620, 184452, 25436, 1000, 500], "backgroundColor": "#fd7e14", "borderRadius": 3}], "Raw Leads": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [24, 13, 47, 74, 143, 122, 193, 103], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [6, 8, 24, 59, 158, 37, 26, 12], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 4, 6, 3, 4, 1, 0, 2], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other / Unknown", "data": [13, 11, 57, 64, 16, 10, 13, 9], "backgroundColor": "#adb5bd", "borderRadius": 3}]},"Raw Leads",["Gross Revenue"]);
-mtrend('ytd-mo-src','ytd-mo-src-sel','line',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],{"Raw Leads": [{"label": "BCI", "data": [10, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [5, 6, 101, 104, 13, 33, 22, 8], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [24, 21, 23, 30, 240, 115, 139, 69], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [1, 1, 6, 1, 0, 1, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Sweepstakes", "data": [3, 7, 2, 6, 11, 2, 0, 0], "borderColor": "#fd7e14", "backgroundColor": "#fd7e14", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 1, 2, 1, 1, 1, 3, 2], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 2, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 55, 56, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Unknown", "data": [0, 0, 0, 1, 0, 0, 1, 0], "borderColor": "#adb5bd", "backgroundColor": "#adb5bd", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 17, 18, 9], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 22, 15], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 3, 1], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 24, 22], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Set": [{"label": "BCI", "data": [10, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [4, 6, 55, 25, 5, 16, 9, 2], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [13, 10, 11, 10, 26, 32, 24, 10], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [1, 1, 0, 1, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Sweepstakes", "data": [0, 0, 0, 0, 0, 1, 0, 0], "borderColor": "#fd7e14", "backgroundColor": "#fd7e14", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 2, 1, 1, 1, 3, 2], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 1, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 1, 3, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 2, 10, 2], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 18, 10], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 3, 1], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 4, 3], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Issued": [{"label": "BCI", "data": [9, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [3, 6, 48, 22, 4, 11, 7, 0], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [13, 9, 11, 9, 24, 27, 20, 8], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [1, 1, 0, 1, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Sweepstakes", "data": [0, 0, 0, 0, 0, 1, 0, 0], "borderColor": "#fd7e14", "backgroundColor": "#fd7e14", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 2, 1, 1, 1, 3, 1], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 1, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 1, 3, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 2, 9, 2], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 17, 4], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 2, 0], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 3, 2], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Demos": [{"label": "BCI", "data": [4, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [2, 4, 41, 14, 4, 9, 5, 0], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [12, 9, 10, 8, 22, 24, 11, 6], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [0, 1, 0, 0, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 2, 1, 1, 1, 3, 1], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 0, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 1, 3, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 2, 7, 0], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 11, 3], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 2, 0], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 0, 2], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Sales": [{"label": "BCI", "data": [1, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [0, 2, 13, 5, 0, 1, 1, 0], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [1, 1, 2, 1, 2, 2, 2, 1], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [0, 1, 0, 0, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 1, 1, 0, 1, 1, 0], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 1, 1, 0], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 4, 1], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 0, 1], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}]},'Raw Leads');
+bar('ytd-mo-overall',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],[{"label": "Raw Leads", "data": [43, 36, 134, 200, 321, 170, 232, 126], "backgroundColor": "#6f42c1", "borderRadius": 3}, {"label": "Set", "data": [38, 13, 63, 51, 48, 57, 74, 46], "backgroundColor": "#2d5a8e", "borderRadius": 3}, {"label": "Issued", "data": [32, 11, 53, 47, 42, 52, 62, 39], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Demos", "data": [20, 8, 42, 29, 31, 39, 40, 20], "backgroundColor": "#28a745", "borderRadius": 3}, {"label": "Sales", "data": [3, 3, 11, 9, 6, 3, 9, 6], "backgroundColor": "#fd7e14", "borderRadius": 3}]);
+mtrend('ytd-mo-prod','ytd-mo-prod-sel','bar',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],{"Set": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [29, 8, 36, 34, 32, 42, 47, 36], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [9, 5, 25, 17, 14, 13, 25, 10], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 0, 2, 0, 1, 2, 0, 0], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other \u2014 MULTI", "data": [0, 0, 0, 0, 0, 0, 1, 0], "backgroundColor": "#adb5bd", "borderRadius": 3}], "Issued": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [25, 7, 30, 34, 28, 40, 43, 31], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [7, 4, 21, 13, 13, 11, 17, 8], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 0, 2, 0, 1, 1, 0, 0], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other \u2014 MULTI", "data": [0, 0, 0, 0, 0, 0, 1, 0], "backgroundColor": "#adb5bd", "borderRadius": 3}], "Demos": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [14, 5, 21, 21, 21, 30, 27, 15], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [6, 3, 20, 8, 9, 8, 11, 5], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 0, 1, 0, 1, 1, 0, 0], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other \u2014 MULTI", "data": [0, 0, 0, 0, 0, 0, 1, 0], "backgroundColor": "#adb5bd", "borderRadius": 3}], "Sales": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [3, 2, 5, 6, 3, 2, 7, 4], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [0, 1, 6, 3, 3, 1, 2, 2], "backgroundColor": "#fd7e14", "borderRadius": 3}], "Gross Revenue": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [79283, 14476, 127863, 132198, 63353, 34971, 117001, 93955], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [0, 16992, 275120, 264620, 184452, 25436, 1000, 1000], "backgroundColor": "#fd7e14", "borderRadius": 3}], "Raw Leads": [{"label": "Bathrooms \u2014 FB + WA + WAIT", "data": [24, 13, 47, 74, 143, 122, 193, 103], "backgroundColor": "#4da6ff", "borderRadius": 3}, {"label": "Kitchens \u2014 FK + CAB", "data": [6, 8, 24, 59, 158, 37, 26, 12], "backgroundColor": "#fd7e14", "borderRadius": 3}, {"label": "Windows & Doors \u2014 WINDR", "data": [0, 4, 6, 3, 4, 1, 0, 2], "backgroundColor": "#20c997", "borderRadius": 3}, {"label": "Other / Unknown", "data": [13, 11, 57, 64, 16, 10, 13, 9], "backgroundColor": "#adb5bd", "borderRadius": 3}]},"Raw Leads",["Gross Revenue"]);
+mtrend('ytd-mo-src','ytd-mo-src-sel','line',["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],{"Raw Leads": [{"label": "BCI", "data": [10, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [5, 6, 101, 104, 13, 33, 22, 8], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [24, 21, 23, 30, 240, 115, 139, 69], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [1, 1, 6, 1, 0, 1, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Sweepstakes", "data": [3, 7, 2, 6, 11, 2, 0, 0], "borderColor": "#fd7e14", "backgroundColor": "#fd7e14", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 1, 2, 1, 1, 1, 3, 2], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 2, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 55, 56, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Unknown", "data": [0, 0, 0, 1, 0, 0, 1, 0], "borderColor": "#adb5bd", "backgroundColor": "#adb5bd", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 17, 18, 9], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 22, 15], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 3, 1], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 24, 22], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Set": [{"label": "BCI", "data": [10, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [4, 6, 55, 25, 5, 16, 9, 2], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [13, 10, 11, 10, 26, 32, 24, 11], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [1, 1, 0, 1, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Sweepstakes", "data": [0, 0, 0, 0, 0, 1, 0, 0], "borderColor": "#fd7e14", "backgroundColor": "#fd7e14", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 2, 1, 1, 1, 3, 2], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 1, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 1, 3, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 2, 10, 2], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 18, 10], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 3, 1], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 4, 3], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Issued": [{"label": "BCI", "data": [9, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [3, 6, 48, 22, 4, 11, 7, 0], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [13, 9, 11, 9, 24, 27, 20, 8], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [1, 1, 0, 1, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Sweepstakes", "data": [0, 0, 0, 0, 0, 1, 0, 0], "borderColor": "#fd7e14", "backgroundColor": "#fd7e14", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 2, 1, 1, 1, 3, 1], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 1, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 1, 3, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 2, 9, 2], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 17, 4], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 2, 0], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 3, 2], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Demos": [{"label": "BCI", "data": [4, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [2, 4, 41, 14, 4, 9, 5, 0], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [12, 9, 10, 8, 22, 24, 11, 6], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [0, 1, 0, 0, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 2, 1, 1, 1, 3, 1], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "CustRef", "data": [0, 0, 0, 0, 0, 1, 0, 0], "borderColor": "#6f42c1", "backgroundColor": "#6f42c1", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Facebook", "data": [0, 0, 0, 1, 3, 0, 0, 0], "borderColor": "#4da6ff", "backgroundColor": "#4da6ff", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 2, 7, 1], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 11, 3], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "ReLove", "data": [0, 0, 0, 0, 0, 0, 2, 0], "borderColor": "#264653", "backgroundColor": "#264653", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 0, 2], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}], "Sales": [{"label": "BCI", "data": [1, 0, 0, 0, 0, 0, 0, 0], "borderColor": "#20c997", "backgroundColor": "#20c997", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Event", "data": [0, 2, 13, 5, 0, 1, 1, 0], "borderColor": "#28a745", "backgroundColor": "#28a745", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Internet", "data": [1, 1, 2, 1, 2, 2, 2, 1], "borderColor": "#2d5a8e", "backgroundColor": "#2d5a8e", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Store Booth", "data": [0, 1, 0, 0, 0, 0, 0, 0], "borderColor": "#ffc107", "backgroundColor": "#ffc107", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "EmpReferral", "data": [0, 0, 1, 1, 0, 1, 1, 0], "borderColor": "#dc3545", "backgroundColor": "#dc3545", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Website", "data": [0, 0, 0, 0, 0, 1, 1, 1], "borderColor": "#17a2b8", "backgroundColor": "#17a2b8", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Home Depot", "data": [0, 0, 0, 0, 0, 0, 4, 1], "borderColor": "#e9c46a", "backgroundColor": "#e9c46a", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}, {"label": "Stratum Digital", "data": [0, 0, 0, 0, 0, 0, 0, 1], "borderColor": "#cccccc", "backgroundColor": "#cccccc", "tension": 0.3, "borderWidth": 2.5, "pointRadius": 3}]},'Raw Leads');
 pie('pw-leads-pie',['EmpReferral','Event','Home Depot','Internet','ReLove','Stratum Digital','Website'],[2,2,8,30,1,11,1],['#dc3545','#28a745','#e83e8c','#2d5a8e','#ff6b35','#7b2d8b','#17a2b8']);
 pie('pw-set-pie',['EmpReferral','Event','Home Depot','Internet','Stratum Digital'],[1,4,8,10,2],['#dc3545','#28a745','#e83e8c','#2d5a8e','#ff6b35']);
 hbar('pw-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[55,25,22,14,11,3],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
@@ -1895,10 +2661,319 @@ pie('pm-set-pie',['EmpReferral','Event','Home Depot','Internet','ReLove','Stratu
 hbar('pm-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[232,74,62,49,40,9],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
 pie('mtd-leads-pie',['EmpReferral','Event','Home Depot','Internet','ReLove','Stratum Digital','Website'],[2,8,15,69,1,22,9],['#dc3545','#28a745','#e83e8c','#2d5a8e','#ff6b35','#7b2d8b','#17a2b8']);
 pie('mtd-set-pie',['EmpReferral','Event','Home Depot','Internet','Stratum Digital','Website'],[2,6,16,15,4,3],['#dc3545','#28a745','#e83e8c','#2d5a8e','#ff6b35','#17a2b8']);
-hbar('mtd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[126,46,38,25,19,5],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+hbar('mtd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[126,46,39,26,20,6],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+pie('l30-leads-pie',['EmpReferral','Event','Home Depot','Internet','ReLove','Stratum Digital','Unknown','Website'],[4,10,33,122,2,41,1,14],['#dc3545','#28a745','#e83e8c','#2d5a8e','#ff6b35','#7b2d8b','#adb5bd','#17a2b8']);
+pie('l30-set-pie',['EmpReferral','Event','Home Depot','Internet','ReLove','Stratum Digital','Website'],[3,10,25,23,2,8,7],['#dc3545','#28a745','#e83e8c','#2d5a8e','#ff6b35','#7b2d8b','#17a2b8']);
+hbar('l30-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[227,78,65,46,36,10],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
 pie('ytd-leads-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Home Depot','Internet','ReLove','Store Booth','Stratum Digital','Sweepstakes','Unknown','Website'],[10,3,11,292,111,37,661,4,10,46,31,2,44],['#20c997','#6f42c1','#dc3545','#28a745','#4da6ff','#e83e8c','#2d5a8e','#ff6b35','#ffc107','#7b2d8b','#fd7e14','#adb5bd','#17a2b8']);
 pie('ytd-set-pie',['BCI','CustRef','EmpReferral','Event','Facebook','Home Depot','Internet','ReLove','Store Booth','Stratum Digital','Sweepstakes','Website'],[11,2,9,147,5,27,159,3,4,8,1,14],['#20c997','#6f42c1','#dc3545','#28a745','#4da6ff','#e83e8c','#2d5a8e','#ff6b35','#ffc107','#7b2d8b','#fd7e14','#17a2b8']);
-hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[1262,390,337,269,230,49],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (CC)','Demos (CC)','Sales (CC)'],[1262,390,338,270,231,50],['#6f42c1','#2d5a8e','#4da6ff','#17a2b8','#28a745','#fd7e14']);
+
+(function(){
+  var el=document.getElementById('sales-conv-pw');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Koerner'],
+      datasets:[
+        {label:'Demo %',data:[75.0,100.0,0.0],backgroundColor:'#4da6ff',borderRadius:4},
+        {label:'Close %',data:[33.3,20.0,0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.x+'%'}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'%'}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('sales-vol-pw');
+  if(!el)return;
+  var usd=function(v){return '$'+Math.round(v).toLocaleString()};
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Koerner'],
+      datasets:[
+        {label:'Gross Volume',data:[39692.36,22420.58,0.0],backgroundColor:'#6f42c1',borderRadius:4},
+        {label:'Net Volume',data:[39692.26,0.0,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+usd(c.parsed.x)}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return usd(v)}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('sales-conv-pm');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Maldonado','Coleman','Robertson','Abeyta'],
+      datasets:[
+        {label:'Demo %',data:[66.7,92.9,92.3,100.0],backgroundColor:'#4da6ff',borderRadius:4},
+        {label:'Close %',data:[28.6,15.4,25.0,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.x+'%'}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'%'}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('sales-vol-pm');
+  if(!el)return;
+  var usd=function(v){return '$'+Math.round(v).toLocaleString()};
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Maldonado','Coleman','Robertson','Abeyta'],
+      datasets:[
+        {label:'Gross Volume',data:[57240.56,23865.86,36894.54,0.0],backgroundColor:'#6f42c1',borderRadius:4},
+        {label:'Net Volume',data:[99593.64,23865.86,17777.61,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+usd(c.parsed.x)}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return usd(v)}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('sales-conv-mtd');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Koerner','Maldonado'],
+      datasets:[
+        {label:'Demo %',data:[83.3,100.0,50.0,57.1],backgroundColor:'#4da6ff',borderRadius:4},
+        {label:'Close %',data:[50.0,20.0,0.0,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.x+'%'}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'%'}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('sales-vol-mtd');
+  if(!el)return;
+  var usd=function(v){return '$'+Math.round(v).toLocaleString()};
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Koerner','Maldonado'],
+      datasets:[
+        {label:'Gross Volume',data:[72534.64,22420.58,0.0,0.0],backgroundColor:'#6f42c1',borderRadius:4},
+        {label:'Net Volume',data:[40692.26,0.0,0.0,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+usd(c.parsed.x)}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return usd(v)}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('sales-ref-mtd');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Koerner','Maldonado'],
+      datasets:[
+        {label:'Customer Referral',data:[0,0,0,0],backgroundColor:'#fd7e14',borderRadius:4},
+        {label:'Employee Referral',data:[0,1,0,1],backgroundColor:'#17a2b8',borderRadius:4},
+        {label:'Other Referral',data:[0,0,0,0],backgroundColor:'#adb5bd',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11}}}},
+      scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},
+              y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('sales-conv-l30');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Maldonado','Robertson','Coleman','Koerner'],
+      datasets:[
+        {label:'Demo %',data:[62.5,83.3,100.0,50.0],backgroundColor:'#4da6ff',borderRadius:4},
+        {label:'Close %',data:[10.0,40.0,30.0,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.x+'%'}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'%'}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('sales-vol-l30');
+  if(!el)return;
+  var usd=function(v){return '$'+Math.round(v).toLocaleString()};
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Maldonado','Robertson','Coleman','Koerner'],
+      datasets:[
+        {label:'Gross Volume',data:[500.0,91651.57,46286.44,0.0],backgroundColor:'#6f42c1',borderRadius:4},
+        {label:'Net Volume',data:[43102.76,40692.26,23865.86,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+usd(c.parsed.x)}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return usd(v)}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('sales-ref-l30');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Maldonado','Robertson','Coleman','Koerner'],
+      datasets:[
+        {label:'Customer Referral',data:[0,0,0,0],backgroundColor:'#fd7e14',borderRadius:4},
+        {label:'Employee Referral',data:[2,0,1,0],backgroundColor:'#17a2b8',borderRadius:4},
+        {label:'Other Referral',data:[0,0,0,0],backgroundColor:'#adb5bd',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11}}}},
+      scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},
+              y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('sales-conv-ytd');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Maldonado','Koerner','Abeyta','Woodden'],
+      datasets:[
+        {label:'Demo %',data:[89.3,87.5,68.2,75.0,92.3,100.0],backgroundColor:'#4da6ff',borderRadius:4},
+        {label:'Close %',data:[26.9,22.9,13.3,33.3,0.0,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.x+'%'}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return v+'%'}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('sales-vol-ytd');
+  if(!el)return;
+  var usd=function(v){return '$'+Math.round(v).toLocaleString()};
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Maldonado','Koerner','Abeyta','Woodden'],
+      datasets:[
+        {label:'Gross Volume',data:[857220.72,460022.41,57240.56,57235.03,0.0,0.0],backgroundColor:'#6f42c1',borderRadius:4},
+        {label:'Net Volume',data:[860167.16,385385.3,99593.64,57235.03,0.0,0.0],backgroundColor:'#28a745',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'top',labels:{font:{size:11}}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+usd(c.parsed.x)}}}
+      },
+      scales:{x:{beginAtZero:true,ticks:{callback:function(v){return usd(v)}}},
+              y:{ticks:{font:{size:11}}}}
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('sales-ref-ytd');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Robertson','Coleman','Maldonado','Koerner','Abeyta','Woodden'],
+      datasets:[
+        {label:'Customer Referral',data:[0,1,0,0,0,0],backgroundColor:'#fd7e14',borderRadius:4},
+        {label:'Employee Referral',data:[4,2,3,0,0,0],backgroundColor:'#17a2b8',borderRadius:4},
+        {label:'Other Referral',data:[0,0,0,0,0,0],backgroundColor:'#adb5bd',borderRadius:4}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{font:{size:11}}}},
+      scales:{x:{beginAtZero:true,stacked:true,ticks:{precision:0}},
+              y:{stacked:true,ticks:{font:{size:11}}}}
+    }
+  });
+})();
 
 (function(){
   var el=document.getElementById('setter-results-pie-pw');
@@ -2063,7 +3138,7 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
     type:'doughnut',
     data:{
       labels:['Sale','Demo (No Sale)','CNS','1-Leg Reset','CXL','NG','Drop'],
-      datasets:[{data:[5,14,2,3,7,0,9],backgroundColor:['#28a745','#4da6ff','#fd7e14','#6f42c1','#dc3545','#adb5bd','#17a2b8'],borderWidth:2,borderColor:'#fff'}]
+      datasets:[{data:[6,14,2,3,7,0,9],backgroundColor:['#28a745','#4da6ff','#fd7e14','#6f42c1','#dc3545','#adb5bd','#17a2b8'],borderWidth:2,borderColor:'#fff'}]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
@@ -2080,7 +3155,7 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
       labels:['Bates','Messano','Palacio','Robinson','Trombley'],
       datasets:[{
         label:'Demo %',
-        data:[0.0,84.2,0.0,100.0,50.0],
+        data:[0.0,85.0,0.0,100.0,50.0],
         backgroundColor:['#dc3545','#28a745','#dc3545','#28a745','#dc3545'],
         borderRadius:4
       }]
@@ -2135,13 +3210,91 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
 })();
 
 (function(){
+  var el=document.getElementById('setter-results-pie-l30');
+  if(!el)return;
+  new Chart(el,{
+    type:'doughnut',
+    data:{
+      labels:['Sale','Demo (No Sale)','CNS','1-Leg Reset','CXL','NG','Drop'],
+      datasets:[{data:[10,26,2,7,10,0,18],backgroundColor:['#28a745','#4da6ff','#fd7e14','#6f42c1','#dc3545','#adb5bd','#17a2b8'],borderWidth:2,borderColor:'#fff'}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'right',labels:{font:{size:11},padding:12}}}
+    }
+  });
+})();
+(function(){
+  var el=document.getElementById('setter-demo-pct-l30');
+  if(!el)return;
+  new Chart(el,{
+    type:'bar',
+    data:{
+      labels:['Bates','Messano','Palacio','Robinson','Trombley'],
+      datasets:[{
+        label:'Demo %',
+        data:[0.0,83.8,0.0,100.0,75.0],
+        backgroundColor:['#dc3545','#28a745','#dc3545','#28a745','#28a745'],
+        borderRadius:4
+      }]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        annotation:{
+          annotations:{
+            target:{
+              type:'line',drawTime:'afterDatasetsDraw',
+              scaleID:'x',value:70,
+              borderColor:'#1a2e4a',borderWidth:2,borderDash:[6,3],
+              label:{display:true,content:'Target 70%',position:'start',
+                     backgroundColor:'#1a2e4a',color:'white',
+                     font:{size:11,weight:'bold'},padding:4}
+            }
+          }
+        }
+      },
+      scales:{
+        x:{beginAtZero:true,max:110,ticks:{callback:function(v){return v+'%'}}},
+        y:{ticks:{font:{size:11}}}
+      }
+    }
+  });
+})();
+
+(function(){
+  var el=document.getElementById('dispo-pie-l30');
+  if(!el)return;
+  var total=80;
+  new Chart(el,{
+    type:'doughnut',
+    data:{
+      labels:['SNS: 23 (29%)','CXL: 10 (12%)','Sale: 10 (12%)','Cancel: 8 (10%)','Set: 7 (9%)','1Leg: 7 (9%)','Issue: 5 (6%)','CNS: 2 (2%)','UnCon: 2 (2%)','SRS: 1 (1%)','CRS: 1 (1%)','Design: 1 (1%)','FTD: 1 (1%)','ND: 1 (1%)','PDNS: 1 (1%)'],
+      datasets:[{data:[23,10,10,8,7,7,5,2,2,1,1,1,1,1,1],backgroundColor:['#2d5a8e','#28a745','#fd7e14','#dc3545','#6f42c1','#17a2b8','#ffc107','#4da6ff','#20c997','#e83e8c','#adb5bd','#343a40','#6610f2','#795548','#00bcd4'],borderWidth:2,borderColor:'#fff'}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'right',labels:{font:{size:11},padding:10}},
+        tooltip:{callbacks:{label:function(ctx){
+          var n=ctx.parsed;
+          var pct=Math.round(n/total*100);
+          return ' '+ctx.label.split(':')[0]+': '+n+' ('+pct+'%)';
+        }}}
+      }
+    }
+  });
+})();
+
+(function(){
   var el=document.getElementById('setter-results-pie-ytd');
   if(!el)return;
   new Chart(el,{
     type:'doughnut',
     data:{
       labels:['Sale','Demo (No Sale)','CNS','1-Leg Reset','CXL','NG','Drop'],
-      datasets:[{data:[49,181,21,17,36,0,78],backgroundColor:['#28a745','#4da6ff','#fd7e14','#6f42c1','#dc3545','#adb5bd','#17a2b8'],borderWidth:2,borderColor:'#fff'}]
+      datasets:[{data:[50,181,21,17,36,0,78],backgroundColor:['#28a745','#4da6ff','#fd7e14','#6f42c1','#dc3545','#adb5bd','#17a2b8'],borderWidth:2,borderColor:'#fff'}]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
@@ -2158,7 +3311,7 @@ hbar('ytd-funnel',['Raw Leads (Mktg)','Set (CC)','Gross Issue (CC)','Net Issue (
       labels:['Bates','Coleman','Goscha','Humphrey','Huston','Knecht','Koerner','Maughan','Messano','Mestas','Palacio','Robertson','Robinson','test','Trombley'],
       datasets:[{
         label:'Demo %',
-        data:[78.1,50.0,100.0,87.5,80.0,89.8,114.3,100.0,84.2,100.0,0.0,85.7,100.0,50.0,87.5],
+        data:[78.1,50.0,100.0,87.5,80.0,89.8,114.3,100.0,84.3,100.0,0.0,85.7,100.0,50.0,87.5],
         backgroundColor:['#28a745','#dc3545','#28a745','#28a745','#28a745','#28a745','#28a745','#28a745','#28a745','#28a745','#dc3545','#28a745','#28a745','#dc3545','#28a745'],
         borderRadius:4
       }]
@@ -2217,11 +3370,14 @@ pie('cc-pm-setter-pie',['Bates, Austin','Koerner, Jesse','Messano, Angela','Mest
 pie('cc-pm-product-pie',['CAB (Cabinets)','FB (Full Bathroom)','FK (Full Kitchen)','MULTI (MULTI)','WA (Wet Area)'],[1,25,24,1,22]);
 pie('cc-mtd-setter-pie',['Bates, Austin','Messano, Angela','Palacio, Angel','Robinson, Teresa','Trombley, Andrew'],[3,32,4,4,3]);
 pie('cc-mtd-product-pie',['FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)','WAIT (Walk-in Tub)'],[24,10,7,5]);
+pie('cc-l30-setter-pie',['Bates, Austin','Messano, Angela','Palacio, Angel','Robinson, Teresa','Trombley, Andrew'],[4,59,4,5,6]);
+pie('cc-l30-product-pie',['FB (Full Bathroom)','FK (Full Kitchen)','WA (Wet Area)','WAIT (Walk-in Tub)'],[34,20,19,5]);
 pie('cc-ytd-setter-pie',['Bates, Austin','Coleman, Maggie','Goscha, Ezra','Humphrey, Dante','Huston, Riley','Knecht, Lindsay','Koerner, Jesse','Maughan, Samantha','Messano, Angela','Mestas, Jazmin','Palacio, Angel','Robertson, Kelly','Robinson, Teresa','test, test','Trombley, Andrew'],[37,3,20,13,28,69,11,1,146,3,4,28,11,4,11]);
 pie('cc-ytd-product-pie',['CAB (Cabinets)','FB (Full Bathroom)','FK (Full Kitchen)','MULTI (MULTI)','WA (Wet Area)','WAIT (Walk-in Tub)','WINDR (Windows & Doors)'],[27,157,91,1,96,11,5]);
 bar('promo-pw-bar',['Angel','Teresa','Andrew'],[{label:'Net Issued',data:[2,0,2],backgroundColor:'#2d5a8e',borderRadius:4},{label:'Gross Issued',data:[3,3,3],backgroundColor:'#aac4e0',borderRadius:4}]);
 bar('promo-pm-bar',['Sara','Jesse','Jazmin','Angel','Kelly','Teresa','Andrew'],[{label:'Net Issued',data:[1,1,0,4,1,2,3],backgroundColor:'#2d5a8e',borderRadius:4},{label:'Gross Issued',data:[1,1,1,4,1,4,3],backgroundColor:'#aac4e0',borderRadius:4}]);
 bar('promo-mtd-bar',['Angel','Teresa','Andrew'],[{label:'Net Issued',data:[5,2,3],backgroundColor:'#2d5a8e',borderRadius:4},{label:'Gross Issued',data:[7,5,6],backgroundColor:'#aac4e0',borderRadius:4}]);
+bar('promo-l30-bar',['Sara','Angel','Teresa','Andrew'],[{label:'Net Issued',data:[1,8,3,5],backgroundColor:'#2d5a8e',borderRadius:4},{label:'Gross Issued',data:[1,10,7,8],backgroundColor:'#aac4e0',borderRadius:4}]);
 bar('promo-ytd-bar',['Austin','Ezra','Dante','Riley','Sara','Lindsay','Jesse','Angela','Jazmin','Angel','Kelly','Teresa','test','Andrew'],[{label:'Net Issued',data:[6,11,10,21,1,41,9,3,1,9,17,9,3,10],backgroundColor:'#2d5a8e',borderRadius:4},{label:'Gross Issued',data:[7,16,14,24,1,50,10,3,2,11,23,14,5,14],backgroundColor:'#aac4e0',borderRadius:4}]);
 
 </script>
